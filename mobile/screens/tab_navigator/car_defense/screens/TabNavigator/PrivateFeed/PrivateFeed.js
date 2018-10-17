@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 
+
 async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Expo.Permissions.getAsync(
     Expo.Permissions.NOTIFICATIONS

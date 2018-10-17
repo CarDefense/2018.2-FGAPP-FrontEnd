@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 export default class PublicNotifications extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

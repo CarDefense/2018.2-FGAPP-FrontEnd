@@ -3,7 +3,6 @@ import {
     View
 } from 'react-native';
 import { Icon } from 'native-base';
-
 import { TabNavigator } from 'react-navigation';
 import TabHandlerVendasApp from './tab_navigator/vendas/TabHandlerVendasApp';
 import IndicaAiApp from './tab_navigator/indica_ai/IndicaAiApp';
