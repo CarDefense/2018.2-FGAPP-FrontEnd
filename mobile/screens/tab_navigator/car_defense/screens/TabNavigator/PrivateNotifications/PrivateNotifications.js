@@ -1,4 +1,4 @@
-import { TextField } from 'react-native-material-textfield';;
+import { TextField } from 'react-native-material-textfield';
 import { Constants, ImagePicker, Permissions } from 'expo';
 import React, { Component } from 'react';
 import {

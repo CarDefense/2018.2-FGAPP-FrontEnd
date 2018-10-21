@@ -149,11 +149,11 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   text: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: '100'
   },
   text1: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: 'bold',
   }
 });

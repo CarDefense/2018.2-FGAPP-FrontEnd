@@ -97,7 +97,7 @@ export default class Feed extends React.Component {
               <View style={styles.item2}>
                 <Text style={styles.text1}>{item.title}</Text>
                 <Image source={{uri:item.image}}
-                  style={{width: 400, height: 400}} />
+                  style={{width: 400, height: 200}} />
                 <Text style={styles.text}>{item.message}</Text>
               </View>
             );
@@ -142,11 +142,11 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   text: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: '100'
   },
   text1: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: 'bold',
   }
 });
