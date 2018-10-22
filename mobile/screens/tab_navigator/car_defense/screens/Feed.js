@@ -105,7 +105,7 @@ export default class Feed extends React.Component {
               <View style={styles.item2}>
                 <Text style={styles.text1}>{item.title}</Text>
                 <Image source={{uri:item.image}}
-                  style={{width: 400, height: 400}} />
+                  style={{width: 400, height: 200}} />
                 <Text style={styles.text}>{item.message}</Text>
               </View>
             );

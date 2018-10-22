@@ -185,7 +185,7 @@ export default class PrivateNotifications extends Component {
             // onSubmitEditing={this.onSubmitPLate}
             returnKeyType='next'
             label='Placa'
-            tintColor = '#5c68c3'
+            tintColor = "#760f9f"
             underlineColorAndroid="transparent"
             maxLength={8}
             autoCapitalize="characters"
@@ -202,24 +202,39 @@ export default class PrivateNotifications extends Component {
             // onSubmitEditing={this.onSubmitMessage}
             returnKeyType='next'
             label='Descrição'
-            tintColor = '#5c68c3'
+            tintColor = "#760f9f"
             error={errors.message}
           />
           <Text style={styles.text}>Adicionar imagem</Text>
           <View style={styles.alternativeLayoutButtonContainer}>
-            <Button onPress={this._takePhoto}
-                    title="                Camera                "
-                    color='#5c68c3' />
-            <Button  onPress={this._pickImage}
-                     title="        Galeria        "
-                     color='#313869' />
+            <TouchableOpacity
+              style={styles.button}
+              color="#760f9f"
+              onPress={this._takePhoto}
+              containerViewStyle={{ width: '40%' }}
+            >
+              <Text style={{ color: 'white' }} >Camera</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button2}
+              color="#540b71"
+              onPress={this._pickImage}
+              containerViewStyle={{ width: '40%' }}
+            >
+              <Text style={{ color: 'white' }} >Galeria</Text>
+            </TouchableOpacity>
           </View>
           {this._maybeRenderImage()}
           {this._maybeRenderUploadingOverlay()}
           <View style={styles.container1}>
-            <Button onPress={this.onPressButton}
-                    title='Enviar Notificação'
-                    color='#5c68c3' />
+            <TouchableOpacity
+              style={styles.button3}
+              color="#760f9f"
+              onPress={this.onPressButton}
+              containerViewStyle={{ width: '40%' }}
+            >
+              <Text style={{ color: 'white' }} >Enviar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -381,7 +396,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingTop: 16,
-    color: '#5c68c3',
+    color: "#760f9f",
     fontWeight: 'bold',
   },
   alternativeLayoutButtonContainer: {
@@ -390,11 +405,40 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingRight: 4,
   },
+  button: {
+    backgroundColor: "#760f9f",
+    borderRadius: 15,
+    height: 40,
+    width: 190,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button2: {
+    backgroundColor: "#540b71",
+    borderRadius: 15,
+    height: 40,
+    width: 120,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button3: {
+    backgroundColor: "#760f9f",
+    borderRadius: 15,
+    height: 40,
+    width: 120,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container1: {
-    paddingTop: 32,
+    paddingTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   header: {
-    color: '#5c68c3',
+    color: "#760f9f",
     textAlign: 'center',
     fontWeight: '200',
     fontSize: 50,
