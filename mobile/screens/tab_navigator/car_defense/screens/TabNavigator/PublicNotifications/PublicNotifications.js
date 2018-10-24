@@ -157,24 +157,39 @@ export default class PublicNotifications extends Component {
             // onSubmitEditing={this.onSubmitMessage}
             returnKeyType='next'
             label='Descrição'
-            tintColor = '#5c68c3'
+            tintColor = '#760f9f'
             error={errors.message}
           />
           <Text style={styles.text}>Adicionar imagem</Text>
           <View style={styles.alternativeLayoutButtonContainer}>
-            <Button onPress={this._takePhoto}
-                    title="                Camera                "
-                    color='#5c68c3' />
-            <Button  onPress={this._pickImage}
-                     title="        Galeria        "
-                     color='#313869' />
+            <TouchableOpacity
+              style={styles.button}
+              color='#760f9f'
+              onPress={this._takePhoto}
+              containerViewStyle={{ width: '73.25%' }}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold'}} >CAMERA</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button2}
+              color='#540b71'
+              onPress={this._pickImage}
+              containerViewStyle={{ width: '73.25%' }}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold'}} >GALERIA</Text>
+            </TouchableOpacity>
           </View>
           {this._maybeRenderImage()}
           {this._maybeRenderUploadingOverlay()}
           <View style={styles.container1}>
-            <Button onPress={this.onPressButton}
-                    title='Emitir Alerta'
-                    color='#5c68c3' />
+            <TouchableOpacity
+              style={styles.button3}
+              color='#760f9f'
+              onPress={this.onPressButton}
+              containerViewStyle={{ width: '73.25%' }}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold'}} >EMITIR ALERTA</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -186,7 +201,7 @@ export default class PublicNotifications extends Component {
       return (
         <View
           style={styles.maybeRenderUploading}>
-          <ActivityIndicator color="#313869" size="large" />
+          <ActivityIndicator color="#540b71" size="large" />
         </View>
       );
     }
@@ -228,7 +243,7 @@ export default class PublicNotifications extends Component {
     alert('Copied image URL to clipboard');
   };
 
-  _takePhoto = async () => { //Done
+  _takePhoto = async () => {
     const {
       status: cameraPerm
     } = await Permissions.askAsync(Permissions.CAMERA);
@@ -336,8 +351,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingTop: 16,
-    color: '#5c68c3',
-    fontWeight: 'bold',
+    color: '#760f9f'
   },
   alternativeLayoutButtonContainer: {
     flexDirection: 'row',
@@ -345,8 +359,37 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingRight: 4,
   },
+  button: {
+    backgroundColor: '#760f9f',
+    borderRadius: 2,
+    height: 40,
+    width: '61%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button2: {
+    backgroundColor: '#540b71',
+    borderRadius: 2,
+    height: 40,
+    width: '33%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button3: {
+    backgroundColor: '#760f9f',
+    borderRadius: 4,
+    height: 40,
+    width: '73.25%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container1: {
     paddingTop: 32,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   maybeRenderUploading: {
     paddingTop: 8,
