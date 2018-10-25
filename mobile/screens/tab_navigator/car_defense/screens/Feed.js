@@ -50,7 +50,7 @@ export default class Feed extends React.Component {
       notification_token: tk,
     })
     console.log(notification);
-    fetch('http://5bbe60de72de1d00132535cc.mockapi.io/set_token', {
+    fetch('http://192.168.15.5:8005/set_token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -65,7 +65,7 @@ export default class Feed extends React.Component {
       console.log(error)
     })
 
-    return fetch('http://5bbe60de72de1d00132535cc.mockapi.io/emergencynotifications')
+    return fetch('http://192.168.15.5:8002/emergencynotifications/')
       .then((response) => response.json())
       .then((responseJson) => {
 

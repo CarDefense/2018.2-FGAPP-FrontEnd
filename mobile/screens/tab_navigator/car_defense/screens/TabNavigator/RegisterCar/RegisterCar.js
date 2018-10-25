@@ -109,7 +109,7 @@ export default class RegisterCar extends Component {
     const { state } = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
     user = jwt_decode(token)
-    let link = 'http://192.168.0.4:8003/car/?token=' + user.user_id
+    let link = 'http://192.168.15.5:8003/car/?token=' + user.user_id
 
     return fetch(link)
       .then((response) => response.json())
@@ -187,7 +187,7 @@ export default class RegisterCar extends Component {
       var token = state.params ? state.params.token : undefined;
       user = jwt_decode(token)
 
-      const url = 'http://192.168.0.4:8003/car/' //cars db models url
+      const url = 'http://192.168.15.5:8003/validate_car/' //cars db models url
 
       let notification = JSON.stringify({
         id_token: user.user_id,
@@ -240,7 +240,7 @@ export default class RegisterCar extends Component {
         }
       >
         <View style={styles.container}>
-          <Text style={styles.header}> Cadastrar carro</Text>
+          <Text style={styles.header}> Cadastro</Text>
           <TextField
             ref={this.plateRef}
             value={data.plate}
@@ -317,7 +317,10 @@ export default class RegisterCar extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingLeft: 16,
+    paddingRight: 16
+  },
   container1: {
     marginTop: 80,
     flexDirection: 'row',

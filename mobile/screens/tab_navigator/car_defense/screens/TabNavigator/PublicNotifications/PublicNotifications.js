@@ -86,7 +86,7 @@ export default class PublicNotifications extends Component {
 
   onPressButton = () => {
     let errors = {};
-    const url = 'http://192.168.1.4:8002/send_emergency_push_message/' //function send_emergency_push_message url
+    const url = 'http://192.168.15.5:8002/send_emergency_push_message/' //function send_emergency_push_message url
     let i = 0;
 
     ['message']
@@ -146,6 +146,7 @@ export default class PublicNotifications extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
+          <Text style={styles.header}>Alerta</Text>
           <TextField
             ref={this.messageRef}
             value={data.message}
@@ -310,7 +311,7 @@ export default class PublicNotifications extends Component {
 }
 
   async function uploadImageAsync(uri) {
-    let apiUrl = 'http://192.168.1.4:8002/notificationsimage/';
+    let apiUrl = 'http://192.168.15.5:8002/notificationsimage/';
 
     // Note:
     // Uncomment this if you want to experiment with local server
@@ -390,6 +391,13 @@ const styles = StyleSheet.create({
     paddingTop: 32,
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  header: {
+    color: "#760f9f",
+    textAlign: 'center',
+    fontWeight: '200',
+    fontSize: 50,
+    marginTop: 25
   },
   maybeRenderUploading: {
     paddingTop: 8,

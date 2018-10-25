@@ -95,7 +95,7 @@ export default class PrivateNotifications extends Component {
 
   onPressButton = () => {
     let errors = {};
-    const url = 'http://192.168.1.4:8002/send_push_message/' //function send_push_message url
+    const url = 'http://192.168.15.5:8002/send_push_message/' //function send_push_message url
     let errorPlate = false;
     let errorMessage = false;
 
@@ -173,7 +173,7 @@ export default class PrivateNotifications extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.header}>Notificações</Text>
+          <Text style={styles.header}>Notificação</Text>
           <TextField
             ref={this.plateRef}
             value={data.plate}
@@ -355,7 +355,7 @@ export default class PrivateNotifications extends Component {
 }
 
   async function uploadImageAsync(uri) {
-    let apiUrl = 'http://192.168.1.4:8002/notificationsimage/';
+    let apiUrl = 'http://192.168.15.5:8002/notificationsimage/';
 
     // Note:
     // Uncomment this if you want to experiment with local server
