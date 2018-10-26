@@ -13,7 +13,7 @@ import {
   Alert,
   Image
 } from 'react-native';
-//import { NOTIFICATIONS_API } from '../const/Const'
+import { NOTIFICATIONS_API } from '../const/Const'
 
 
 var tk
@@ -88,7 +88,7 @@ export default class PublicNotifications extends Component {
 
   onPressButton = () => {
     let errors = {};
-    const url = 'http://cardefense.eastus.cloudapp.azure.com:8002/' + '/send_emergency_push_message/' //function send_emergency_push_message url
+    const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
     let i = 0;
 
     ['message']
@@ -313,7 +313,7 @@ export default class PublicNotifications extends Component {
 }
 
   async function uploadImageAsync(uri) {
-    let apiUrl = 'http://cardefense.eastus.cloudapp.azure.com:8002/' + '/notificationsimage/';
+    let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
 
     // Note:
     // Uncomment this if you want to experiment with local server

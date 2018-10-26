@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
-import {  NOTIFICATIONS_API, CAR_API, PROFILE_API } from '../const/Const'
+import {  NOTIFICATIONS_API } from '../const/Const'
 
 
 async function registerForPushNotificationsAsync() {
@@ -55,7 +55,7 @@ export default class Feed extends React.Component {
 
   async componentDidMount() {
     let token = await registerForPushNotificationsAsync();
-    let url = 'http://cardefense.eastus.cloudapp.azure.com:8002/' + `/notifications`
+    let url = NOTIFICATIONS_API + `/notifications`
 
     return fetch(url)
       .then((response) => response.json())

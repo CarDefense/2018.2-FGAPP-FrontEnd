@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, FlatList, 
 // import Expo from 'expo'
 // import { Permissions, Notifications } from 'expo'
 import jwt_decode from 'jwt-decode';
-//import { CAR_API } from '../const/Const'
+import { CAR_API } from '../const/Const'
 
 
 // var tk
@@ -111,7 +111,7 @@ export default class RegisterCar extends Component {
     const { state } = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
     user = jwt_decode(token)
-    let link = 'http://cardefense.eastus.cloudapp.azure.com:8003/' + '/car/?token=' + user.user_id
+    let link = CAR_API + '/car/?token=' + user.user_id
 
     return fetch(link)
       .then((response) => response.json())
