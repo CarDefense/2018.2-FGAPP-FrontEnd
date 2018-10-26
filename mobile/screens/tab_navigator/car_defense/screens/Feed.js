@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 import jwt_decode from 'jwt-decode';
+//import { NOTIFICATIONS_API } from './TabNavigator/const/Const.js'
 
 var tk
 
@@ -50,7 +51,7 @@ export default class Feed extends React.Component {
       notification_token: tk,
     })
     console.log(notification);
-    fetch('http://192.168.15.5:8005/set_token/', {
+    fetch('http://cardefense.eastus.cloudapp.azure.com:8005/' + '/set_token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -65,7 +66,7 @@ export default class Feed extends React.Component {
       console.log(error)
     })
 
-    return fetch('http://192.168.15.5:8002/emergencynotifications/')
+    return fetch('http://cardefense.eastus.cloudapp.azure.com:8002/' + '/emergencynotifications/')
       .then((response) => response.json())
       .then((responseJson) => {
 

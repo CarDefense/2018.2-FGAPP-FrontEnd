@@ -4,6 +4,8 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, FlatList, 
 // import Expo from 'expo'
 // import { Permissions, Notifications } from 'expo'
 import jwt_decode from 'jwt-decode';
+//import { CAR_API } from '../const/Const'
+
 
 // var tk
 // async function register() {
@@ -109,7 +111,7 @@ export default class RegisterCar extends Component {
     const { state } = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
     user = jwt_decode(token)
-    let link = 'http://192.168.15.5:8003/car/?token=' + user.user_id
+    let link = 'http://cardefense.eastus.cloudapp.azure.com:8003/' + '/car/?token=' + user.user_id
 
     return fetch(link)
       .then((response) => response.json())
@@ -187,7 +189,7 @@ export default class RegisterCar extends Component {
       var token = state.params ? state.params.token : undefined;
       user = jwt_decode(token)
 
-      const url = 'http://192.168.15.5:8003/validate_car/' //cars db models url
+      const url = 'http://cardefense.eastus.cloudapp.azure.com:8003/' + '/validate_car/' //cars db models url
 
       let notification = JSON.stringify({
         id_token: user.user_id,
