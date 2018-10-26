@@ -3,19 +3,19 @@ import {
     View
 } from 'react-native';
 import { Icon } from 'native-base';
-
 import { TabNavigator } from 'react-navigation';
 import TabHandlerVendasApp from './tab_navigator/vendas/TabHandlerVendasApp';
 import IndicaAiApp from './tab_navigator/indica_ai/IndicaAiApp';
 import RolesApp from './tab_navigator/roles/RolesApp';
-import CarDefenseApp from './tab_navigator/car_defense/CarDefenseApp';
 import Settings from './tab_navigator/settings/Settings';
+import CarDefenseTabHandler from './tab_navigator/car_defense/CarDefenseTabHandler';
 
 const TabHandler = new TabNavigator({
     Roles: {
         screen: RolesApp,
         navigationOptions: {
             tabBarLabel: 'Eventos',
+            headerLeft: null,
             tabBarIcon: ({ focused }) => (
                 <Icon
                     name="md-star"
@@ -40,8 +40,9 @@ const TabHandler = new TabNavigator({
         screen: IndicaAiApp,
         navigationOptions: {
             tabBarLabel: 'IndicaAi',
+            headerLeft: null,
             tabBarIcon: ({ focused }) => (
-                <Icon
+                <Icon 
                     name="md-locate"
                     style={{ color: focused ? '#0AACCC' : '#5A5A5A' }}
                 />
@@ -49,9 +50,10 @@ const TabHandler = new TabNavigator({
         }
     },
     CarDefense: {
-        screen: CarDefenseApp,
+        screen: CarDefenseTabHandler,
         navigationOptions: {
             tabBarLabel: 'CarDefense',
+            headerLeft: null,
             tabBarIcon: ({ focused }) => (
                 <Icon
                     name="md-car"
@@ -64,6 +66,7 @@ const TabHandler = new TabNavigator({
         screen: Settings,
         navigationOptions: {
             tabBarLabel: 'Configurações',
+            headerLeft: null,
             tabBarIcon: ({ focused }) => (
                 <Icon
                     name="md-settings"

@@ -25,6 +25,7 @@ Inside docker's container, execute ***yarn start*** to run the react-native app.
 yarn start
 ```
 ## Development Environment
+
 Inside ***mobile*** directory, must have a .env file similar a file called env.mock-reference in the same directory. In order to maintain correct domains for external api paths.
 
 #### Acessando variáveis de ambiente

@@ -4,27 +4,32 @@
 
 import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
-import MyProducts from './screens/MyProducts';
-import Offers from './screens/Offers';
-import OrderedProducts from './screens/OrderedProducts';
+import OfferScreen from './screens/OfferScreen';
+import OrderScreen from './screens/OrderScreen';
+import MyProductStackNavigator from './screens/MyProductsScreen';
 
 const TabHandlerVendasApp = new TabNavigator({
-    Offers: {
-        screen: Offers,
+    OfferScreen: {
+        screen: OfferScreen,
         navigationOptions: {
             tabBarLabel: 'Ofertas',
+
+            params: {numero:40}
+            //params: {token: this.props.navigation.params ? this.props.navigation.params.product : undefined}
         }
     },
-    MyProducts: {
-        screen: MyProducts,
-        navigationOptions: {
-            tabBarLabel: 'Meus produtos',
-        }
+    MyProductStackNavigator: {
+      screen: MyProductStackNavigator,
+      navigationOptions: {
+          tabBarLabel: 'Meus Produtos',
+      }
+
     },
-    OrderedProducts: {
-        screen: OrderedProducts,
+    OrderScreen: {
+        screen: OrderScreen,
         navigationOptions: {
             tabBarLabel: 'Pedidos',
+            headerLeft: null,
         }
     }
 },

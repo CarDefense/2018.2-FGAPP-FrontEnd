@@ -3,16 +3,15 @@
 */
 
 import React, { Component } from 'react';
-import { Image, ImageBackground, View, TouchableHighlight } from 'react-native';
+import { Image, ImageBackground, View } from 'react-native';
 import { Card, CardItem, Text, Left, Right } from 'native-base';
 import styles from './styles';
 import { LinearGradient } from 'expo';
 
-class ProductCard extends Component {
+class ProductImage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <TouchableHighlight onPress={this.props.onPress}>
         <ImageBackground
           style={ styles.image }
           source={{ uri: this.props.photo }}
@@ -22,21 +21,10 @@ class ProductCard extends Component {
             locations={[0.2, 0.85]}
             style={styles.gradient}
           />
-          <CardItem style={styles.item}>
-            <Left>
-              <Text style={styles.text}>{this.props.name}</Text>
-            </Left>
-            <Right>
-              <Text>
-                <Text style={styles.text}>R$ {this.props.price}</Text>
-              </Text>
-            </Right>
-          </CardItem>
         </ImageBackground>
-      </TouchableHighlight>
       </View>
     );
   }
 }
 
-export default ProductCard;
+export default ProductImage;
