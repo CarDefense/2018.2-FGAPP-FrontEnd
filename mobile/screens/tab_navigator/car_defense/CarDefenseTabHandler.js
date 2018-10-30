@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import { TabNavigator } from 'react-navigation
+import { TabNavigator } from 'react-navigation'
 import Feed from './screens/Feed'
 import PublicNotifications from './screens/TabNavigator/PublicNotifications/PublicNotifications'
 import PrivateNotifications from './screens/TabNavigator/PrivateNotifications/PrivateNotifications'

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput, Alert, FlatList, RefreshControl } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, FlatList, RefreshControl } from 'react-native';
 // import Expo from 'expo'
 // import { Permissions, Notifications } from 'expo'
 import jwt_decode from 'jwt-decode';
+import { CAR_API } from '../const/Const'
+
 
 // var tk
 // async function register() {
@@ -49,31 +52,58 @@ import jwt_decode from 'jwt-decode';
 
 export default class RegisterCar extends Component {
 
-
   constructor(props) {
     super(props);
+
+    this.plateRef = this.updateRef.bind(this, 'plate');
+    this.modelRef = this.updateRef.bind(this, 'model');
+    this.colorRef = this.updateRef.bind(this, 'color');
+    this.onFocus = this.onFocus.bind(this);
+
     this.state = {
       plate: '',
       model: '',
       color: '',
-      hasError: false,
-      errorMessage: '',
-      // registered: false,
-      // registerMessage: '',
       refreshing: false
     };
   }
 
-  handlePlate = (text) => {
-    this.setState({ plate: text })
+  onFocus() {
+    let { errors = {} } = this.state;
+
+    for (let text in errors) {
+      let ref = this[text];
+
+      if (ref && ref.isFocused()) {
+        delete errors[text];
+      }
+    }
+
+    this.setState({ errors });
   }
 
-  handleModel = (text) => {
-    this.setState({ model: text })
-  }
-
-  handleColor = (text) => {
-    this.setState({ color: text })
+  onChangeText(words) {
+    ['plate']
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
+    ['model']
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
+    ['color']
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
   }
 
   async componentDidMount() {
@@ -81,7 +111,7 @@ export default class RegisterCar extends Component {
     const { state } = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
     user = jwt_decode(token)
-    let link = 'http://192.168.0.4:8003/car/?token=' + user.user_id
+    let link = CAR_API + '/car/?token=' + user.user_id
 
     return fetch(link)
       .then((response) => response.json())
@@ -109,18 +139,57 @@ export default class RegisterCar extends Component {
 
 
   onPressButton = () => {
+    let errors = {};
+    let errorPlate = false;
 
-    if (this.state.plate.length < 8) {
-      this.setState({ hasError: true, errorMessage: 'Insira uma placa válida: AAA-0000' })
-    }
+    ['plate']
+      .forEach((text) => {
+        let value = this[text].value();
 
-    else {
-      this.setState({ hasError: false, errorMessage: '' })
+        if (!value) {
+          errors[text] = 'Campo obrigatório.';
+          errorPlate = true;
+        } else {
+          if ('plate' === text && value.length < 8) {
+            errors[text] = 'Placa inválida. Ex.:AAA-0000';
+            errorPlate = true;
+          }
+        }
+      });
+
+    ['plate']
+      .forEach((text) => {
+        let value = this[text].value();
+
+        if (!value) {
+          errors[text] = 'Campo obrigatório.';
+          errorPlate = true;
+        } else {
+          if ('plate' === text && value.length < 8) {
+            errors[text] = 'Placa inválida. Ex.:AAA-0000';
+            errorPlate = true;
+          }
+        }
+      });
+
+    ['model']
+      .forEach((text) => {
+        let value = this[text].value();
+      });
+
+    ['color']
+      .forEach((text) => {
+        let value = this[text].value();
+      });
+
+
+    if (errorPlate == false) {
+
       const { state } = this.props.navigation;
       var token = state.params ? state.params.token : undefined;
       user = jwt_decode(token)
 
-      const url = 'http://192.168.0.4:8003/car/' //cars db models url
+      const url = 'http://cardefense.eastus.cloudapp.azure.com:8003/' + '/validate_car/' //cars db models url
 
       let notification = JSON.stringify({
         id_token: user.user_id,
@@ -146,12 +215,23 @@ export default class RegisterCar extends Component {
       }
       ).catch(error => {
         console.log(error)
+        Alert.alert('Erro ao cadastrar!')
       })
-
     }
+    this.setState({ errors });
+  }
+
+  updateRef(text, ref) {
+    this[text] = ref;
   }
 
   render() {
+
+    let { errors = {}, ...data } = this.state;
+    let { plate = 'text' } = data;
+    let { model = 'text' } = data;
+    let { color = 'text' } = data;
+
     return (
       <ScrollView
         refreshControl={
@@ -162,29 +242,49 @@ export default class RegisterCar extends Component {
         }
       >
         <View style={styles.container}>
-          <Text style={styles.header}> Cadastrar carro</Text>
-          <TextInput
-            style={styles.input}
-            placeholderTextColor="#858DC7"
-            placeholder="Placa do carro"
+          <Text style={styles.header}> Cadastro</Text>
+          <TextField
+            ref={this.plateRef}
+            value={data.plate}
+            autoCorrect={false}
+            enablesReturnKeyAutomatically={true}
+            onFocus={this.onFocus}
+            onChangeText={(plate) => this.setState({ plate })}
+            // onChangeText={this.onChangeText}
+            // onSubmitEditing={this.onSubmitPLate}
+            returnKeyType='next'
+            label='Placa'
+            tintColor="#760f9f"
             underlineColorAndroid="transparent"
             maxLength={8}
-            onChangeText={this.handlePlate}
+            autoCapitalize="characters"
+            error={errors.plate}
           />
-          {this.state.hasError ? <Text style={{ color: '#E62C00', paddingLeft: 35 }}>{this.state.errorMessage}</Text> : null}
-          <TextInput
-            style={styles.input}
-            placeholderTextColor="#858DC7"
-            placeholder="Modelo do carro (opcional)"
-            underlineColorAndroid="transparent"
-            onChangeText={this.handleModel}
+          <TextField
+            ref={this.modelRef}
+            value={data.model}
+            autoCorrect={false}
+            enablesReturnKeyAutomatically={true}
+            onFocus={this.onFocus}
+            onChangeText={(model) => this.setState({ model })}
+            // onChangeText={this.onChangeText}
+            // onSubmitEditing={this.onSubmitModel}
+            returnKeyType='next'
+            label='Modelo'
+            tintColor="#760f9f"
           />
-          <TextInput
-            style={styles.input}
-            placeholderTextColor="#858DC7"
-            placeholder="Cor do carro (opcional)"
-            underlineColorAndroid="transparent"
-            onChangeText={this.handleColor}
+          <TextField
+            ref={this.colorRef}
+            value={data.color}
+            autoCorrect={false}
+            enablesReturnKeyAutomatically={true}
+            onFocus={this.onFocus}
+            onChangeText={(color) => this.setState({ color })}
+            // onChangeText={this.onChangeText}
+            // onSubmitEditing={this.onSubmitMessage}
+            returnKeyType='next'
+            label='Cor'
+            tintColor="#760f9f"
           />
         </View>
         <View style={styles.container1}>
@@ -210,7 +310,7 @@ export default class RegisterCar extends Component {
 
               );
             }}
-            keyExtractor={({ id }, index) => id}
+            keyExtractor={({ id }, index) => id.toString()}
           />
         </View>
       </ScrollView>
@@ -219,42 +319,35 @@ export default class RegisterCar extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingLeft: 16,
+    paddingRight: 16
+  },
   container1: {
     marginTop: 80,
     flexDirection: 'row',
     justifyContent: 'center'
   },
   header: {
-    color: '#5c68c3',
+    color: '#760f9f',
     textAlign: 'center',
     fontWeight: '200',
     fontSize: 50,
     marginTop: 25
   },
   header2: {
-    color: '#5c68c3',
+    color: '#760f9f',
     textAlign: 'left',
     paddingLeft: 20,
     paddingTop: 35,
     fontWeight: '100',
     fontSize: 30,
   },
-  input: {
-    width: 300,
-    height: 30,
-    borderBottomWidth: 1,
-    alignSelf: 'center',
-    textAlign: 'left',
-    borderBottomColor: '#5c68c3',
-    marginTop: 70,
-    color: '#5c68c3'
-  },
   button: {
-    backgroundColor: "#c8cdea",
+    backgroundColor: "#760f9f",
     borderRadius: 15,
     height: 40,
-    width: 121,
+    width: 120,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -275,7 +368,7 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   text1: {
-    color: "#5c68c3",
-    fontWeight: 'bold',
+    color: "#760f9f",
+    fontWeight: '200',
   }
 });

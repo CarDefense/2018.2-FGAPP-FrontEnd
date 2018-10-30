@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
+import {  NOTIFICATIONS_API } from '../const/Const'
 
 
 async function registerForPushNotificationsAsync() {
@@ -54,7 +55,7 @@ export default class Feed extends React.Component {
 
   async componentDidMount() {
     let token = await registerForPushNotificationsAsync();
-    let url = `http://5bbe60de72de1d00132535cc.mockapi.io/emergencynotifications`
+    let url = NOTIFICATIONS_API + `/notifications`
 
     return fetch(url)
       .then((response) => response.json())
@@ -97,7 +98,7 @@ export default class Feed extends React.Component {
               <View style={styles.item2}>
                 <Text style={styles.text1}>{item.title}</Text>
                 <Image source={{uri:item.image}}
-                  style={{width: 400, height: 400}} />
+                  style={{width: 400, height: 200}} />
                 <Text style={styles.text}>{item.message}</Text>
               </View>
             );
@@ -142,11 +143,11 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   text: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: '100'
   },
   text1: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: 'bold',
   }
 });

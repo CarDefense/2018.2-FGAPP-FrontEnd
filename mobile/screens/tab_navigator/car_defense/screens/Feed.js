@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 import jwt_decode from 'jwt-decode';
+import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 
 var tk
 
@@ -50,7 +51,7 @@ export default class Feed extends React.Component {
       notification_token: tk,
     })
     console.log(notification);
-    fetch('http://5bbe60de72de1d00132535cc.mockapi.io/set_token', {
+    fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -65,7 +66,7 @@ export default class Feed extends React.Component {
       console.log(error)
     })
 
-    return fetch('http://5bbe60de72de1d00132535cc.mockapi.io/emergencynotifications')
+    return fetch(NOTIFICATIONS_API + '/emergencynotifications/')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -105,7 +106,7 @@ export default class Feed extends React.Component {
               <View style={styles.item2}>
                 <Text style={styles.text1}>{item.title}</Text>
                 <Image source={{uri:item.image}}
-                  style={{width: 400, height: 400}} />
+                  style={{width: 400, height: 200}} />
                 <Text style={styles.text}>{item.message}</Text>
               </View>
             );
@@ -149,11 +150,11 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   text: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: '100'
   },
   text1: {
-    color: "#5c68c3",
+    color: "#540b71",
     fontWeight: 'bold',
   }
 });
