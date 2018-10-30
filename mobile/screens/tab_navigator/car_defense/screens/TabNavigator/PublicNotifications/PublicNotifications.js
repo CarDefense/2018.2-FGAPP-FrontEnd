@@ -13,6 +13,8 @@ import {
   Alert,
   Image
 } from 'react-native';
+import { NOTIFICATIONS_API } from '../const/Const'
+
 
 var tk
 async function register() {
@@ -86,7 +88,7 @@ export default class PublicNotifications extends Component {
 
   onPressButton = () => {
     let errors = {};
-    const url = 'http://192.168.15.5:8002/send_emergency_push_message/' //function send_emergency_push_message url
+    const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
     let i = 0;
 
     ['message']
@@ -311,7 +313,7 @@ export default class PublicNotifications extends Component {
 }
 
   async function uploadImageAsync(uri) {
-    let apiUrl = 'http://192.168.15.5:8002/notificationsimage/';
+    let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
 
     // Note:
     // Uncomment this if you want to experiment with local server
@@ -362,7 +364,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#760f9f',
-    borderRadius: 2,
+    borderRadius: 15,
     height: 40,
     width: '61%',
     flexDirection: 'row',
@@ -371,7 +373,7 @@ const styles = StyleSheet.create({
   },
   button2: {
     backgroundColor: '#540b71',
-    borderRadius: 2,
+    borderRadius: 15,
     height: 40,
     width: '33%',
     flexDirection: 'row',
@@ -380,7 +382,7 @@ const styles = StyleSheet.create({
   },
   button3: {
     backgroundColor: '#760f9f',
-    borderRadius: 4,
+    borderRadius: 15,
     height: 40,
     width: '73.25%',
     flexDirection: 'row',
