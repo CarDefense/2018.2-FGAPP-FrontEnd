@@ -86,6 +86,7 @@ const CarDefenseTabHandler = new TabNavigator({
             headerLeft: null,
         }
     },
+    
 },
     {
         tabBarOptions: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 import {  NOTIFICATIONS_API } from '../const/Const'
-
+import Expo from 'expo'
 
 async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Expo.Permissions.getAsync(
@@ -52,8 +52,7 @@ export default class Feed extends React.Component {
     };
   }
 
-
-  async componentDidMount() {
+  getPrivateFeedInfo = () => {
     let token = await registerForPushNotificationsAsync();
     let url = NOTIFICATIONS_API + `/notifications`
 
@@ -72,6 +71,10 @@ export default class Feed extends React.Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  async componentDidMount() {
+    this.getPrivateFeedInfo()
   }
 
   _onRefresh = () => {

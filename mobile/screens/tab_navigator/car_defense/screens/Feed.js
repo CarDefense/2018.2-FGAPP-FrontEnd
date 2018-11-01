@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 import jwt_decode from 'jwt-decode';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
-
+import Expo from 'expo'
 var tk
 
 async function register() {
@@ -21,6 +21,7 @@ async function register() {
 }
 
 export default class Feed extends React.Component {
+  
   componentWillMount() {
     register();
     this.listener = Expo.Notifications.addListener(this.listen);
@@ -38,8 +39,7 @@ export default class Feed extends React.Component {
     this.state = { refreshing: false, }
   }
 
-  async componentDidMount() {
-
+  sendIdData = () => {
     const {state} = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
     console.log(token)
@@ -66,6 +66,9 @@ export default class Feed extends React.Component {
       console.log(error)
     })
 
+  }
+
+  getFeedInfo = () => {
     return fetch(NOTIFICATIONS_API + '/emergencynotifications/')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -81,6 +84,11 @@ export default class Feed extends React.Component {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  async componentDidMount() {
+    this.sendIdData()
+    this.getFeedInfo()
   }
 
   _onRefresh = () => {
