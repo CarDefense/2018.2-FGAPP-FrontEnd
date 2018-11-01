@@ -39,25 +39,24 @@ export default class Feed extends React.Component {
   }
 
   async componentDidMount() {
-
     const {state} = this.props.navigation;
+    var id = state.params ? state.params.id : undefined;
     var token = state.params ? state.params.token : undefined;
-    console.log(token)
-    user = jwt_decode(token)
-      
-    console.log(token)
-    let notification = JSON.stringify({
-      id_token: user.user_id,
+    user = token ? jwt_decode(token) : undefined;
+    id = id ? id : user.user_id;
+    console.log(id)
+    let profile =  JSON.stringify({
+      id_token: id,
       notification_token: tk,
-    })
-    console.log(notification);
+    }) 
+    console.log(profile);
     fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: notification
+      body: profile
     }).then(response => { return response.json() }
     ).then(jsonResponse => {
       console.log(jsonResponse);
