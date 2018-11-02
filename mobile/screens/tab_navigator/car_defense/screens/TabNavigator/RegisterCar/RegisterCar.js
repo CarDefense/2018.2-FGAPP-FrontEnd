@@ -185,7 +185,7 @@ export default class RegisterCar extends Component {
 
       const { state } = this.props.navigation;
       var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id ) : undefined;
-
+      
       const url = CAR_API + '/validate_car/' //cars db models url
 
       let car = JSON.stringify({

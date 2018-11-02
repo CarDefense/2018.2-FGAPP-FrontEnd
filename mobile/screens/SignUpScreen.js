@@ -11,8 +11,8 @@ import {
   Button,
   FlatList,
 } from 'react-native';
-import Cookie from 'react-native-cookie';
 import Field from './components/Field';
+import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js'
 
 export default class App extends Component {
 
@@ -25,7 +25,7 @@ export default class App extends Component {
 
   _onPressButton = async () => {
 
-    var registration_path = 'http://192.168.15.8:8005/users/';
+    var registration_path = PROFILE_API + '/users/';
       fetch(registration_path,{
         method: 'POST',
         credentials: 'include',

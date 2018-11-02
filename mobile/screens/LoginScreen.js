@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Field from './components/Field';
 import jwt_decode from 'jwt-decode';
+import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js'
 
 class LoginScreen extends Component {
 
@@ -23,7 +24,7 @@ class LoginScreen extends Component {
   }
 
   _onPressButton = async () => {
-    var login_path = 'http://192.168.15.8:8005/token-auth/';
+    var login_path = PROFILE_API + '/token-auth/';
       fetch(login_path, {
         method: 'POST',
         headers: {
