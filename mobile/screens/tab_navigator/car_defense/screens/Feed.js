@@ -70,7 +70,6 @@ export default class Feed extends React.Component {
       .then((responseJson) => {
 
         this.setState({
-          isLoading: false,
           dataSource: responseJson,
         }, function () {
 
@@ -110,7 +109,7 @@ export default class Feed extends React.Component {
               </View>
             );
           }}
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={({ id }, index) => id.toString()}
 
         />
       </ScrollView>

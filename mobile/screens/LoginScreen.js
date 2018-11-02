@@ -15,54 +15,54 @@ class LoginScreen extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        email: '', password: '',
-        email_field_is_bad: false, password_field_is_bad: false,
-        email_field_alerts: [''], password_field_alerts: [''], non_field_alert: ['']
+        username: '', password: '',
+        username_field_is_bad: false, password_field_is_bad: false,
+        username_field_alerts: [''], password_field_alerts: [''], non_field_alert: ['']
       };
   }
 
   _onPressButton = async () => {
-      var login_path = `${process.env.INTEGRA_LOGIN_AUTH}/login/`;
+    var login_path = 'http://192.168.25.230:8005/token-auth/';
       fetch(login_path, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        'username': this.state.email, //UsernameField foi definido como email
+        'username': this.state.username, //UsernameField foi definido como username
         'password': this.state.password,
       }),
   })
   .then((response) => response.json())
   .then((responseJson) => {
     console.log(JSON.stringify(responseJson));
-    //Campo de email
-   if (responseJson.username != undefined){
-     this.setState({ email_field_alerts: responseJson.username})
-     this.setState({ email_field_is_bad: true })
-    }
-    else{
-      this.setState({ email_field_alerts: ['']})
-      this.setState({ email_field_is_bad: false })
-    }
+  //   //Campo de username
+  //  if (responseJson.username != undefined){
+  //    this.setState({ username_field_alerts: responseJson.username})
+  //    this.setState({ username_field_is_bad: true })
+  //   }
+  //   else{
+  //     this.setState({ username_field_alerts: ['']})
+  //     this.setState({ username_field_is_bad: false })
+  //   }
 
-    //Campo de password
-    if (responseJson.password != undefined){
-      this.setState({ password_field_alerts: responseJson.password})
-      this.setState({ password_field_is_bad: true })
-    }
-    else{
-      this.setState({ password_field_alerts: ['']})
-      this.setState({ password_field_is_bad: false })
-    }
+  //   //Campo de password
+  //   if (responseJson.password != undefined){
+  //     this.setState({ password_field_alerts: responseJson.password})
+  //     this.setState({ password_field_is_bad: true })
+  //   }
+  //   else{
+  //     this.setState({ password_field_alerts: ['']})
+  //     this.setState({ password_field_is_bad: false })
+  //   }
 
-    //Sem campo
-    if (responseJson.non_field_errors != undefined){
-      this.setState({ non_field_alert: responseJson.non_field_errors})
-    }
-    else{
-      this.setState({ non_field_alert: ['']})
-    }
+  //   //Sem campo
+  //   if (responseJson.non_field_errors != undefined){
+  //     this.setState({ non_field_alert: responseJson.non_field_errors})
+  //   }
+  //   else{
+  //     this.setState({ non_field_alert: ['']})
+  //   }
     //Sucesso
    if (responseJson.token != undefined||
          responseJson.key != undefined){
@@ -86,11 +86,11 @@ class LoginScreen extends Component {
             <View style={{paddingTop: 50, paddingLeft: 30, paddingRight: 30}}>
               <Text>Login</Text>
               <Field
-               placeholder={"Email"}
-               badInput={this.state.email_field_is_bad}
-               fieldAlert={this.state.email_field_alerts}
+               placeholder={"Usuário"}
+               badInput={this.state.username_field_is_bad}
+               fieldAlert={this.state.username_field_alerts}
                keyExtractor={'username'}
-               onChangeText={(email) => this.setState({email})}
+               onChangeText={(username) => this.setState({username})}
               />
 
               <Field
@@ -103,7 +103,7 @@ class LoginScreen extends Component {
                secureTextEntry
               />
 
-              <Button title='Login' onPress={this._onPressButton}/>
+              <Button title='Entrar' onPress={this._onPressButton}/>
               <View style={{height: 20}} />
               <FlatList
                   data={this.state.non_field_alert}
