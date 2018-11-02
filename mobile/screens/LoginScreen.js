@@ -9,6 +9,7 @@ import {
     Alert,
 } from "react-native";
 import Field from './components/Field';
+import jwt_decode from 'jwt-decode';
 
 class LoginScreen extends Component {
 
@@ -22,7 +23,7 @@ class LoginScreen extends Component {
   }
 
   _onPressButton = async () => {
-    var login_path = 'http://192.168.25.230:8005/token-auth/';
+    var login_path = 'http://192.168.15.8:8005/token-auth/';
       fetch(login_path, {
         method: 'POST',
         headers: {
@@ -64,11 +65,14 @@ class LoginScreen extends Component {
   //     this.setState({ non_field_alert: ['']})
   //   }
     //Sucesso
-   if (responseJson.token != undefined||
-         responseJson.key != undefined){
-     this.props.navigation.navigate('TabHandler', {token:responseJson.token})
-      }
-   })
+    
+  
+    var token = responseJson.token ? responseJson.token : undefined;
+    user = token ? jwt_decode(token) : undefined;
+    if (user != undefined || responseJson.key != undefined){
+      this.props.navigation.navigate('TabHandler', {user:user})
+    }
+  })
    .catch( err => {
      if (typeof err.text === 'function') {
        err.text().then(errorMessage => {

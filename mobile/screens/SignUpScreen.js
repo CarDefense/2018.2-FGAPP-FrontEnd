@@ -25,7 +25,7 @@ export default class App extends Component {
 
   _onPressButton = async () => {
 
-    var registration_path = 'http://192.168.25.230:8005/users/';
+    var registration_path = 'http://192.168.15.8:8005/users/';
       fetch(registration_path,{
         method: 'POST',
         credentials: 'include',

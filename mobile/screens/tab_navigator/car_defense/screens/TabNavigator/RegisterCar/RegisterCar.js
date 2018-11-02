@@ -3,7 +3,6 @@ import { TextField } from 'react-native-material-textfield';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, FlatList, RefreshControl } from 'react-native';
 // import Expo from 'expo'
 // import { Permissions, Notifications } from 'expo'
-import jwt_decode from 'jwt-decode';
 import { CAR_API } from '../const/Const'
 
 
@@ -109,9 +108,8 @@ export default class RegisterCar extends Component {
   async componentDidMount() {
     this.setState({ hasError: false, errorMessage: '' })
     const { state } = this.props.navigation;
-    var token = state.params ? state.params.token : undefined;
-    user = jwt_decode(token)
-    let link = CAR_API + '/car/?token=' + user.user_id
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id ) : undefined;
+    let link = CAR_API + '/car/?token=' + id
 
     return fetch(link)
       .then((response) => response.json())
@@ -186,19 +184,18 @@ export default class RegisterCar extends Component {
     if (errorPlate == false) {
 
       const { state } = this.props.navigation;
-      var token = state.params ? state.params.token : undefined;
-      user = jwt_decode(token)
+      var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id ) : undefined;
 
-      const url = 'http://cardefense.eastus.cloudapp.azure.com:8003/' + '/validate_car/' //cars db models url
+      const url = CAR_API + '/validate_car/' //cars db models url
 
-      let notification = JSON.stringify({
-        id_token: user.user_id,
+      let car = JSON.stringify({
+        id_token: id,
         plate: this.state.plate,
         model: this.state.model,
         color: this.state.color
       })
 
-      console.log(notification)
+      console.log(car)
 
       fetch(url, {
         method: 'POST',
@@ -206,7 +203,7 @@ export default class RegisterCar extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: notification
+        body: car
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);

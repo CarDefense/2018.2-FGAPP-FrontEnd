@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
-import jwt_decode from 'jwt-decode';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 
 var tk
@@ -40,11 +39,8 @@ export default class Feed extends React.Component {
 
   async componentDidMount() {
     const {state} = this.props.navigation;
-    var id = state.params ? state.params.id : undefined;
-    var token = state.params ? state.params.token : undefined;
-    user = token ? jwt_decode(token) : undefined;
-    id = id ? id : user.user_id;
-    console.log(id)
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id ) : undefined;
+    
     let profile =  JSON.stringify({
       id_token: id,
       notification_token: tk,

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Button, Alert } from 'react-native';
 
-process.env.VENDAS_PRODUCTS='https://5baa70ed53adf70014d15d2e.mockapi.io'
-process.env.INTEGRA_LOGIN_AUTH='http://5babadabecc1a70014306b40.mockapi.io/api/rest-auth'
 
 class WelcomeScreen extends Component {
 
@@ -12,10 +10,10 @@ class WelcomeScreen extends Component {
           });
         if (type === 'success') {
           // Get the user's name using Facebook's Graph API
-            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-            const id = (await response.json()).id;
-            console.log(id);
-            this.props.navigation.navigate('TabHandler', {id:id});
+            const response = await fetch(`https://graph.facebook.com/v3.2/me?access_token=${token}&debug=all&fields=id%2Cname%2Cemail&format=json&method=get&pretty=0&suppress_http_code=1`);
+            const user = (await response.json());
+            console.log(user);
+            this.props.navigation.navigate('TabHandler', {user:user});
          }
       }
 
