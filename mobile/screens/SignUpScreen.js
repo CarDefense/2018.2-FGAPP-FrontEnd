@@ -12,14 +12,15 @@ import {
   FlatList,
 } from 'react-native';
 import Field from './components/Field';
-import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js'
+import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
 
 export default class App extends Component {
 
   constructor(props) {
       super(props);
       this.state = {
-        username: '', password: ''
+        username: '', 
+        password: ''
       };
   }
 
