@@ -160,7 +160,6 @@ class WelcomeScreen extends Component {
                     });
                 } else {
                     Alert.alert("Erro na conexão.");
-                    console.log(err)
                 }
             });
         }

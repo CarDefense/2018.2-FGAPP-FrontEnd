@@ -195,12 +195,14 @@ export default class SignUpScreen extends Component {
             <TextField
               ref={this.emailRef}
               value={data.email}
+              keyboardType='email-address'
+              autoCapitalize='none'
               autoCorrect={false}
               enablesReturnKeyAutomatically={true}
               onFocus={this.onFocus}
               onChangeText={(email) => this.setState({ email })}
               returnKeyType='next'
-              label='Email'
+              label='Endereço de email'
               tintColor="#760f9f"
               underlineColorAndroid="transparent"
               error={errors.email}
