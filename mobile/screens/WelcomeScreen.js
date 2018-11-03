@@ -71,14 +71,6 @@ class WelcomeScreen extends Component {
         this.setState(({ secureTextEntry }) => ({ secureTextEntry: !secureTextEntry }));
     }
 
-    onSubmitUserName() {
-        this.password.focus();
-    }
-
-    onSubmitPassword() {
-        this.password.blur();
-    }
-
     updateRef(name, ref) {
         this[name] = ref;
     }
@@ -177,10 +169,7 @@ class WelcomeScreen extends Component {
     }
 
     render() {
-        let { image } = this.state;
         let { errors = {}, ...data } = this.state;
-        let { userName = 'text' } = data;
-        let { password = 'text' } = data;
 
         return (
             <ImageBackground
@@ -273,12 +262,6 @@ class WelcomeScreen extends Component {
 export default WelcomeScreen;
 
 const styles = StyleSheet.create({
-    background: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: "#000000",
-        opacity: 0.9
-    },
     button: {
         backgroundColor: "#540b71",
         borderRadius: 15,
