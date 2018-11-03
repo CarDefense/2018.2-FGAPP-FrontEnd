@@ -177,7 +177,7 @@ export default class SignUpScreen extends Component {
   }
 
   render() {
-    let { errors = {}, ...data } = this.state;
+    let { errors = {}, secureTextEntry, ...data } = this.state;
 
     return (
       <ImageBackground
@@ -223,7 +223,7 @@ export default class SignUpScreen extends Component {
             <TextField
               ref={this.passwordRef}
               value={data.password}
-              secureTextEntry={true}
+              secureTextEntry={secureTextEntry}
               autoCapitalize='none'
               autoCorrect={false}
               enablesReturnKeyAutomatically={true}

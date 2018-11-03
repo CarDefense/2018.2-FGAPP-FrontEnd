@@ -168,7 +168,7 @@ class WelcomeScreen extends Component {
     }
 
     render() {
-        let { errors = {}, ...data } = this.state;
+        let { errors = {}, secureTextEntry, ...data } = this.state;
 
         return (
             <ImageBackground
@@ -199,7 +199,7 @@ class WelcomeScreen extends Component {
                         <TextField
                             ref={this.passwordRef}
                             value={data.password}
-                            secureTextEntry={true}
+                            secureTextEntry={secureTextEntry}
                             autoCapitalize='none'
                             autoCorrect={false}
                             enablesReturnKeyAutomatically={true}
