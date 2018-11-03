@@ -7,13 +7,11 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
   TouchableOpacity,
-  Button,
   Alert,
   Image
 } from 'react-native';
-import { NOTIFICATIONS_API } from '../const/Const'
+import { NOTIFICATIONS_API } from '../const/Const.js'
 
 var tk
 async function register() {

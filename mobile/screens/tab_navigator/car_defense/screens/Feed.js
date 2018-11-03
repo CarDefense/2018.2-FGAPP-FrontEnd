@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
-import jwt_decode from 'jwt-decode';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 
 var tk
@@ -39,25 +38,21 @@ export default class Feed extends React.Component {
   }
 
   async componentDidMount() {
-
     const {state} = this.props.navigation;
-    var token = state.params ? state.params.token : undefined;
-    console.log(token)
-    user = jwt_decode(token)
-      
-    console.log(token)
-    let notification = JSON.stringify({
-      id_token: user.user_id,
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id ) : undefined;
+    
+    let profile =  JSON.stringify({
+      id_token: id,
       notification_token: tk,
-    })
-    console.log(notification);
+    }) 
+    console.log(profile);
     fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: notification
+      body: profile
     }).then(response => { return response.json() }
     ).then(jsonResponse => {
       console.log(jsonResponse);
@@ -71,7 +66,6 @@ export default class Feed extends React.Component {
       .then((responseJson) => {
 
         this.setState({
-          isLoading: false,
           dataSource: responseJson,
         }, function () {
 
@@ -111,7 +105,7 @@ export default class Feed extends React.Component {
               </View>
             );
           }}
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={({ id }, index) => id.toString()}
 
         />
       </ScrollView>
