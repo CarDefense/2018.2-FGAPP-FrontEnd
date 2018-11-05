@@ -10,6 +10,7 @@ import PublicNotifications from './tab_navigator/car_defense/screens/TabNavigato
 import PrivateNotifications from './tab_navigator/car_defense/screens/TabNavigator/PrivateNotifications/PrivateNotifications'
 import RegisterCar from './tab_navigator/car_defense/screens/TabNavigator/RegisterCar/RegisterCar'
 import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
+
 import PrivateFeed from './tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
 import { Icon } from 'native-base';
 
@@ -39,6 +40,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="send-o"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -53,6 +55,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="warning"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -67,6 +70,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="car"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
 
                 />
             ),
@@ -96,6 +100,11 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="user"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+            tabBarIcon: ({ focused }) => (
+                <Icon
+                    type='FontAwesome'
+                    name="bell-o"
+                    style={{ color: '#5c68c3', fontSize: 15 }}
                 />
             ),
             headerLeft: null,
@@ -109,6 +118,7 @@ const TabHandler = new TabNavigator({
             swipeEnabled: true,
             activeTintColor: '#318E95',
             inactiveTintColor: '#8bd4da',
+
             labelStyle: {
                 fontSize: 5,
             },
@@ -117,6 +127,7 @@ const TabHandler = new TabNavigator({
             },
             style: {
                 backgroundColor: 'white',
+
             },
             animationEnabled: true,
         },
