@@ -6,8 +6,10 @@ import {
     Image,
     FlatList,
     ScrollView,
-    RefreshControl
+    RefreshControl, 
+    Button
 } from 'react-native';
+import { Icon } from 'native-base';
 import { CAR_API } from '../const/Const'
 
 export default class UserProfileView extends Component {
@@ -59,7 +61,15 @@ export default class UserProfileView extends Component {
 
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ backgroundColor: "#8bd4da" }}>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                    />
+                }
+            >
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
                         <Image style={styles.avatar}
@@ -72,31 +82,36 @@ export default class UserProfileView extends Component {
                     </View>
                 </View>
 
-                <ScrollView
-                    // style={styles.body}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this._onRefresh}
-                        />
-                    }
-                >
+                <View style={{backgroundColor: '#8bd4da'}}>
                     <FlatList
                         style={{ backgroundColor: '#8bd4da' }}
                         data={this.state.dataSource}
                         renderItem={({ item }) => {
                             return (
                                 <View style={styles.item2}>
-                                    <Text style={styles.text1}>Placa = {item.plate}</Text>
-                                    <Text style={styles.text1}>Modelo = {item.model}</Text>
-                                    <Text style={styles.text1}>Cor = {item.color}</Text>
+                                    <Text style={styles.text1}>{item.plate}</Text>
+                                    <Text style={styles.text2}>Modelo: {item.model}   Cor: {item.color}</Text>
+                                    <Icon
+                                        type='FontAwesome'
+                                        name="car"
+                                        style={styles.icon1}
+                                    />
+                                    {/* <Button
+                                        title='press'
+                                    >
+                                        <Icon
+                                        type='FontAwesome'
+                                        name="car"
+                                        />
+                                        </Button> */}
                                 </View>
 
                             );
                         }}
                         keyExtractor={({ id }, index) => id.toString()}
                     />
-                </ScrollView>
+                </View>
+            </ScrollView>
             </View>
         );
     }
@@ -127,7 +142,7 @@ const styles = StyleSheet.create({
     userInfo: {
         fontSize: 15,
         color: "white",
-        fontWeight: '500',
+        fontWeight: '800',
         marginTop: 30,
         marginBottom: 15
     },
@@ -161,22 +176,33 @@ const styles = StyleSheet.create({
     },
     item2: {
         alignItems: "center",
-        backgroundColor: "#ffffff",
+        backgroundColor: "white",
         flexGrow: 1,
-        margin: 4,
         padding: 20,
-        shadowColor: "#000000",
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        shadowOffset: {
-            height: 1,
-            width: 1
-        },
-        elevation: 4
+        borderRadius: 15,
+        elevation: 4,
+        margin: 25,
+        marginTop: 2,
+        
+    },
+    icon1: {
+        color: "#8bd4da",
+        fontWeight: '800',
+        fontSize: 44,
+        position: 'absolute',
+        left: 10, 
+        marginTop: 5,
+        bottom: 25// Keep some space between your left border and Image
+          
     },
     text1: {
         color: "#8bd4da",
         fontWeight: '800',
-        fontSize: 14
+        fontSize: 30
+    },
+    text2: {
+        color: "#8bd4da",
+        fontWeight: '800',
+        fontSize: 12
     }
 });
