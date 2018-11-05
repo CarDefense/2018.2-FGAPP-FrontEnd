@@ -39,6 +39,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="send-o"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -53,6 +54,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="warning"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -67,6 +69,7 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="car"
                     style={{ color: '#8bd4da', fontSize: 15 }}
+
 
                 />
             ),
@@ -96,19 +99,20 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="user"
                     style={{ color: '#8bd4da', fontSize: 15 }}
-                />
+                    />
             ),
             headerLeft: null,
         }
     },
 },
-    {
+            {
         tabBarOptions: {
             showLabel: true,
             showIcon: true,
             swipeEnabled: true,
             activeTintColor: '#318E95',
             inactiveTintColor: '#8bd4da',
+
             labelStyle: {
                 fontSize: 5,
             },
@@ -117,6 +121,7 @@ const TabHandler = new TabNavigator({
             },
             style: {
                 backgroundColor: 'white',
+
             },
             animationEnabled: true,
         },
