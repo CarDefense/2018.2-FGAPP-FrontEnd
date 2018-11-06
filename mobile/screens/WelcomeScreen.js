@@ -172,17 +172,19 @@ class WelcomeScreen extends Component {
 
         return (
             <ImageBackground
-                source={require('../images/background.jpg')}
+                source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png'}}
+
                 style={{ width: '100%', height: '100%' }}
             >
                 <View style={styles.container}>
                     <View style={styles.containerImage}>
                         <Image
                             style={styles.image}
-                            source={require('../images/logo.png')}
+                            source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png'}}
                         />
                     </View>
-                    <View>
+                    <View style={styles.container1}>
+
                         <TextField
                             ref={this.usernameRef}
                             value={data.username}
@@ -192,9 +194,11 @@ class WelcomeScreen extends Component {
                             onChangeText={(username) => this.setState({ username })}
                             returnKeyType='next'
                             label='Nome de usuário'
-                            tintColor="#760f9f"
+                            tintColor="white"
                             underlineColorAndroid="transparent"
                             error={errors.username}
+                            textColor='white'
+
                         />
                         <TextField
                             ref={this.passwordRef}
@@ -208,12 +212,15 @@ class WelcomeScreen extends Component {
                             onChangeText={(password) => this.setState({ password })}
                             returnKeyType='done'
                             label='Senha'
-                            tintColor="#760f9f"
+                            tintColor="white"
+
                             underlineColorAndroid="transparent"
                             error={errors.password}
                             maxLength={20}
                             characterRestriction={15}
                             renderAccessory={this.renderPasswordAccessory}
+                            textColor='white'
+
                         />
                         <View style={styles.containerButton}>
                             <TouchableOpacity
@@ -221,7 +228,8 @@ class WelcomeScreen extends Component {
                                 onPress={() => this._onPressButton()}
                                 containerViewStyle={{ width: '40%' }}
                             >
-                                <Text style={{ color: 'white' }} >Entrar</Text>
+                                <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >LOG IN</Text>
+
                             </TouchableOpacity>
                             <FlatList
                                 data={this.state.non_field_alert}
@@ -229,28 +237,22 @@ class WelcomeScreen extends Component {
                                 keyExtractor={item => 'non_field_errors'}
                             />
                         </View>
-                    </View>
-                    <View style={styles.containerText}>
-                        <Text style={{ color: 'gray' }} >
-                            -    -    -    -    -    Ou     -     -    -     -    -
-                    </Text>
-                    </View>
-                    <View style={styles.containerButton}>
+
                         <TouchableOpacity
                             style={styles.buttonFacebook}
                             onPress={() => this.logIn()}
                             containerViewStyle={{ width: '40%' }}
                         >
-                            <Text style={{ color: 'white' }} >Entrar com Facebook</Text>
+                            <Text style={{ color: 'white', fontWeight: '700'}} >Facebook</Text>
                         </TouchableOpacity>
-                    </View>
-                    <View style={{ margin: 30 }}>
+
                         <TouchableOpacity
                             style={styles.button1}
                             onPress={() => this.props.navigation.navigate('SignUpScreen')}
                             containerViewStyle={{ width: '40%' }}
                         >
-                            <Text style={{ color: "#540b71" }} >Criar conta</Text>
+                            <Text style={{ color: "#8bd4da" }} >Criar conta</Text>
+
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -262,18 +264,22 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#540b71",
+        backgroundColor: "#8bd4da",
         borderRadius: 15,
         height: 40,
         width: 320,
         justifyContent: 'center',
         alignItems: 'center'
     },
+    container1: {
+        marginTop: 150,
+      },
+
     buttonFacebook: {
         backgroundColor: "#3B5998",
         borderRadius: 15,
         height: 40,
-        width: 320,
+        width: 100,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -282,12 +288,16 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         height: 40,
         width: 120,
+        alignItems: 'center'
+
     },
     container: {
         margin: 16,
     },
     containerButton: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 10
+
     },
     containerImage: {
         margin: 30,

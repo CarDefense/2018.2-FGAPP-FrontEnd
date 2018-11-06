@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
-import {  NOTIFICATIONS_API } from '../const/Const'
+import { NOTIFICATIONS_API } from '../const/Const'
 
 
 async function registerForPushNotificationsAsync() {
@@ -24,17 +24,17 @@ async function registerForPushNotificationsAsync() {
   }
   var token
   var tk = await Promise
-    .resolve (token = await Expo.Notifications.getExpoPushTokenAsync())
+    .resolve(token = await Expo.Notifications.getExpoPushTokenAsync())
     .then(x => token);
   return tk;
-  
+
 
 }
 
 export default class Feed extends React.Component {
 
   componentWillMount() {
-    
+
     this.listener = Expo.Notifications.addListener(this.listen);
   }
   componentWillUnmount() {
@@ -75,46 +75,48 @@ export default class Feed extends React.Component {
   }
 
   _onRefresh = () => {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     this.componentDidMount().then(() => {
-      this.setState({refreshing: false});
+      this.setState({ refreshing: false });
     });
   }
 
   render() {
     return (
-      <ScrollView style={styles.item}
-      refreshControl={
-        <RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={this._onRefresh}
-        />
-      }
-      >
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.item2}>
-                <Text style={styles.text1}>{item.title}</Text>
-                <Image source={{uri:item.image}}
-                  style={{width: 400, height: 200}} />
-                <Text style={styles.text}>{item.message}</Text>
-              </View>
-            );
-          }}
-          keyExtractor={({ id }, index) => id.toString()}
-          
-        />
-        
-      </ScrollView>
+      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+        <ScrollView style={styles.item}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
+        >
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.item2}>
+                  <Text style={styles.text1}>{item.title}</Text>
+                  <Image source={{ uri: item.image }}
+                    style={{ width: 270, height: 135 }} />
+                  <Text style={styles.text}>{item.message}</Text>
+                </View>
+              );
+            }}
+            keyExtractor={({ id }, index) => id.toString()}
+
+          />
+
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "",
     margin: 4,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
@@ -124,30 +126,86 @@ const styles = StyleSheet.create({
       width: 1
     },
     elevation: 4
+  },
+
+  text: {
+    color: "#8bd4da",
+    fontWeight: '600'
+  },
+  text1: {
+    color: "#8bd4da",
+    fontWeight: '800',
+  }, header: {
+    backgroundColor: "#8bd4da",
+  },
+
+  headerContent: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 22,
+    color: "white",
+    fontWeight: '800',
+  },
+  userInfo: {
+    fontSize: 15,
+    color: "white",
+    fontWeight: '800',
+    marginTop: 30,
+    marginBottom: 15
+  },
+  item: {
+    flexDirection: 'row',
+  },
+
+  icon: {
+    width: 30,
+    height: 30,
+    marginTop: 20,
+  },
+  info: {
+    fontSize: 18,
+    marginTop: 20,
+    color: "#FFFFFF",
   },
   item2: {
     alignItems: "center",
-    justifyContent: 'center',
-    backgroundColor: "#ffffff",
+    backgroundColor: "white",
     flexGrow: 1,
-    margin: 4,
     padding: 20,
-    borderRadius: 10,
-    shadowColor: "#000000",
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 1
-    },
-    elevation: 4
+    borderRadius: 15,
+    elevation: 4,
+    margin: 25,
+    marginTop: 2,
+
   },
-  text: {
-    color: "#540b71",
-    fontWeight: '100'
+  icon1: {
+    color: "#8bd4da",
+    fontWeight: '800',
+    fontSize: 44,
+    position: 'absolute',
+    left: 10,
+    marginTop: 5,
+    bottom: 25// Keep some space between your left border and Image
+
   },
   text1: {
-    color: "#540b71",
-    fontWeight: 'bold',
+    color: "#8bd4da",
+    fontWeight: '800',
+    fontSize: 30
+  },
+  text2: {
+    color: "#8bd4da",
+    fontWeight: '800',
+    fontSize: 12
   }
 });

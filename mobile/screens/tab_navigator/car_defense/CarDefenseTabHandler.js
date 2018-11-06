@@ -10,6 +10,7 @@ import PublicNotifications from './screens/TabNavigator/PublicNotifications/Publ
 import PrivateNotifications from './screens/TabNavigator/PrivateNotifications/PrivateNotifications'
 import RegisterCar from './screens/TabNavigator/RegisterCar/RegisterCar'
 import PrivateFeed from './screens/TabNavigator/PrivateFeed/PrivateFeed'
+import Profile from './screens/TabNavigator/Profile/Profile'
 import { Icon } from 'native-base';
 
 
@@ -80,6 +81,20 @@ const CarDefenseTabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="bell-o"
+                    style={{ color: '#5c68c3', fontSize: 15 }}
+                />
+            ),
+            headerLeft: null,
+        }
+    },
+    Profile: {
+        screen: Profile,
+        navigationOptions: {
+            tabBarLabel: 'Perfil',
+            tabBarIcon: ({ focused }) => (
+                <Icon
+                    type='FontAwesome'
+                    name="user"
                     style={{ color: '#5c68c3', fontSize: 15 }}
                 />
             ),

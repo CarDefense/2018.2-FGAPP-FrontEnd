@@ -181,14 +181,16 @@ export default class SignUpScreen extends Component {
 
     return (
       <ImageBackground
-        source={require('../images/background.jpg')}
+        source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png'}}
+
         style={{ width: '100%', height: '100%' }}
       >
         <View style={styles.container}>
           <View style={styles.containerImage}>
             <Image
               style={styles.image}
-              source={require('../images/logo.png')}
+              source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png'}}
+
             />
           </View>
           <View>
@@ -290,3 +292,4 @@ const styles = StyleSheet.create({
       width: 100,
   }
 });
+

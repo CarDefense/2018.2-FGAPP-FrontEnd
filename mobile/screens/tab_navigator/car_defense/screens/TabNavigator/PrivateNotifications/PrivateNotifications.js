@@ -1,3 +1,4 @@
+
 import { TextField } from 'react-native-material-textfield';
 import { Constants, ImagePicker, Permissions } from 'expo';
 import React, { Component } from 'react';
@@ -7,11 +8,14 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  TextInput,
   TouchableOpacity,
+  Button,
   Alert,
   Image
 } from 'react-native';
-import { NOTIFICATIONS_API } from '../const/Const.js'
+import { NOTIFICATIONS_API } from '../const/Const'
+
 
 var tk
 async function register() {
