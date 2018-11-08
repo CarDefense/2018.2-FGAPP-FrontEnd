@@ -53,7 +53,6 @@ export default class Feed extends React.Component {
   }
 
   getPrivateFeedInfo = () => {
-    let token = await registerForPushNotificationsAsync();
     let url = NOTIFICATIONS_API + `/notifications`
 
     return fetch(url)

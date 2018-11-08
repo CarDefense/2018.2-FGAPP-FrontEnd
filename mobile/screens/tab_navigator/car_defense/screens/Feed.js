@@ -17,11 +17,11 @@ async function register() {
   const value = await Expo.Notifications.getExpoPushTokenAsync();
   tk = value;
   console.log(status, value);
-  
+
 }
 
 export default class Feed extends React.Component {
-  
+
   componentWillMount() {
     register();
     this.listener = Expo.Notifications.addListener(this.listen);
@@ -40,12 +40,10 @@ export default class Feed extends React.Component {
   }
 
   sendIdData = () => {
-    const {state} = this.props.navigation;
+    const { state } = this.props.navigation;
     var token = state.params ? state.params.token : undefined;
-    console.log(token)
     user = jwt_decode(token)
-      
-    console.log(token)
+
     let notification = JSON.stringify({
       id_token: user.user_id,
       notification_token: tk,
@@ -113,8 +111,8 @@ export default class Feed extends React.Component {
             return (
               <View style={styles.item2}>
                 <Text style={styles.text1}>{item.title}</Text>
-                <Image source={{uri:item.image}}
-                  style={{width: 400, height: 200}} />
+                <Image source={{ uri: item.image }}
+                  style={{ width: 400, height: 200 }} />
                 <Text style={styles.text}>{item.message}</Text>
               </View>
             );
