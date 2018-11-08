@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-    View
-} from 'react-native';
+    View,
+    Text,
+    StyleSheet
+} from "react-native";
+import { TabNavigator } from 'react-navigation'
 import Feed from './tab_navigator/car_defense/screens/Feed'
 import PublicNotifications from './tab_navigator/car_defense/screens/TabNavigator/PublicNotifications/PublicNotifications'
 import PrivateNotifications from './tab_navigator/car_defense/screens/TabNavigator/PrivateNotifications/PrivateNotifications'
 import RegisterCar from './tab_navigator/car_defense/screens/TabNavigator/RegisterCar/RegisterCar'
+import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
 import PrivateFeed from './tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
 import { Icon } from 'native-base';
-import { TabNavigator } from 'react-navigation';
+
 
 const TabHandler = new TabNavigator({
     Feed: {
@@ -19,7 +23,7 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="home"
-                    style={{ color: '#5c68c3', fontSize: 16 }}
+                    style={{ color: '#8bd4da', fontSize: 16 }}
                 />
             ),
             headerLeft: null,
@@ -34,7 +38,8 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="send-o"
-                    style={{ color: '#5c68c3', fontSize: 15 }}
+                    style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -48,7 +53,8 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="warning"
-                    style={{ color: '#5c68c3', fontSize: 15 }}
+                    style={{ color: '#8bd4da', fontSize: 15 }}
+
                 />
             ),
             headerLeft: null,
@@ -62,7 +68,8 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="car"
-                    style={{ color: '#5c68c3', fontSize: 15 }}
+                    style={{ color: '#8bd4da', fontSize: 15 }}
+
 
                 />
             ),
@@ -77,24 +84,49 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="bell-o"
-                    style={{ color: '#5c68c3', fontSize: 15 }}
+                    style={{ color: '#8bd4da', fontSize: 15 }}
                 />
             ),
             headerLeft: null,
         }
     },
-}, {
-    tabBarOptions: {
-        showIcon: true,
-        showLabel: false,
-        style: {
-            backgroundColor: '#171717',
-        },
-        tabStyle: {
-            height: 60,
-        },
+    Profile: {
+        screen: Profile,
+        navigationOptions: {
+            tabBarLabel: 'Perfil',
+            tabBarIcon: ({ focused }) => (
+                <Icon
+                    type='FontAwesome'
+                    name="user"
+                    style={{ color: '#8bd4da', fontSize: 15 }}
+                    />
+            ),
+            headerLeft: null,
+        }
     },
-    animationEnabled: true,
-});
+},
+            {
+        tabBarOptions: {
+            showLabel: true,
+            showIcon: true,
+            swipeEnabled: true,
+            activeTintColor: '#318E95',
+            inactiveTintColor: '#8bd4da',
+
+            labelStyle: {
+                fontSize: 5,
+            },
+            tabStyle: {
+                height: 65,
+            },
+            style: {
+                backgroundColor: 'white',
+
+            },
+            animationEnabled: true,
+        },
+
+    });
+
 
 export default TabHandler;
