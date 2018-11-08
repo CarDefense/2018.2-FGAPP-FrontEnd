@@ -30,6 +30,9 @@
         "useBabelrc": true
       }
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
