@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
+import Expo from 'expo'
 
 var tk
 
@@ -28,9 +29,9 @@ export default class Feed extends React.Component {
     this.listener && Expo.Notifications.addListener(this.listen);
   }
 
-  // listen = ({ origin, data }) => {
-  //   //console.log('cool data', origin, data);
-  // }
+  listen = ({ origin, data }) => {
+    console.log('cool data', origin, data);
+  }
 
   constructor(props) {
     super(props);

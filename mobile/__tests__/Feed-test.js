@@ -3,9 +3,9 @@ import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-test('Feed snapShot', () => {
+it('Feed snapShot', () => {
     const snap = renderer.create(
         <Feed/>
     ).toJSON()
     expect(snap).toMatchSnapshot()
-})
+});

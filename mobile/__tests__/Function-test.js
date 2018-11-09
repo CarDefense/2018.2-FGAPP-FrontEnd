@@ -3,14 +3,14 @@ import React from 'react'
 import Feed from '../screens/tab_navigator/car_defense/screens/Feed'
 import renderer from 'react-test-renderer'
 
-it('Function getFeedInfo', () => {
-    let feedData = renderer.create(<Feed/>).getInstance()
+// it('Function getFeedInfo', () => {
+//     let feedData = renderer.create(<Feed/>).getInstance()
 
-    feedData.getFeedInfo()
+//     feedData.getFeedInfo()
 
-    expect(feedData.state.isLoading).toEqual()
-})
-
+//     expect(feedData.state.isLoading).toEqual()
+// })
+ 
 
 it('Function onRefresh', () => {
     let feedData = renderer.create(<Feed/>).getInstance()
@@ -21,20 +21,20 @@ it('Function onRefresh', () => {
     
 })
 
-// it('Function sendIdData', () => {
+// // it('Function sendIdData', () => {
+// //     let feedData = renderer.create(<Feed/>).getInstance()
+
+// //     feedData.sendIdData()
+
+// //     expect(feedData.sendIdData()).toEqual()
+
+// // })
+
+// it('Function renderItem', () => {
 //     let feedData = renderer.create(<Feed/>).getInstance()
 
-//     feedData.sendIdData()
+//     feedData.renderItem()
 
-//     expect(feedData.sendIdData()).toEqual()
+//     expect(feedData.renderItem()).toEqual()
 
 // })
-
-it('Function renderItem', () => {
-    let feedData = renderer.create(<Feed/>).getInstance()
-
-    feedData.renderItem()
-
-    expect(feedData.renderItem()).toEqual()
-
-})
