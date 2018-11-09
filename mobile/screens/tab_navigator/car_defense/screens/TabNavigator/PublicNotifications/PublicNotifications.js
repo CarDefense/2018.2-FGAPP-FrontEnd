@@ -15,35 +15,10 @@ import {
 } from 'react-native';
 import { NOTIFICATIONS_API } from '../const/Const'
 
-
-var tk
-async function register() {
-  const { status } = await Expo.Permissions.askAsync(
-    Expo.Permissions.NOTIFICATIONS
-  );
-  if (status != 'granted') {
-    alert('You need to enable permissions in settings');
-    return;
-  }
-
-  const value = await Expo.Notifications.getExpoPushTokenAsync();
-  tk = value;
-  console.log(status, value);
-}
+const tk = 0;
 
 export default class PublicNotifications extends Component {
-  componentWillMount() {
-    register();
-    this.listener = Expo.Notifications.addListener(this.listen);
-  }
-  componentWillUnmount() {
-    this.listener && Expo.Notifications.addListener(this.listen);
-  }
-
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
-
+ 
   constructor(props) {
     super(props);
 

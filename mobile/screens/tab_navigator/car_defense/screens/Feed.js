@@ -15,7 +15,7 @@ async function register() {
 
   const value = await Expo.Notifications.getExpoPushTokenAsync();
   tk = value;
-  console.log(status, value);
+  //console.log(status, value);
 
 }
 
@@ -28,9 +28,9 @@ export default class Feed extends React.Component {
     this.listener && Expo.Notifications.addListener(this.listen);
   }
 
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
+  // listen = ({ origin, data }) => {
+  //   //console.log('cool data', origin, data);
+  // }
 
   constructor(props) {
     super(props);
@@ -45,7 +45,7 @@ export default class Feed extends React.Component {
       id_token: id,
       notification_token: tk,
     })
-    console.log(profile);
+    //console.log(profile);
     fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
@@ -55,10 +55,10 @@ export default class Feed extends React.Component {
       body: profile
     }).then(response => { return response.json() }
     ).then(jsonResponse => {
-      console.log(jsonResponse);
+      //console.log(jsonResponse);
     }
     ).catch(error => {
-      console.log(error)
+      //console.log(error)
     })
 
     return fetch(NOTIFICATIONS_API + '/emergencynotifications/')
@@ -73,7 +73,7 @@ export default class Feed extends React.Component {
 
       })
       .catch((error) => {
-        console.error(error);
+        //console.error(error);
       });
   }
 

@@ -1,32 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PublicNotifications snapShot 1`] = `
-<RCTScrollView>
-  <View>
-    <View
-      style={
-        Object {
-          "paddingLeft": 16,
-          "paddingRight": 16,
-        }
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+<View
+  style={
+    Object {
+      "backgroundColor": "#8bd4da",
+      "flex": 1,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+    }
+  }
+>
+  <RCTScrollView>
+    <View>
+      <View
         style={
           Object {
-            "color": "#760f9f",
-            "fontSize": 50,
-            "fontWeight": "200",
             "marginTop": 25,
-            "textAlign": "center",
           }
         }
       >
-        Alerta
-      </Text>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "padding": 30,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "uri": "http://cardefense2.eastus.cloudapp.azure.com:8002/media/alert.png",
+              }
+            }
+            style={
+              Object {
+                "borderColor": "white",
+                "borderRadius": 63,
+                "borderWidth": 7,
+                "height": 170,
+                "marginBottom": 10,
+                "width": 170,
+              }
+            }
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "fontWeight": "800",
+              }
+            }
+          >
+            Envie aqui os alertas
+          </Text>
+        </View>
+      </View>
       <View
         onResponderRelease={[Function]}
         onStartShouldSetResponder={[Function]}
@@ -91,8 +125,9 @@ exports[`PublicNotifications snapShot 1`] = `
               onChangeText={[Function]}
               onContentSizeChange={[Function]}
               onFocus={[Function]}
+              placeholderTextColor="white"
               returnKeyType="next"
-              selectionColor="#760f9f"
+              selectionColor="white"
               style={
                 Array [
                   Object {
@@ -102,7 +137,7 @@ exports[`PublicNotifications snapShot 1`] = `
                     "top": 2,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, .87)",
+                    "color": "white",
                     "fontSize": 16,
                     "height": 24,
                     "textAlign": "left",
@@ -192,24 +227,12 @@ exports[`PublicNotifications snapShot 1`] = `
           </View>
         </View>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "#760f9f",
-            "paddingTop": 16,
-          }
-        }
-      >
-        Adicionar imagem
-      </Text>
       <View
         style={
           Object {
             "flexDirection": "row",
             "justifyContent": "space-between",
+            "marginTop": 20,
             "paddingRight": 4,
             "paddingTop": 4,
           }
@@ -235,13 +258,13 @@ exports[`PublicNotifications snapShot 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#760f9f",
+              "backgroundColor": "white",
               "borderRadius": 15,
               "flexDirection": "row",
-              "height": 40,
+              "height": 30,
               "justifyContent": "center",
               "opacity": 1,
-              "width": "61%",
+              "width": 190,
             }
           }
           testID={undefined}
@@ -253,12 +276,12 @@ exports[`PublicNotifications snapShot 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "white",
-                "fontWeight": "bold",
+                "color": "#8bd4da",
+                "fontWeight": "800",
               }
             }
           >
-            CAMERA
+            Camera
           </Text>
         </View>
         <View
@@ -281,13 +304,13 @@ exports[`PublicNotifications snapShot 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#540b71",
+              "backgroundColor": "white",
               "borderRadius": 15,
               "flexDirection": "row",
               "height": 40,
               "justifyContent": "center",
               "opacity": 1,
-              "width": "33%",
+              "width": 120,
             }
           }
           testID={undefined}
@@ -299,12 +322,12 @@ exports[`PublicNotifications snapShot 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "white",
-                "fontWeight": "bold",
+                "color": "#8bd4da",
+                "fontWeight": "800",
               }
             }
           >
-            GALERIA
+            Galeria
           </Text>
         </View>
       </View>
@@ -313,7 +336,8 @@ exports[`PublicNotifications snapShot 1`] = `
           Object {
             "flexDirection": "row",
             "justifyContent": "center",
-            "paddingTop": 32,
+            "marginBottom": 40,
+            "paddingTop": 20,
           }
         }
       >
@@ -337,13 +361,13 @@ exports[`PublicNotifications snapShot 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#760f9f",
+              "backgroundColor": "white",
               "borderRadius": 15,
               "flexDirection": "row",
               "height": 40,
               "justifyContent": "center",
               "opacity": 1,
-              "width": "73.25%",
+              "width": 120,
             }
           }
           testID={undefined}
@@ -355,16 +379,16 @@ exports[`PublicNotifications snapShot 1`] = `
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "white",
-                "fontWeight": "bold",
+                "color": "#8bd4da",
+                "fontWeight": "800",
               }
             }
           >
-            EMITIR ALERTA
+            Enviar
           </Text>
         </View>
       </View>
     </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;
