@@ -134,7 +134,7 @@ export default class PrivateNotifications extends Component {
 
     if (errorPlate == false && errorMessage == false) {
       let notification = JSON.stringify({
-        sender_id: tk,
+        //sender_id: tk,
         title: this.state.title,
         plate: this.state.plate,
         message: this.state.message,
@@ -173,10 +173,17 @@ export default class PrivateNotifications extends Component {
     let {plate = 'text'} = data;
     let {message = 'text'} = data;
 
-    return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.header}>Notificação</Text>
+    return ( 
+    <View style={styles.container}>
+      <ScrollView>   
+      <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <Image style={styles.avatar}
+              source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/notificationicon.png' }}
+            />
+            <Text style={styles.name}>Envie aqui as notificões</Text>
+          </View>
+        </View>
           <TextField
             ref={this.plateRef}
             value={data.plate}
@@ -188,11 +195,13 @@ export default class PrivateNotifications extends Component {
             // onSubmitEditing={this.onSubmitPLate}
             returnKeyType='next'
             label='Placa'
-            tintColor = "#760f9f"
+            tintColor = "white"
             underlineColorAndroid="transparent"
             maxLength={8}
             autoCapitalize="characters"
             error={errors.plate}
+            textColor="white"
+            placeholderTextColor="white"
           />
           <TextField
             ref={this.messageRef}
@@ -205,18 +214,21 @@ export default class PrivateNotifications extends Component {
             // onSubmitEditing={this.onSubmitMessage}
             returnKeyType='next'
             label='Descrição'
-            tintColor = "#760f9f"
+            tintColor = "white"
             error={errors.message}
+            textColor="white"
+            labelPadding={10}
+            placeholderTextColor="white"
           />
-          <Text style={styles.text}>Adicionar imagem</Text>
+          {/* <Text style={styles.text}>Adicionar imagem</Text> */}
           <View style={styles.alternativeLayoutButtonContainer}>
             <TouchableOpacity
               style={styles.button}
-              color="#760f9f"
+              color="#8bd4da"
               onPress={this._takePhoto}
               containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white' }} >Camera</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button2}
@@ -224,7 +236,7 @@ export default class PrivateNotifications extends Component {
               onPress={this._pickImage}
               containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white' }} >Galeria</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
             </TouchableOpacity>
           </View>
           {this._maybeRenderImage()}
@@ -232,15 +244,16 @@ export default class PrivateNotifications extends Component {
           <View style={styles.container1}>
             <TouchableOpacity
               style={styles.button3}
-              color="#760f9f"
+              color="#8bd4da"
               onPress={this.onPressButton}
               containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white' }} >Enviar</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
             </TouchableOpacity>
           </View>
+        </ScrollView>
         </View>
-      </ScrollView>
+      
     );
   }
 
@@ -395,11 +408,13 @@ export default class PrivateNotifications extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
+    backgroundColor: '#8bd4da',
+    flex: 1
   },
   text: {
     paddingTop: 16,
-    color: "#760f9f",
+    color: "#8bd4da",
     fontWeight: 'bold',
   },
   alternativeLayoutButtonContainer: {
@@ -407,18 +422,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 4,
     paddingRight: 4,
+    marginTop: 20
   },
   button: {
-    backgroundColor: "#760f9f",
+    backgroundColor: "white",
     borderRadius: 15,
-    height: 40,
+    height: 30,
     width: 190,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   button2: {
-    backgroundColor: "#540b71",
+    backgroundColor: "white",
     borderRadius: 15,
     height: 40,
     width: 120,
@@ -427,7 +443,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button3: {
-    backgroundColor: "#760f9f",
+    backgroundColor: "white",
     borderRadius: 15,
     height: 40,
     width: 120,
@@ -441,11 +457,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   header: {
-    color: "#760f9f",
-    textAlign: 'center',
-    fontWeight: '200',
-    fontSize: 50,
-    marginTop: 25
+    marginTop: 25,
   },
   maybeRenderUploading: {
     paddingTop: 8,
@@ -477,5 +489,27 @@ const styles = StyleSheet.create({
   maybeRenderImage: {
     height: 250,
     width: 250,
+  },
+  avatar: {
+    width: 170,
+    height: 170,
+    borderRadius: 63,
+    borderWidth: 7,
+    borderColor: "white",
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: '800',
+  },
+  headerContent: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  input: {
+    marginBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });

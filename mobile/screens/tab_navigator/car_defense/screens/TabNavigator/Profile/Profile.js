@@ -57,11 +57,11 @@ export default class UserProfileView extends Component {
 
     render() {
         const { state } = this.props.navigation;
-        var user = state.params ? (state.params.user.username ? state.params.user.username : state.params.user.username) : undefined;
+        var user = state.params ? (state.params.user.name ? state.params.user.name : state.params.user.username) : undefined;
 
 
         return (
-            <View style={{ backgroundColor: "#8bd4da" }}>
+            <View style={{ backgroundColor: "#8bd4da", flex: 1 }}>
             <ScrollView
                 refreshControl={
                     <RefreshControl
@@ -146,24 +146,10 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 15
     },
-    body: {
-        backgroundColor: "#778899",
-        height: 500,
-        alignItems: 'center',
-    },
     item: {
         flexDirection: 'row',
     },
-    infoContent: {
-        flex: 1,
-        alignItems: 'flex-start',
-        paddingLeft: 5
-    },
-    iconContent: {
-        flex: 1,
-        alignItems: 'flex-end',
-        paddingRight: 5,
-    },
+    
     icon: {
         width: 30,
         height: 30,
