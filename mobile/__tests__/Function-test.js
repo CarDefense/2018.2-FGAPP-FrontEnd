@@ -22,15 +22,27 @@ it('Function onRefresh', () => {
     
 })
 
-// componentWillUnmount() {
-//     this.listener && Expo.Notifications.addListener(this.listen);
-//   }
 it('Function componentWillUnmount', () => {
     let feedData = renderer.create(<Feed/>).getInstance()
 
     feedData.componentWillUnmount()
 
     expect(feedData.componentWillUnmount(true)).toEqual(undefined)
+    
+})
+
+// listen = ({ origin, data }) => {
+//     console.log('cool data', origin, data);
+// }
+
+it('Function listen', () => {
+    let feedData = renderer.create(<Feed/>).getInstance()
+    let origin = ''
+    let data = ''
+
+    feedData.listen(origin, data)
+
+    expect(feedData.listen(origin, data)).toEqual(undefined)
     
 })
 
