@@ -2,7 +2,6 @@ import 'react-native'
 import React from 'react'
 import Feed from '../screens/tab_navigator/car_defense/screens/Feed'
 import renderer from 'react-test-renderer'
-import * as register from '../screens/tab_navigator/car_defense/screens/Feed'
 
 // it('Function getFeedInfo', () => {
 //     let feedData = renderer.create(<Feed/>).getInstance()
@@ -18,7 +17,7 @@ it('Function onRefresh', () => {
 
     feedData._onRefresh()
 
-    expect(feedData._onRefresh(true)).toEqual(undefined)
+    expect(feedData._onRefresh()).toEqual(undefined)
     
 })
 
@@ -27,13 +26,9 @@ it('Function componentWillUnmount', () => {
 
     feedData.componentWillUnmount()
 
-    expect(feedData.componentWillUnmount(true)).toEqual(undefined)
+    expect(feedData.componentWillUnmount()).toEqual(undefined)
     
 })
-
-// listen = ({ origin, data }) => {
-//     console.log('cool data', origin, data);
-// }
 
 it('Function listen', () => {
     let feedData = renderer.create(<Feed/>).getInstance()
@@ -43,6 +38,15 @@ it('Function listen', () => {
     feedData.listen(origin, data)
 
     expect(feedData.listen(origin, data)).toEqual(undefined)
+    
+})
+
+it('Function componentDidMount', async () => {
+    let feedData = renderer.create(<Feed/>).getInstance()
+
+    feedData.componentDidMount()
+
+    expect(feedData.componentDidMount()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
     
 })
 
