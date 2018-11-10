@@ -21,6 +21,22 @@ it('Function onChangeText', () => {
     
 })
 
+
+it('Function onAccessoryPress', () => {
+    let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
+
+    signUpSreenData.onAccessoryPress()
+
+    expect(signUpSreenData.onAccessoryPress()).toEqual(undefined)
+    
+})
+
+// it('Function onPressButton', async () => {
+//     let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
+
+//     expect(signUpSreenData._onPressButton()).toEqual()
+    
+// })
 // it('Function componentDidMount', async () => {
 //     let feedData = renderer.create(<Feed/>).getInstance()
 
