@@ -1,5 +1,6 @@
 import { TextField } from 'react-native-material-textfield';;
 import { Constants, ImagePicker, Permissions } from 'expo';
+import { NOTIFICATIONS_API } from '../const/Const'
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
@@ -13,12 +14,11 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { NOTIFICATIONS_API } from '../const/Const'
 
 const tk = 0;
 
 export default class PublicNotifications extends Component {
- 
+
   constructor(props) {
     super(props);
 
@@ -122,7 +122,7 @@ export default class PublicNotifications extends Component {
 
     return (
       <View style={styles.container}>
-      <ScrollView>   
+      <ScrollView>
       <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image style={styles.avatar}
