@@ -23,7 +23,29 @@ export default class UserProfileView extends Component {
         };
     }
 
-    getCar = () => {
+    // getCar = () => {
+    //     const { state } = this.props.navigation;
+    //     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    //     let link = CAR_API + '/car/?token=' + id
+
+    //     return fetch(link)
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+
+    //             this.setState({
+    //                 isLoading: false,
+    //                 dataSource: responseJson,
+    //             }, function () {
+
+    //             });
+
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
+
+    async componentDidMount() {
         const { state } = this.props.navigation;
         var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
         let link = CAR_API + '/car/?token=' + id
@@ -45,18 +67,15 @@ export default class UserProfileView extends Component {
             });
     }
 
-    async componentDidMount() {
-        this.getCar();
-    }
-
-    _onPressButton = (deletePlate) => {
+    _onPressButton = (plate) => {
         const { state } = this.props.navigation;
         var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
         url = CAR_API + '/delete_car/'
 
+
         let car = JSON.stringify({
             id_token: id,
-            plate: deletePlate
+            plate: plate
         })
 
         fetch(url, {
@@ -123,9 +142,8 @@ export default class UserProfileView extends Component {
                                             style={styles.icon1}
                                         />
                                         <TouchableOpacity
-                                            style={styles.button}
                                             color="grey"
-                                            onPress={this._onPressButton(item.plate)}
+                                            onPress={ () => { this._onPressButton(item.plate) } }
                                             containerViewStyle={{ width: '10%' }}
                                         >
                                             <Icon
