@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { TextField } from 'react-native-material-textfield';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, Image, RefreshControl } from 'react-native';
+import { View,
+  Text, 
+  TouchableOpacity, 
+  ScrollView, 
+  StyleSheet, 
+  Alert, 
+  Image,
+  KeyboardAvoidingView
+} from 'react-native';
 import { CAR_API } from '../const/Const'
 import { Icon } from "native-base";
 
@@ -183,83 +191,89 @@ export default class RegisterCar extends Component {
 
 
     return (
-      <View style={{ backgroundColor: "#8bd4da", flex: 1 }}>
-        <View style={styles.header}>
-          <View style={styles.headerContent}>
-            <Image style={styles.avatar}
-              source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/ssssssssssssssssssssssssssss.png' }}
+
+      <KeyboardAvoidingView behavior="position">
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <View style={styles.headerContent}>
+                <Image style={styles.avatar}
+                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/ssssssssssssssssssssssssssss.png' }}
+                />
+                <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
+              </View>
+            </View>
+            <TextField
+              ref={this.plateRef}
+              value={data.plate}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(plate) => this.setState({ plate })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitPLate}
+              returnKeyType='next'
+              label='Placa'
+              tintColor="white"
+              underlineColorAndroid="transparent"
+              maxLength={8}
+              autoCapitalize="characters"
+              error={errors.plate}
+              textColor="white"
             />
-            <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
+            <TextField
+              ref={this.modelRef}
+              value={data.model}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(model) => this.setState({ model })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitModel}
+              returnKeyType='next'
+              label='Modelo'
+              tintColor="white"
+              textColor="white"
+            />
+            <TextField
+              ref={this.colorRef}
+              value={data.color}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(color) => this.setState({ color })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitMessage}
+              returnKeyType='next'
+              label='Cor'
+              tintColor="white"
+              textColor="white"
+
+            />
+            <View style={styles.container1}>
+              <TouchableOpacity
+                style={styles.button}
+                color="white"
+                onPress={this.onPressButton}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+              </TouchableOpacity>
+              {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
+
+            </View>
           </View>
-        </View>
-        <TextField
-          ref={this.plateRef}
-          value={data.plate}
-          autoCorrect={false}
-          enablesReturnKeyAutomatically={true}
-          onFocus={this.onFocus}
-          onChangeText={(plate) => this.setState({ plate })}
-          // onChangeText={this.onChangeText}
-          // onSubmitEditing={this.onSubmitPLate}
-          returnKeyType='next'
-          label='Placa'
-          tintColor="white"
-          underlineColorAndroid="transparent"
-          maxLength={8}
-          autoCapitalize="characters"
-          error={errors.plate}
-          textColor="white"
-        />
-        <TextField
-          ref={this.modelRef}
-          value={data.model}
-          autoCorrect={false}
-          enablesReturnKeyAutomatically={true}
-          onFocus={this.onFocus}
-          onChangeText={(model) => this.setState({ model })}
-          // onChangeText={this.onChangeText}
-          // onSubmitEditing={this.onSubmitModel}
-          returnKeyType='next'
-          label='Modelo'
-          tintColor="white"
-          textColor="white"
-        />
-        <TextField
-          ref={this.colorRef}
-          value={data.color}
-          autoCorrect={false}
-          enablesReturnKeyAutomatically={true}
-          onFocus={this.onFocus}
-          onChangeText={(color) => this.setState({ color })}
-          // onChangeText={this.onChangeText}
-          // onSubmitEditing={this.onSubmitMessage}
-          returnKeyType='next'
-          label='Cor'
-          tintColor="white"
-          textColor="white"
-
-        />
-        <View style={styles.container1}>
-          <TouchableOpacity
-            style={styles.button}
-            color="white"
-            onPress={this.onPressButton}
-            containerViewStyle={{ width: '40%' }}
-          >
-            <Text style={{ color: '#8bd4da', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
-          </TouchableOpacity>
-          {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
-
-        </View>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 16,
-    paddingRight: 16
+    padding: 16,
+    backgroundColor: '#8bd4da',
+    flex: 1
   },
   container1: {
     marginTop: 13,
@@ -331,5 +345,5 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginTop: 30,
     marginBottom: 15
-},
+  },
 });
