@@ -8,11 +8,10 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
   TouchableOpacity,
-  Button,
   Alert,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
 
 const tk = 0;
@@ -49,12 +48,12 @@ export default class PublicNotifications extends Component {
 
   onChangeText(words) {
     ['message']
-    .map((text) => ({ text, ref: this[text] }))
-    .forEach(({ text, ref }) => {
-      if (ref && ref.isFocused()) {
-        this.setState({ [text]: words });
-      }
-    });
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
   }
 
   // onSubmitFirstName() {
@@ -67,19 +66,19 @@ export default class PublicNotifications extends Component {
     let i = 0;
 
     ['message']
-    .forEach((text) => {
-      let value = this[text].value();
+      .forEach((text) => {
+        let value = this[text].value();
 
-      if (!value) {
-        errors[text] = 'Campo obrigatório.';
-        i+=1;
-      } else {
-        if ('message' === text && value.length < 5) {
-          errors[text] = 'Forneça mais detalhes do ocorrido.';
-          i+=1;
+        if (!value) {
+          errors[text] = 'Campo obrigatório.';
+          i += 1;
+        } else {
+          if ('message' === text && value.length < 5) {
+            errors[text] = 'Forneça mais detalhes do ocorrido.';
+            i += 1;
+          }
         }
-      }
-    });
+      });
 
     if (i == 0) {
       let notification = JSON.stringify({
@@ -117,70 +116,72 @@ export default class PublicNotifications extends Component {
 
   render() {
     let { image } = this.state;
-    let { errors = {}, ...data} = this.state;
-    let {message = 'text'} = data;
+    let { errors = {}, ...data } = this.state;
+    let { message = 'text' } = data;
 
     return (
-      <View style={styles.container}>
-      <ScrollView>
-      <View style={styles.header}>
-          <View style={styles.headerContent}>
-            <Image style={styles.avatar}
-              source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/alert.png' }}
+      <KeyboardAvoidingView behavior="position">
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <View style={styles.headerContent}>
+                <Image style={styles.avatar}
+                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/alert.png' }}
+                />
+                <Text style={styles.name}>Envie aqui os alertas</Text>
+              </View>
+            </View>
+            <TextField
+              ref={this.messageRef}
+              value={data.message}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(message) => this.setState({ message })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitMessage}
+              returnKeyType='next'
+              label='Descrição'
+              tintColor="white"
+              error={errors.message}
+              textColor="white"
+              labelPadding={10}
+              placeholderTextColor="white"
             />
-            <Text style={styles.name}>Envie aqui os alertas</Text>
-          </View>
-        </View>
-          <TextField
-            ref={this.messageRef}
-            value={data.message}
-            autoCorrect={false}
-            enablesReturnKeyAutomatically={true}
-            onFocus={this.onFocus}
-            onChangeText={ (message) => this.setState({ message }) }
-            // onChangeText={this.onChangeText}
-            // onSubmitEditing={this.onSubmitMessage}
-            returnKeyType='next'
-            label='Descrição'
-            tintColor = "white"
-            error={errors.message}
-            textColor="white"
-            labelPadding={10}
-            placeholderTextColor="white"
-          />
-          {/* <Text style={styles.text}>Adicionar imagem</Text> */}
-          <View style={styles.alternativeLayoutButtonContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              color="#8bd4da"
-              onPress={this._takePhoto}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button2}
-              color="#540b71"
-              onPress={this._pickImage}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
-            </TouchableOpacity>
-          </View>
-          {this._maybeRenderImage()}
-          {this._maybeRenderUploadingOverlay()}
-          <View style={styles.container1}>
-            <TouchableOpacity
-              style={styles.button3}
-              color="#8bd4da"
-              onPress={this.onPressButton}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
-            </TouchableOpacity>
+            {/* <Text style={styles.text}>Adicionar imagem</Text> */}
+            <View style={styles.alternativeLayoutButtonContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                color="#8bd4da"
+                onPress={this._takePhoto}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button2}
+                color="#540b71"
+                onPress={this._pickImage}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
+              </TouchableOpacity>
+            </View>
+            {this._maybeRenderImage()}
+            {this._maybeRenderUploadingOverlay()}
+            <View style={styles.container1}>
+              <TouchableOpacity
+                style={styles.button3}
+                color="#8bd4da"
+                onPress={this.onPressButton}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
-        </View>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -240,7 +241,7 @@ export default class PublicNotifications extends Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-  // only if user allows permission to camera AND camera roll
+    // only if user allows permission to camera AND camera roll
     if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
@@ -255,7 +256,7 @@ export default class PublicNotifications extends Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-  // only if user allows permission to camera roll
+    // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -291,46 +292,46 @@ export default class PublicNotifications extends Component {
       alert('Upload failed, sorry :(');
     } finally {
       this.setState({
-      uploading: false
+        uploading: false
       });
     }
   };
 }
 
-  async function uploadImageAsync(uri) {
-    let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
+async function uploadImageAsync(uri) {
+  let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
 
-    // Note:
-    // Uncomment this if you want to experiment with local server
-    //
-    // if (Constants.isDevice) {
-    //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-    // } else {
-    //   apiUrl = `http://localhost:3000/upload`
-    // }
+  // Note:
+  // Uncomment this if you want to experiment with local server
+  //
+  // if (Constants.isDevice) {
+  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
+  // } else {
+  //   apiUrl = `http://localhost:3000/upload`
+  // }
 
-    let uriParts = uri.split('.');
-    let fileType = uriParts[uriParts.length - 1];
+  let uriParts = uri.split('.');
+  let fileType = uriParts[uriParts.length - 1];
 
-    let formData = new FormData();
-    formData.append('image', {
-      uri,
-      name: `photo.${fileType}`,
-      type: `image/${fileType}`,
-    });
+  let formData = new FormData();
+  formData.append('image', {
+    uri,
+    name: `photo.${fileType}`,
+    type: `image/${fileType}`,
+  });
 
-    console.log(uri)
+  console.log(uri)
 
-    let options = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    };
-    return fetch(apiUrl, options);
-  }
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  return fetch(apiUrl, options);
+}
 
 const styles = StyleSheet.create({
   container: {
