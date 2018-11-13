@@ -1,53 +1,8 @@
 import React, { Component } from "react";
 import { TextField } from 'react-native-material-textfield';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert, Image, RefreshControl } from 'react-native';
-// import Expo from 'expo'
-// import { Permissions, Notifications } from 'expo'
 import { CAR_API } from '../const/Const'
 import { Icon } from "native-base";
-
-
-// var tk
-// async function register() {
-//   const { status } = await Expo.Permissions.askAsync(
-//     Expo.Permissions.NOTIFICATIONS
-//   );
-//   if (status != 'granted') {
-//     alert('You need to enable permissions in settings');
-//     return;
-//   }
-
-//   const value = await Expo.Notifications.getExpoPushTokenAsync();
-//   tk = value;
-//   console.log(status, value);
-// }
-
-// async function list() {
-//   const { status: existingStatus } = await Permissions.getAsync(
-//     Permissions.NOTIFICATIONS
-//   );
-//   let finalStatus = existingStatus;
-
-//   // only ask if permissions have not already been determined, because
-//   // iOS won't necessarily prompt the user a second time.
-//   if (existingStatus !== 'granted') {
-//     // Android remote notification permissions are granted during the app
-//     // install, so this will only ask on iOS
-//     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-//     finalStatus = status;
-//   }
-
-//   // Stop here if the user did not grant permissions
-//   if (finalStatus !== 'granted') {
-//     return;
-//   }
-//   var value
-//   var tk = await Promise
-//     .resolve(value = await Notifications.getExpoPushTokenAsync())
-//     .then(x => value);
-//   return tk;
-
-// }
 
 
 export default class RegisterCar extends Component {

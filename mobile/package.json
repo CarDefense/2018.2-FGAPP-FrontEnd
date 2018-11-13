@@ -21,7 +21,8 @@
     "eject": "react-native-scripts-ts eject",
     "android": "react-native-scripts-ts android",
     "ios": "react-native-scripts-ts ios",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "jest": {
     "globals": {
@@ -29,6 +30,9 @@
         "useBabelrc": true
       }
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -48,8 +52,9 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",
+    "axios": "^0.18.0",
     "babel-plugin-inline-dotenv": "^1.1.2",
-    "expo": "^27.0.1",
+    "expo": "^27.1.1",
     "jwt-decode": "^2.2.0",
     "native-base": "^2.8.0",
     "react": "16.3.1",

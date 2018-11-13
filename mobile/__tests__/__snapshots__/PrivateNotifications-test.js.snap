@@ -1,0 +1,560 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivateNotifications snapShot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#8bd4da",
+      "flex": 1,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+    }
+  }
+>
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          Object {
+            "marginTop": 25,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "padding": 30,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "uri": "http://cardefense2.eastus.cloudapp.azure.com:8002/media/notificationicon.png",
+              }
+            }
+            style={
+              Object {
+                "borderColor": "white",
+                "borderRadius": 63,
+                "borderWidth": 7,
+                "height": 170,
+                "marginBottom": 10,
+                "width": 170,
+              }
+            }
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "fontWeight": "800",
+              }
+            }
+          >
+            Envie aqui as notificões
+          </Text>
+        </View>
+      </View>
+      <View
+        onResponderRelease={[Function]}
+        onStartShouldSetResponder={[Function]}
+        pointerEvents="auto"
+        style={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderBottomColor": "rgba(0, 0, 0, 0.38)",
+              "borderBottomWidth": 0.5,
+              "height": 64,
+              "paddingBottom": 8,
+              "paddingTop": 32,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "position": "absolute",
+                "top": 36,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "rgba(0, 0, 0, 0.38)",
+                  "fontSize": 16,
+                }
+              }
+            >
+              Placa
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="characters"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              editable={true}
+              enablesReturnKeyAutomatically={true}
+              error={undefined}
+              maxLength={8}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onChangeText={[Function]}
+              onContentSizeChange={[Function]}
+              onFocus={[Function]}
+              placeholderTextColor="white"
+              returnKeyType="next"
+              selectionColor="white"
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "margin": 0,
+                    "padding": 0,
+                    "top": 2,
+                  },
+                  Object {
+                    "color": "white",
+                    "fontSize": 16,
+                    "height": 24,
+                    "textAlign": "left",
+                  },
+                  undefined,
+                ]
+              }
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "flexDirection": "row",
+              "height": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "bottom": 0,
+                  "left": 0,
+                  "paddingVertical": 4,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgb(213, 0, 0)",
+                    "fontSize": 0,
+                    "opacity": 0,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "bottom": 0,
+                  "left": 0,
+                  "paddingVertical": 4,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgba(0, 0, 0, .38)",
+                    "fontSize": 12,
+                    "opacity": 1,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onResponderRelease={[Function]}
+        onStartShouldSetResponder={[Function]}
+        pointerEvents="auto"
+        style={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderBottomColor": "rgba(0, 0, 0, 0.38)",
+              "borderBottomWidth": 0.5,
+              "height": 64,
+              "paddingBottom": 8,
+              "paddingTop": 32,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "position": "absolute",
+                "top": 36,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "rgba(0, 0, 0, 0.38)",
+                  "fontSize": 16,
+                }
+              }
+            >
+              Descrição
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCapitalize="sentences"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              editable={true}
+              enablesReturnKeyAutomatically={true}
+              error={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onChangeText={[Function]}
+              onContentSizeChange={[Function]}
+              onFocus={[Function]}
+              placeholderTextColor="white"
+              returnKeyType="next"
+              selectionColor="white"
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "margin": 0,
+                    "padding": 0,
+                    "top": 2,
+                  },
+                  Object {
+                    "color": "white",
+                    "fontSize": 16,
+                    "height": 24,
+                    "textAlign": "left",
+                  },
+                  undefined,
+                ]
+              }
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "flexDirection": "row",
+              "height": 8,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "bottom": 0,
+                  "left": 0,
+                  "paddingVertical": 4,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgb(213, 0, 0)",
+                    "fontSize": 0,
+                    "opacity": 0,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "bottom": 0,
+                  "left": 0,
+                  "paddingVertical": 4,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgba(0, 0, 0, .38)",
+                    "fontSize": 12,
+                    "opacity": 1,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginTop": 20,
+            "paddingRight": 4,
+            "paddingTop": 4,
+          }
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 15,
+              "flexDirection": "row",
+              "height": 30,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 190,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#8bd4da",
+                "fontWeight": "800",
+              }
+            }
+          >
+            Camera
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 15,
+              "flexDirection": "row",
+              "height": 40,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 120,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#8bd4da",
+                "fontWeight": "800",
+              }
+            }
+          >
+            Galeria
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingTop": 20,
+          }
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 15,
+              "flexDirection": "row",
+              "height": 40,
+              "justifyContent": "center",
+              "opacity": 1,
+              "width": 120,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#8bd4da",
+                "fontWeight": "800",
+              }
+            }
+          >
+            Enviar
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

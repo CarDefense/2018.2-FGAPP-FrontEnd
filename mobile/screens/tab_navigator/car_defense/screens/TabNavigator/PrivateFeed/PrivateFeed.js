@@ -3,47 +3,8 @@ import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } f
 import { NOTIFICATIONS_API } from '../const/Const'
 
 
-async function registerForPushNotificationsAsync() {
-  const { status: existingStatus } = await Expo.Permissions.getAsync(
-    Expo.Permissions.NOTIFICATIONS
-  );
-  let finalStatus = existingStatus;
-
-  // only ask if permissions have not already been determined, because
-  // iOS won't necessarily prompt the user a second time.
-  if (existingStatus !== 'granted') {
-    // Android remote notification permissions are granted during the app
-    // install, so this will only ask on iOS
-    const { status } = await Expo.Permissions.askAsync(Expo.Permissions.NOTIFICATIONS);
-    finalStatus = status;
-  }
-
-  // Stop here if the user did not grant permissions
-  if (finalStatus !== 'granted') {
-    return;
-  }
-  var token
-  var tk = await Promise
-    .resolve(token = await Expo.Notifications.getExpoPushTokenAsync())
-    .then(x => token);
-  return tk;
-
-
-}
 
 export default class Feed extends React.Component {
-
-  componentWillMount() {
-
-    this.listener = Expo.Notifications.addListener(this.listen);
-  }
-  componentWillUnmount() {
-    this.listener && Expo.Notifications.addListener(this.listen);
-  }
-
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
 
   constructor(props) {
     super(props);
@@ -54,8 +15,9 @@ export default class Feed extends React.Component {
 
 
   async componentDidMount() {
-    let token = await registerForPushNotificationsAsync();
-    let url = NOTIFICATIONS_API + `/notifications`
+    const { state } = this.props.navigation;
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    let url = NOTIFICATIONS_API + `/notifications/?token=` + id
 
     return fetch(url)
       .then((response) => response.json())

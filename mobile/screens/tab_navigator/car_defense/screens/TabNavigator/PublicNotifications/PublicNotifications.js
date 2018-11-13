@@ -1,5 +1,6 @@
 import { TextField } from 'react-native-material-textfield';;
 import { Constants, ImagePicker, Permissions } from 'expo';
+import { NOTIFICATIONS_API } from '../const/Const'
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
@@ -13,36 +14,10 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { NOTIFICATIONS_API } from '../const/Const'
 
-
-var tk
-async function register() {
-  const { status } = await Expo.Permissions.askAsync(
-    Expo.Permissions.NOTIFICATIONS
-  );
-  if (status != 'granted') {
-    alert('You need to enable permissions in settings');
-    return;
-  }
-
-  const value = await Expo.Notifications.getExpoPushTokenAsync();
-  tk = value;
-  console.log(status, value);
-}
+const tk = 0;
 
 export default class PublicNotifications extends Component {
-  componentWillMount() {
-    register();
-    this.listener = Expo.Notifications.addListener(this.listen);
-  }
-  componentWillUnmount() {
-    this.listener && Expo.Notifications.addListener(this.listen);
-  }
-
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
 
   constructor(props) {
     super(props);
@@ -146,9 +121,16 @@ export default class PublicNotifications extends Component {
     let {message = 'text'} = data;
 
     return (
+      <View style={styles.container}>
       <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.header}>Alerta</Text>
+      <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <Image style={styles.avatar}
+              source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/alert.png' }}
+            />
+            <Text style={styles.name}>Envie aqui os alertas</Text>
+          </View>
+        </View>
           <TextField
             ref={this.messageRef}
             value={data.message}
@@ -160,26 +142,29 @@ export default class PublicNotifications extends Component {
             // onSubmitEditing={this.onSubmitMessage}
             returnKeyType='next'
             label='Descrição'
-            tintColor = '#760f9f'
+            tintColor = "white"
             error={errors.message}
+            textColor="white"
+            labelPadding={10}
+            placeholderTextColor="white"
           />
-          <Text style={styles.text}>Adicionar imagem</Text>
+          {/* <Text style={styles.text}>Adicionar imagem</Text> */}
           <View style={styles.alternativeLayoutButtonContainer}>
             <TouchableOpacity
               style={styles.button}
-              color='#760f9f'
+              color="#8bd4da"
               onPress={this._takePhoto}
-              containerViewStyle={{ width: '73.25%' }}
+              containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white', fontWeight: 'bold'}} >CAMERA</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button2}
-              color='#540b71'
+              color="#540b71"
               onPress={this._pickImage}
-              containerViewStyle={{ width: '73.25%' }}
+              containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white', fontWeight: 'bold'}} >GALERIA</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
             </TouchableOpacity>
           </View>
           {this._maybeRenderImage()}
@@ -187,15 +172,15 @@ export default class PublicNotifications extends Component {
           <View style={styles.container1}>
             <TouchableOpacity
               style={styles.button3}
-              color='#760f9f'
+              color="#8bd4da"
               onPress={this.onPressButton}
-              containerViewStyle={{ width: '73.25%' }}
+              containerViewStyle={{ width: '40%' }}
             >
-              <Text style={{ color: 'white', fontWeight: 'bold'}} >EMITIR ALERTA</Text>
+              <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
             </TouchableOpacity>
           </View>
+        </ScrollView>
         </View>
-      </ScrollView>
     );
   }
 
@@ -350,56 +335,57 @@ export default class PublicNotifications extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
+    backgroundColor: '#8bd4da',
+    flex: 1
   },
   text: {
     paddingTop: 16,
-    color: '#760f9f'
+    color: "#8bd4da",
+    fontWeight: 'bold',
   },
   alternativeLayoutButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 4,
     paddingRight: 4,
+    marginTop: 20
   },
   button: {
-    backgroundColor: '#760f9f',
+    backgroundColor: "white",
     borderRadius: 15,
-    height: 40,
-    width: '61%',
+    height: 30,
+    width: 190,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   button2: {
-    backgroundColor: '#540b71',
+    backgroundColor: "white",
     borderRadius: 15,
     height: 40,
-    width: '33%',
+    width: 120,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   button3: {
-    backgroundColor: '#760f9f',
+    backgroundColor: "white",
     borderRadius: 15,
     height: 40,
-    width: '73.25%',
+    width: 120,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   container1: {
-    paddingTop: 32,
+    paddingTop: 20,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 40
   },
   header: {
-    color: "#760f9f",
-    textAlign: 'center',
-    fontWeight: '200',
-    fontSize: 50,
-    marginTop: 25
+    marginTop: 25,
   },
   maybeRenderUploading: {
     paddingTop: 8,
@@ -431,5 +417,27 @@ const styles = StyleSheet.create({
   maybeRenderImage: {
     height: 250,
     width: 250,
+  },
+  avatar: {
+    width: 170,
+    height: 170,
+    borderRadius: 63,
+    borderWidth: 7,
+    borderColor: "white",
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: '800',
+  },
+  headerContent: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  input: {
+    marginBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });
