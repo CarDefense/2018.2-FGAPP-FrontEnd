@@ -6,8 +6,9 @@ import {
     Image,
     FlatList,
     ScrollView,
-    RefreshControl, 
-    Button
+    RefreshControl,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { Icon } from 'native-base';
 import { CAR_API } from '../const/Const'
@@ -48,6 +49,31 @@ export default class UserProfileView extends Component {
         this.getCar();
     }
 
+    _onPressButton = (deletePlate) => {
+        const { state } = this.props.navigation;
+        var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+        url = CAR_API + '/delete_car/'
+
+        let car = JSON.stringify({
+            id_token: id,
+            plate: deletePlate
+        })
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: car
+        }).then(response => { return response.json() }
+        ).then(jsonResponse => {
+            Alert.alert(jsonResponse)
+        }).catch(error => {
+            Alert.alert("Falha na conexão")
+        })
+    }
+
     _onRefresh = () => {
         this.setState({ refreshing: true });
         this.componentDidMount().then(() => {
@@ -62,41 +88,53 @@ export default class UserProfileView extends Component {
 
         return (
             <View style={{ backgroundColor: "#8bd4da", flex: 1 }}>
-            <ScrollView
-                refreshControl={
-                    <RefreshControl
-                        refreshing={this.state.refreshing}
-                        onRefresh={this._onRefresh}
-                    />
-                }
-            >
-                <View style={styles.header}>
-                    <View style={styles.headerContent}>
-                        <Image style={styles.avatar}
-                            source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/hehehehhehehehheeh.png' }} />
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
+                        />
+                    }
+                >
+                    <View style={styles.header}>
+                        <View style={styles.headerContent}>
+                            <Image style={styles.avatar}
+                                source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/hehehehhehehehheeh.png' }} />
 
-                        <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
-                        {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
-                        {/* <Text style={styles.userInfo}>Florida </Text> */}
-                        <Text style={styles.userInfo}>Aqui estão os seus carros</Text>
+                            <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
+                            {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
+                            {/* <Text style={styles.userInfo}>Florida </Text> */}
+                            <Text style={styles.userInfo}>Aqui estão os seus carros</Text>
+                        </View>
                     </View>
-                </View>
 
-                <View style={{backgroundColor: '#8bd4da'}}>
-                    <FlatList
-                        style={{ backgroundColor: '#8bd4da' }}
-                        data={this.state.dataSource}
-                        renderItem={({ item }) => {
-                            return (
-                                <View style={styles.item2}>
-                                    <Text style={styles.text1}>{item.plate}</Text>
-                                    <Text style={styles.text2}>Modelo: {item.model}   Cor: {item.color}</Text>
-                                    <Icon
-                                        type='FontAwesome'
-                                        name="car"
-                                        style={styles.icon1}
-                                    />
-                                    {/* <Button
+                    <View style={{ backgroundColor: '#8bd4da' }}>
+                        <FlatList
+                            style={{ backgroundColor: '#8bd4da' }}
+                            data={this.state.dataSource}
+                            renderItem={({ item }) => {
+                                return (
+                                    <View style={styles.item2}>
+                                        <Text style={styles.text1}>{item.plate}</Text>
+                                        <Text style={styles.text2}>Modelo: {item.model}   Cor: {item.color}</Text>
+                                        <Icon
+                                            type='FontAwesome'
+                                            name="car"
+                                            style={styles.icon1}
+                                        />
+                                        <TouchableOpacity
+                                            style={styles.button}
+                                            color="grey"
+                                            onPress={this._onPressButton(item.plate)}
+                                            containerViewStyle={{ width: '10%' }}
+                                        >
+                                            <Icon
+                                                type='FontAwesome'
+                                                name="trash"
+                                                style={{ color: "red" }}
+                                            />
+                                        </TouchableOpacity>
+                                        {/* <Button
                                         title='press'
                                     >
                                         <Icon
@@ -104,14 +142,14 @@ export default class UserProfileView extends Component {
                                         name="car"
                                         />
                                         </Button> */}
-                                </View>
+                                    </View>
 
-                            );
-                        }}
-                        keyExtractor={({ id }, index) => id.toString()}
-                    />
-                </View>
-            </ScrollView>
+                                );
+                            }}
+                            keyExtractor={({ id }, index) => id.toString()}
+                        />
+                    </View>
+                </ScrollView>
             </View>
         );
     }
@@ -149,7 +187,7 @@ const styles = StyleSheet.create({
     item: {
         flexDirection: 'row',
     },
-    
+
     icon: {
         width: 30,
         height: 30,
@@ -169,17 +207,17 @@ const styles = StyleSheet.create({
         elevation: 4,
         margin: 25,
         marginTop: 2,
-        
+
     },
     icon1: {
         color: "#8bd4da",
         fontWeight: '800',
         fontSize: 44,
         position: 'absolute',
-        left: 10, 
+        left: 10,
         marginTop: 5,
         bottom: 25// Keep some space between your left border and Image
-          
+
     },
     text1: {
         color: "#8bd4da",
