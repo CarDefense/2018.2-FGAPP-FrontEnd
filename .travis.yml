@@ -1,11 +1,11 @@
 
 language: node_js
-  node_js:
-    - '9.3'
-  before_install:
-    - cd mobile && yarn
-  script:
-    - yarn test
+node_js:
+  - '9.3'
+before_install:
+  - cd mobile && yarn
+script:
+  - yarn test
 
 - stage: production deploy
     if: branch = master AND (NOT type = pull_request)
