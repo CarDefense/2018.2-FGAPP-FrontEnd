@@ -8,11 +8,10 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
   TouchableOpacity,
-  Button,
   Alert,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
 import { NOTIFICATIONS_API } from '../const/Const'
 
@@ -34,7 +33,7 @@ export default class PrivateNotifications extends Component {
       uploading: false,
     }
   }
-   
+
   onFocus() {
     let { errors = {} } = this.state;
 
@@ -51,19 +50,19 @@ export default class PrivateNotifications extends Component {
 
   onChangeText(words) {
     ['plate']
-    .map((text) => ({ text, ref: this[text] }))
-    .forEach(({ text, ref }) => {
-      if (ref && ref.isFocused()) {
-        this.setState({ [text]: words });
-      }
-    });
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
     ['message']
-    .map((text) => ({ text, ref: this[text] }))
-    .forEach(({ text, ref }) => {
-      if (ref && ref.isFocused()) {
-        this.setState({ [text]: words });
-      }
-    });
+      .map((text) => ({ text, ref: this[text] }))
+      .forEach(({ text, ref }) => {
+        if (ref && ref.isFocused()) {
+          this.setState({ [text]: words });
+        }
+      });
   }
 
   // onSubmitFirstName() {
@@ -77,34 +76,34 @@ export default class PrivateNotifications extends Component {
     let errorMessage = false;
 
     ['plate']
-    .forEach((text) => {
-      let value = this[text].value();
+      .forEach((text) => {
+        let value = this[text].value();
 
-      if (!value) {
-        errors[text] = 'Campo obrigatório.';
-        errorPlate = true;
-      } else {
-        if ('plate' === text && value.length < 8) {
-          errors[text] = 'Placa inválida. Ex.:AAA-0000';
+        if (!value) {
+          errors[text] = 'Campo obrigatório.';
           errorPlate = true;
+        } else {
+          if ('plate' === text && value.length < 8) {
+            errors[text] = 'Placa inválida. Ex.:AAA-0000';
+            errorPlate = true;
+          }
         }
-      }
-    });
+      });
 
     ['message']
-    .forEach((text) => {
-      let value = this[text].value();
+      .forEach((text) => {
+        let value = this[text].value();
 
-      if (!value) {
-        errors[text] = 'Campo obrigatório.';
-        errorMessage = true;
-      } else {
-        if ('message' === text && value.length < 5) {
-          errors[text] = 'Forneça mais detalhes do ocorrido.';
+        if (!value) {
+          errors[text] = 'Campo obrigatório.';
           errorMessage = true;
+        } else {
+          if ('message' === text && value.length < 5) {
+            errors[text] = 'Forneça mais detalhes do ocorrido.';
+            errorMessage = true;
+          }
         }
-      }
-    });
+      });
 
     if (errorPlate == false && errorMessage == false) {
       let notification = JSON.stringify({
@@ -128,7 +127,7 @@ export default class PrivateNotifications extends Component {
       ).then(jsonResponse => {
         console.log(jsonResponse);
         Alert.alert("Notificação enviada!")
-      }      
+      }
       ).catch(error => {
         console.log(error)
         Alert.alert("Placa não existe!")
@@ -143,91 +142,92 @@ export default class PrivateNotifications extends Component {
 
   render() {
     let { image } = this.state;
-    let { errors = {}, ...data} = this.state;
-    let {plate = 'text'} = data;
-    let {message = 'text'} = data;
+    let { errors = {}, ...data } = this.state;
+    let { plate = 'text' } = data;
+    let { message = 'text' } = data;
 
-    return ( 
-    <View style={styles.container}>
-      <ScrollView>   
-      <View style={styles.header}>
-          <View style={styles.headerContent}>
-            <Image style={styles.avatar}
-              source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/notificationicon.png' }}
+    return (
+      <KeyboardAvoidingView behavior="position">
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <View style={styles.headerContent}>
+                <Image style={styles.avatar}
+                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/notificationicon.png' }}
+                />
+                <Text style={styles.name}>Envie aqui as notificões</Text>
+              </View>
+            </View>
+            <TextField
+              ref={this.plateRef}
+              value={data.plate}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(plate) => this.setState({ plate })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitPLate}
+              returnKeyType='next'
+              label='Placa'
+              tintColor="white"
+              underlineColorAndroid="transparent"
+              maxLength={8}
+              autoCapitalize="characters"
+              error={errors.plate}
+              textColor="white"
+              placeholderTextColor="white"
             />
-            <Text style={styles.name}>Envie aqui as notificões</Text>
-          </View>
-        </View>
-          <TextField
-            ref={this.plateRef}
-            value={data.plate}
-            autoCorrect={false}
-            enablesReturnKeyAutomatically={true}
-            onFocus={this.onFocus}
-            onChangeText={ (plate) => this.setState({ plate }) }
-            // onChangeText={this.onChangeText}
-            // onSubmitEditing={this.onSubmitPLate}
-            returnKeyType='next'
-            label='Placa'
-            tintColor = "white"
-            underlineColorAndroid="transparent"
-            maxLength={8}
-            autoCapitalize="characters"
-            error={errors.plate}
-            textColor="white"
-            placeholderTextColor="white"
-          />
-          <TextField
-            ref={this.messageRef}
-            value={data.message}
-            autoCorrect={false}
-            enablesReturnKeyAutomatically={true}
-            onFocus={this.onFocus}
-            onChangeText={ (message) => this.setState({ message }) }
-            // onChangeText={this.onChangeText}
-            // onSubmitEditing={this.onSubmitMessage}
-            returnKeyType='next'
-            label='Descrição'
-            tintColor = "white"
-            error={errors.message}
-            textColor="white"
-            labelPadding={10}
-            placeholderTextColor="white"
-          />
-          {/* <Text style={styles.text}>Adicionar imagem</Text> */}
-          <View style={styles.alternativeLayoutButtonContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              color="#8bd4da"
-              onPress={this._takePhoto}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button2}
-              color="#540b71"
-              onPress={this._pickImage}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
-            </TouchableOpacity>
-          </View>
-          {this._maybeRenderImage()}
-          {this._maybeRenderUploadingOverlay()}
-          <View style={styles.container1}>
-            <TouchableOpacity
-              style={styles.button3}
-              color="#8bd4da"
-              onPress={this.onPressButton}
-              containerViewStyle={{ width: '40%' }}
-            >
-              <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
-            </TouchableOpacity>
+            <TextField
+              ref={this.messageRef}
+              value={data.message}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={(message) => this.setState({ message })}
+              // onChangeText={this.onChangeText}
+              // onSubmitEditing={this.onSubmitMessage}
+              returnKeyType='next'
+              label='Descrição'
+              tintColor="white"
+              error={errors.message}
+              textColor="white"
+              labelPadding={10}
+              placeholderTextColor="white"
+            />
+            {/* <Text style={styles.text}>Adicionar imagem</Text> */}
+            <View style={styles.alternativeLayoutButtonContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                color="#8bd4da"
+                onPress={this._takePhoto}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button2}
+                color="#540b71"
+                onPress={this._pickImage}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
+              </TouchableOpacity>
+            </View>
+            {this._maybeRenderImage()}
+            {this._maybeRenderUploadingOverlay()}
+            <View style={styles.container1}>
+              <TouchableOpacity
+                style={styles.button3}
+                color="#8bd4da"
+                onPress={this.onPressButton}
+                containerViewStyle={{ width: '40%' }}
+              >
+                <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
-        </View>
-      
+      </KeyboardAvoidingView>
     );
   }
 
@@ -287,7 +287,7 @@ export default class PrivateNotifications extends Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-  // only if user allows permission to camera AND camera roll
+    // only if user allows permission to camera AND camera roll
     if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
@@ -302,7 +302,7 @@ export default class PrivateNotifications extends Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-  // only if user allows permission to camera roll
+    // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -338,46 +338,46 @@ export default class PrivateNotifications extends Component {
       alert('Upload failed, sorry :(');
     } finally {
       this.setState({
-      uploading: false
+        uploading: false
       });
     }
   };
 }
 
-  async function uploadImageAsync(uri) {
-    let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
+async function uploadImageAsync(uri) {
+  let apiUrl = NOTIFICATIONS_API + '/notificationsimage/';
 
-    // Note:
-    // Uncomment this if you want to experiment with local server
-    //
-    // if (Constants.isDevice) {
-    //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-    // } else {
-    //   apiUrl = `http://localhost:3000/upload`
-    // }
+  // Note:
+  // Uncomment this if you want to experiment with local server
+  //
+  // if (Constants.isDevice) {
+  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
+  // } else {
+  //   apiUrl = `http://localhost:3000/upload`
+  // }
 
-    let uriParts = uri.split('.');
-    let fileType = uriParts[uriParts.length - 1];
+  let uriParts = uri.split('.');
+  let fileType = uriParts[uriParts.length - 1];
 
-    let formData = new FormData();
-    formData.append('image', {
-      uri,
-      name: `photo.${fileType}`,
-      type: `image/${fileType}`,
-    });
+  let formData = new FormData();
+  formData.append('image', {
+    uri,
+    name: `photo.${fileType}`,
+    type: `image/${fileType}`,
+  });
 
-    console.log(uri)
+  console.log(uri)
 
-    let options = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    };
-    return fetch(apiUrl, options);
-  }
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  return fetch(apiUrl, options);
+}
 
 const styles = StyleSheet.create({
   container: {

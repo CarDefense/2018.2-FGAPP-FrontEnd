@@ -182,13 +182,13 @@ export default class SignUpScreen extends Component {
     let { errors = {}, secureTextEntry, ...data } = this.state;
 
     return (
-          <ImageBackground
-            source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
+      <ImageBackground
+        source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
 
-            style={{ width: '100%', height: '100%' }}
-          >
-          <KeyboardAvoidingView behavior="position">
-            <ScrollView>
+        style={{ width: '100%', height: '100%' }}
+      >
+        <KeyboardAvoidingView behavior="position">
+          <ScrollView>
             <View style={styles.container}>
               <View style={styles.containerImage}>
                 <Image
@@ -261,9 +261,9 @@ export default class SignUpScreen extends Component {
                 </View>
               </View>
             </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-          </ImageBackground>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     );
   }
 }
@@ -298,4 +298,3 @@ const styles = StyleSheet.create({
     width: 100,
   }
 });
-
