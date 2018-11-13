@@ -1,20 +1,18 @@
-jobs:
-  include:
-    - stage: test
-      language: node_js
-      node_js:
-        - '9.3'
-      before_install:
-        - cd mobile && yarn
-      script:
-        - yarn test
 
-    - stage: production deploy
-        if: branch = master AND (NOT type = pull_request)
-        node_js:
-          - '9.3'
-        script:
-          - cd mobile
-          - yarn add expo-cli
-          - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-          - yarn expo publish --non-interactive
+language: node_js
+  node_js:
+    - '9.3'
+  before_install:
+    - cd mobile && yarn
+  script:
+    - yarn test
+
+- stage: production deploy
+    if: branch = master AND (NOT type = pull_request)
+    node_js:
+      - '9.3'
+    script:
+      - cd mobile
+      - yarn add expo-cli
+      - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+      - yarn expo publish --non-interactive
