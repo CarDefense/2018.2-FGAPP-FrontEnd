@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, ImageBackground, Alert } from 'react-native';
+import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, ImageBackground, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import jwt_decode from 'jwt-decode';
@@ -171,6 +171,8 @@ class WelcomeScreen extends Component {
         let { errors = {}, secureTextEntry, ...data } = this.state;
 
         return (
+            <KeyboardAvoidingView behavior="padding">
+            <ScrollView>
             <ImageBackground
                 source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png'}}
 
@@ -257,6 +259,8 @@ class WelcomeScreen extends Component {
                     </View>
                 </View>
             </ImageBackground>
+            </ScrollView>
+            </KeyboardAvoidingView>
         );
     }
 }
