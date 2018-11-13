@@ -13,12 +13,13 @@
     "version": "0.1.0",
     "icon": "./images/icontest.png",
     "description": "",
-    "githubUrl": "https://github.com/fga-eps-mds/2018.2-CarDefense",
+    "githubUrl": "https://github.com/CarDefense/CarDefense_FrontEnd",
     "ios": {
-      "bundleIdentifier": "com.epsmds.cardefense"
+      "bundleIdentifier": "com.cardefense.cardefense"
     },
     "android": {
-      "package": "com.epsmds.cardefense"
+      "package": "com.cardefense.cardefense",
+      "versionCode": 1
     }
   }
 }
