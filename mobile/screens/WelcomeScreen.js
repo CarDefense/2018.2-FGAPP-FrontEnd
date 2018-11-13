@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, ImageBackground, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+    View, 
+    StyleSheet, 
+    Image, 
+    FlatList, 
+    Text, 
+    TouchableOpacity,
+    ImageBackground, 
+    Alert, 
+    ScrollView, 
+    KeyboardAvoidingView
+} from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import jwt_decode from 'jwt-decode';
@@ -125,7 +136,7 @@ class WelcomeScreen extends Component {
                     }
                 }
             });
-            
+
         if (!errorUserName && !errorPassword) {
             var login_path = PROFILE_API + '/token-auth/';
             fetch(login_path, {
@@ -138,30 +149,30 @@ class WelcomeScreen extends Component {
                     'password': this.state.password,
                 }),
             })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(JSON.stringify(responseJson));
-                if (responseJson.non_field_errors != undefined){
-                    this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).']})
-                }
-                else{
-                    this.setState({ non_field_alert: ['']})
-                }
-                var token = responseJson.token ? responseJson.token : undefined;
-                user = token ? jwt_decode(token) : undefined;
-                if (user != undefined || responseJson.key != undefined) {
-                    this.props.navigation.navigate('TabHandler', { user: user });
-                }
-            })
-            .catch(err => {
-                if (typeof err.text === 'function') {
-                    err.text().then(errorMessage => {
-                        this.props.dispatch(displayTheError(errorMessage))
-                    });
-                } else {
-                    Alert.alert("Erro na conexão.");
-                }
-            });
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(JSON.stringify(responseJson));
+                    if (responseJson.non_field_errors != undefined) {
+                        this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).'] })
+                    }
+                    else {
+                        this.setState({ non_field_alert: [''] })
+                    }
+                    var token = responseJson.token ? responseJson.token : undefined;
+                    user = token ? jwt_decode(token) : undefined;
+                    if (user != undefined || responseJson.key != undefined) {
+                        this.props.navigation.navigate('TabHandler', { user: user });
+                    }
+                })
+                .catch(err => {
+                    if (typeof err.text === 'function') {
+                        err.text().then(errorMessage => {
+                            this.props.dispatch(displayTheError(errorMessage))
+                        });
+                    } else {
+                        Alert.alert("Erro na conexão.");
+                    }
+                });
         }
         this.setState({ errors });
 
@@ -171,96 +182,96 @@ class WelcomeScreen extends Component {
         let { errors = {}, secureTextEntry, ...data } = this.state;
 
         return (
-            <KeyboardAvoidingView behavior="padding">
-            <ScrollView>
-            <ImageBackground
-                source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png'}}
+                    <ImageBackground
+                        source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
 
-                style={{ width: '100%', height: '100%' }}
-            >
-                <View style={styles.container}>
-                    <View style={styles.containerImage}>
-                        <Image
-                            style={styles.image}
-                            source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png'}}
-                        />
-                    </View>
-                    <View style={styles.container1}>
+                        style={{ width: '100%', height: '100%' }}
+                    >
+                    <KeyboardAvoidingView behavior="position">
+                        <ScrollView>
+                        <View style={styles.container}>
+                            <View style={styles.containerImage}>
+                                <Image
+                                    style={styles.image}
+                                    source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png' }}
+                                />
+                            </View>
+                            <View style={styles.container1}>
 
-                        <TextField
-                            ref={this.usernameRef}
-                            value={data.username}
-                            autoCorrect={false}
-                            enablesReturnKeyAutomatically={true}
-                            onFocus={this.onFocus}
-                            onChangeText={(username) => this.setState({ username })}
-                            returnKeyType='next'
-                            label='Nome de usuário'
-                            tintColor="white"
-                            underlineColorAndroid="transparent"
-                            error={errors.username}
-                            textColor='white'
+                                <TextField
+                                    ref={this.usernameRef}
+                                    value={data.username}
+                                    autoCorrect={false}
+                                    enablesReturnKeyAutomatically={true}
+                                    onFocus={this.onFocus}
+                                    onChangeText={(username) => this.setState({ username })}
+                                    returnKeyType='next'
+                                    label='Nome de usuário'
+                                    tintColor="white"
+                                    underlineColorAndroid="transparent"
+                                    error={errors.username}
+                                    textColor='white'
 
-                        />
-                        <TextField
-                            ref={this.passwordRef}
-                            value={data.password}
-                            secureTextEntry={secureTextEntry}
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            enablesReturnKeyAutomatically={true}
-                            clearTextOnFocus={true}
-                            onFocus={this.onFocus}
-                            onChangeText={(password) => this.setState({ password })}
-                            returnKeyType='done'
-                            label='Senha'
-                            tintColor="white"
+                                />
+                                <TextField
+                                    ref={this.passwordRef}
+                                    value={data.password}
+                                    secureTextEntry={secureTextEntry}
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    enablesReturnKeyAutomatically={true}
+                                    clearTextOnFocus={true}
+                                    onFocus={this.onFocus}
+                                    onChangeText={(password) => this.setState({ password })}
+                                    returnKeyType='done'
+                                    label='Senha'
+                                    tintColor="white"
 
-                            underlineColorAndroid="transparent"
-                            error={errors.password}
-                            maxLength={20}
-                            characterRestriction={15}
-                            renderAccessory={this.renderPasswordAccessory}
-                            textColor='white'
+                                    underlineColorAndroid="transparent"
+                                    error={errors.password}
+                                    maxLength={20}
+                                    characterRestriction={15}
+                                    renderAccessory={this.renderPasswordAccessory}
+                                    textColor='white'
 
-                        />
-                        <View style={styles.containerButton}>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => this._onPressButton()}
-                                containerViewStyle={{ width: '40%' }}
-                            >
-                                <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >LOG IN</Text>
+                                />
+                                <View style={styles.containerButton}>
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                        onPress={() => this._onPressButton()}
+                                        containerViewStyle={{ width: '40%' }}
+                                    >
+                                        <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >LOG IN</Text>
 
-                            </TouchableOpacity>
-                            <FlatList
-                                data={this.state.non_field_alert}
-                                renderItem={({item}) => <Text style ={{color: 'red'}}>{item}</Text>}
-                                keyExtractor={item => 'non_field_errors'}
-                            />
+                                    </TouchableOpacity>
+                                    <FlatList
+                                        data={this.state.non_field_alert}
+                                        renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
+                                        keyExtractor={item => 'non_field_errors'}
+                                    />
+                                </View>
+
+                                <TouchableOpacity
+                                    style={styles.buttonFacebook}
+                                    onPress={() => this.logIn()}
+                                    containerViewStyle={{ width: '40%' }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: '700' }} >Facebook</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.button1}
+                                    onPress={() => this.props.navigation.navigate('SignUpScreen')}
+                                    containerViewStyle={{ width: '40%' }}
+                                >
+                                    <Text style={{ color: "#8bd4da" }} >Criar conta</Text>
+
+                                </TouchableOpacity>
+                            </View>
                         </View>
-
-                        <TouchableOpacity
-                            style={styles.buttonFacebook}
-                            onPress={() => this.logIn()}
-                            containerViewStyle={{ width: '40%' }}
-                        >
-                            <Text style={{ color: 'white', fontWeight: '700'}} >Facebook</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={styles.button1}
-                            onPress={() => this.props.navigation.navigate('SignUpScreen')}
-                            containerViewStyle={{ width: '40%' }}
-                        >
-                            <Text style={{ color: "#8bd4da" }} >Criar conta</Text>
-
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </ImageBackground>
-            </ScrollView>
+                </ScrollView>
             </KeyboardAvoidingView>
+                    </ImageBackground>
         );
     }
 }
@@ -277,7 +288,7 @@ const styles = StyleSheet.create({
     },
     container1: {
         marginTop: 150,
-      },
+    },
 
     buttonFacebook: {
         backgroundColor: "#3B5998",

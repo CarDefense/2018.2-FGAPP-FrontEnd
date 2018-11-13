@@ -8,6 +8,8 @@ import {
   FlatList,
   ImageBackground,
   Image,
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -149,8 +151,8 @@ export default class SignUpScreen extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
           console.log(JSON.stringify(responseJson));
-          if (responseJson.username != undefined){
-            this.setState({ username_field_alerts: ['Um usuário já foi cadastrado com esse nome.']})
+          if (responseJson.username != undefined) {
+            this.setState({ username_field_alerts: ['Um usuário já foi cadastrado com esse nome.'] })
           }
           else {
             this.setState({ username_field_alerts: [''] })
@@ -180,116 +182,120 @@ export default class SignUpScreen extends Component {
     let { errors = {}, secureTextEntry, ...data } = this.state;
 
     return (
-      <ImageBackground
-        source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png'}}
+          <ImageBackground
+            source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
 
-        style={{ width: '100%', height: '100%' }}
-      >
-        <View style={styles.container}>
-          <View style={styles.containerImage}>
-            <Image
-              style={styles.image}
-              source={{uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png'}}
+            style={{ width: '100%', height: '100%' }}
+          >
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+            <View style={styles.container}>
+              <View style={styles.containerImage}>
+                <Image
+                  style={styles.image}
+                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png' }}
 
-            />
-          </View>
-          <View>
-            <TextField
-              ref={this.emailRef}
-              value={data.email}
-              keyboardType='email-address'
-              autoCapitalize='none'
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(email) => this.setState({ email })}
-              returnKeyType='next'
-              label='Endereço de email'
-              tintColor="#760f9f"
-              underlineColorAndroid="transparent"
-              error={errors.email}
-            />
-            <TextField
-              ref={this.usernameRef}
-              value={data.username}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(username) => this.setState({ username })}
-              returnKeyType='next'
-              label='Nome de usuário'
-              tintColor="#760f9f"
-              underlineColorAndroid="transparent"
-              error={errors.username}
-            />
-            <TextField
-              ref={this.passwordRef}
-              value={data.password}
-              secureTextEntry={secureTextEntry}
-              autoCapitalize='none'
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              clearTextOnFocus={true}
-              onFocus={this.onFocus}
-              onChangeText={(password) => this.setState({ password })}
-              returnKeyType='done'
-              label='Senha'
-              tintColor="#760f9f"
-              underlineColorAndroid="transparent"
-              error={errors.password}
-              maxLength={20}
-              characterRestriction={15}
-              renderAccessory={this.renderPasswordAccessory}
-            />
-            <View style={styles.containerButton}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => this._onPressButton()}
-                containerViewStyle={{ width: '40%' }}
-              >
-                <Text style={{ color: 'white' }} >Cadastrar</Text>
-              </TouchableOpacity>
-              <FlatList
-                data={this.state.username_field_alerts}
-                renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
-                keyExtractor={item => 'non_field_errors'}
-              />
+                />
+              </View>
+              <View>
+                <TextField
+                  ref={this.emailRef}
+                  value={data.email}
+                  keyboardType='email-address'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(email) => this.setState({ email })}
+                  returnKeyType='next'
+                  label='Endereço de email'
+                  tintColor="#760f9f"
+                  underlineColorAndroid="transparent"
+                  error={errors.email}
+                />
+                <TextField
+                  ref={this.usernameRef}
+                  value={data.username}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(username) => this.setState({ username })}
+                  returnKeyType='next'
+                  label='Nome de usuário'
+                  tintColor="#760f9f"
+                  underlineColorAndroid="transparent"
+                  error={errors.username}
+                />
+                <TextField
+                  ref={this.passwordRef}
+                  value={data.password}
+                  secureTextEntry={secureTextEntry}
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  clearTextOnFocus={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(password) => this.setState({ password })}
+                  returnKeyType='done'
+                  label='Senha'
+                  tintColor="#760f9f"
+                  underlineColorAndroid="transparent"
+                  error={errors.password}
+                  maxLength={20}
+                  characterRestriction={15}
+                  renderAccessory={this.renderPasswordAccessory}
+                />
+                <View style={styles.containerButton}>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => this._onPressButton()}
+                    containerViewStyle={{ width: '40%' }}
+                  >
+                    <Text style={{ color: 'white' }} >Cadastrar</Text>
+                  </TouchableOpacity>
+                  <FlatList
+                    data={this.state.username_field_alerts}
+                    renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
+                    keyExtractor={item => 'non_field_errors'}
+                  />
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-      </ImageBackground>
+        </ScrollView>
+      </KeyboardAvoidingView>
+          </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
   button: {
-      backgroundColor: "#540b71",
-      borderRadius: 15,
-      height: 40,
-      width: 320,
-      justifyContent: 'center',
-      alignItems: 'center'
+    backgroundColor: "#540b71",
+    borderRadius: 15,
+    height: 40,
+    width: 320,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   container: {
-      margin: 16,
+    margin: 16,
   },
   containerButton: {
-      alignItems: 'center'
+    alignItems: 'center'
   },
   containerImage: {
-      margin: 30,
-      paddingTop: 4,
-      paddingRight: 4,
-      alignItems: 'center'
+    margin: 30,
+    paddingTop: 4,
+    paddingRight: 4,
+    alignItems: 'center'
   },
   containerText: {
-      margin: 60,
-      alignItems: 'center'
+    margin: 60,
+    alignItems: 'center'
   },
   image: {
-      height: 100,
-      width: 100,
+    height: 100,
+    width: 100,
   }
 });
 
