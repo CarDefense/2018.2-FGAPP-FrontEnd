@@ -1,7 +1,7 @@
 import { TextField } from 'react-native-material-textfield';;
 import { Constants, ImagePicker, Permissions } from 'expo';
 import { NOTIFICATIONS_API } from '../const/Const'
-import React, { Component } from 'react';
+import React, { Component, Children } from 'react';
 import {
   ActivityIndicator,
   View,
@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   Alert,
   Image,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Picker
 } from 'react-native';
 
 const tk = 0;
@@ -25,13 +26,16 @@ export default class PublicNotifications extends Component {
     this.onFocus = this.onFocus.bind(this);
 
     this.state = {
-      title: 'Alerta Geral',
+      title: '',
       message: '',
       image: null,
       uploading: false,
     }
   }
-
+  updateTitle = (title) => {
+    this.setState({ title: title})
+    }
+    
   onFocus() {
     let { errors = {} } = this.state;
 
@@ -131,6 +135,12 @@ export default class PublicNotifications extends Component {
                 <Text style={styles.name}>Envie aqui os alertas</Text>
               </View>
             </View>
+            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle}>           
+              <Picker.Item label="Alerta Geral" value="Alerta Geral" />
+              <Picker.Item label="Roubo" value="Roubo" />
+              <Picker.Item label="Incêndio" value="Incendio" />
+              <Picker.Item label ="Tempestade" value="Tempestade" />
+            </Picker>           
             <TextField
               ref={this.messageRef}
               value={data.message}
@@ -141,7 +151,7 @@ export default class PublicNotifications extends Component {
               // onChangeText={this.onChangeText}
               // onSubmitEditing={this.onSubmitMessage}
               returnKeyType='next'
-              label='Descrição'
+              label='Detalhes'
               tintColor="white"
               error={errors.message}
               textColor="white"
