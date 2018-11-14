@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { TextField } from 'react-native-material-textfield';
-import { View,
-  Text, 
-  TouchableOpacity, 
-  ScrollView, 
-  StyleSheet, 
-  Alert, 
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Alert,
   Image,
   KeyboardAvoidingView
 } from 'react-native';
@@ -347,3 +348,4 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
 });
+
