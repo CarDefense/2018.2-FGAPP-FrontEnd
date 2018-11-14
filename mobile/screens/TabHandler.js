@@ -18,7 +18,6 @@ const TabHandler = new TabNavigator({
     Feed: {
         screen: Feed,
         navigationOptions: {
-            tabBarLabel: 'Feed',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -33,7 +32,6 @@ const TabHandler = new TabNavigator({
     PrivateNotifications: {
         screen: PrivateNotifications,
         navigationOptions: {
-            tabBarLabel: 'Notificação',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -48,7 +46,6 @@ const TabHandler = new TabNavigator({
     PublicNotifications: {
         screen: PublicNotifications,
         navigationOptions: {
-            tabBarLabel: 'Alerta',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -63,7 +60,6 @@ const TabHandler = new TabNavigator({
     RegisterCar: {
         screen: RegisterCar,
         navigationOptions: {
-            tabBarLabel: 'Carros',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -79,7 +75,6 @@ const TabHandler = new TabNavigator({
     PrivateFeed: {
         screen: PrivateFeed,
         navigationOptions: {
-            tabBarLabel: 'Feed Privado',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -93,7 +88,6 @@ const TabHandler = new TabNavigator({
     Profile: {
         screen: Profile,
         navigationOptions: {
-            tabBarLabel: 'Perfil',
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
@@ -105,11 +99,10 @@ const TabHandler = new TabNavigator({
         }
     },
 },
-    {
-
+    {  
         tabBarPosition: 'bottom',
         tabBarOptions: {
-            showLabel: true,
+            showLabel: false,
             showIcon: true,
             swipeEnabled: true,
             activeTintColor: '#318E95',
