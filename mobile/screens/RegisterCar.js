@@ -10,7 +10,7 @@ import {
   Image,
   KeyboardAvoidingView
 } from 'react-native';
-import { CAR_API } from '../const/Const'
+import { CAR_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
 import { Icon } from "native-base";
 
 

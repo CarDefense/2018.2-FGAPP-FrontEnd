@@ -23,28 +23,6 @@ export default class UserProfileView extends Component {
         };
     }
 
-    // getCar = () => {
-    //     const { state } = this.props.navigation;
-    //     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-    //     let link = CAR_API + '/car/?token=' + id
-
-    //     return fetch(link)
-    //         .then((response) => response.json())
-    //         .then((responseJson) => {
-
-    //             this.setState({
-    //                 isLoading: false,
-    //                 dataSource: responseJson,
-    //             }, function () {
-
-    //             });
-
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }
-
     async componentDidMount() {
         const { state } = this.props.navigation;
         var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
@@ -100,6 +78,12 @@ export default class UserProfileView extends Component {
         });
     }
 
+    registerCar = () => {
+        const { state } = this.props.navigation;
+        var user = state.params ? state.params.user : undefined;
+        this.props.navigation.navigate('RegisterCar', { user: user })
+    }
+
     render() {
         const { state } = this.props.navigation;
         var user = state.params ? (state.params.user.name ? state.params.user.name : state.params.user.username) : undefined;
@@ -143,7 +127,7 @@ export default class UserProfileView extends Component {
                                         />
                                         <TouchableOpacity
                                             color="grey"
-                                            onPress={ () => { this._onPressButton(item.plate) } }
+                                            onPress={() => { this._onPressButton(item.plate) }}
                                             containerViewStyle={{ width: '10%' }}
                                         >
                                             <Icon
@@ -152,20 +136,22 @@ export default class UserProfileView extends Component {
                                                 style={{ color: "red" }}
                                             />
                                         </TouchableOpacity>
-                                        {/* <Button
-                                        title='press'
-                                    >
-                                        <Icon
-                                        type='FontAwesome'
-                                        name="car"
-                                        />
-                                        </Button> */}
                                     </View>
 
                                 );
                             }}
                             keyExtractor={({ id }, index) => id.toString()}
                         />
+                    </View>
+                    <View style={styles.container}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => this.registerCar()}
+                            containerViewStyle={{ width: '40%' }}
+                        >
+                            <Text style={styles.text} >+</Text>
+
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </View>
@@ -174,6 +160,21 @@ export default class UserProfileView extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center'
+    },
+    text: {
+        color: "white",
+        fontSize: 30,
+    },
+    button: {
+        backgroundColor: "#A3F8FF",
+        borderRadius: 20,
+        height: 40,
+        width: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     header: {
         backgroundColor: "#8bd4da",
     },

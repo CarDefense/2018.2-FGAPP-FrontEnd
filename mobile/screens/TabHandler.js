@@ -8,7 +8,6 @@ import { TabNavigator } from 'react-navigation'
 import Feed from './tab_navigator/car_defense/screens/Feed'
 import PublicNotifications from './tab_navigator/car_defense/screens/TabNavigator/PublicNotifications/PublicNotifications'
 import PrivateNotifications from './tab_navigator/car_defense/screens/TabNavigator/PrivateNotifications/PrivateNotifications'
-import RegisterCar from './tab_navigator/car_defense/screens/TabNavigator/RegisterCar/RegisterCar'
 import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
 import PrivateFeed from './tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
 import { Icon } from 'native-base';
@@ -51,21 +50,6 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="warning"
                     style={{ color: '#8bd4da', fontSize: 15 }}
-
-                />
-            ),
-            header: null,
-        }
-    },
-    RegisterCar: {
-        screen: RegisterCar,
-        navigationOptions: {
-            tabBarIcon: ({ focused }) => (
-                <Icon
-                    type='FontAwesome'
-                    name="car"
-                    style={{ color: '#8bd4da', fontSize: 15 }}
-
 
                 />
             ),

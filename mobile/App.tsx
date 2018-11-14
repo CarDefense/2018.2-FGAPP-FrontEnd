@@ -4,6 +4,7 @@ import {StackNavigator} from 'react-navigation'
 
 import WelcomeScreen from './screens/WelcomeScreen'
 import SignUpScreen from './screens/SignUpScreen'
+import RegisterCar from './screens/RegisterCar'
 import TabHandler from './screens/TabHandler'
 
 
@@ -29,6 +30,9 @@ const AppStackNavigator = new StackNavigator({
     navigationOptions: ({ navigation }) => ({
       header: null,
     }),
+  },
+  RegisterCar:{
+    screen:RegisterCar,
   },
   TabHandler:{
     screen:TabHandler,
