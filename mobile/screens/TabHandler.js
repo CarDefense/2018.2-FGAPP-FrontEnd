@@ -106,6 +106,8 @@ const TabHandler = new TabNavigator({
     },
 },
     {
+
+        tabBarPosition: 'bottom',
         tabBarOptions: {
             showLabel: true,
             showIcon: true,
