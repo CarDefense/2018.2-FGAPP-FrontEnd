@@ -14,6 +14,7 @@ import {
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import jwt_decode from 'jwt-decode';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js';
 
 class WelcomeScreen extends Component {
@@ -24,7 +25,9 @@ class WelcomeScreen extends Component {
         });
         if (type === 'success') {
             // Get the user's name using Facebook's Graph API
-            const response = await fetch(`https://graph.facebook.com/v3.2/me?access_token=${token}&debug=all&fields=id%2Cname%2Cemail&format=json&method=get&pretty=0&suppress_http_code=1`);
+            const response = await fetch(
+                `https://graph.facebook.com/v3.2/me?access_token=${token}&debug=all&fields=id%2Cname%2Cemail&format=json&method=get&pretty=0&suppress_http_code=1`
+                );
             const user = (await response.json());
             console.log(user);
             this.props.navigation.navigate('TabHandler', { user: user });
@@ -183,8 +186,7 @@ class WelcomeScreen extends Component {
 
         return (
             <ImageBackground
-                source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
-
+            source={require('../images/bg.jpg')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <KeyboardAvoidingView behavior="position">
@@ -193,7 +195,7 @@ class WelcomeScreen extends Component {
                             <View style={styles.containerImage}>
                                 <Image
                                     style={styles.image}
-                                    source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png' }}
+                                    source={require('../images/icontest.png')}
                                 />
                             </View>
                             <View style={styles.container1}>
@@ -241,7 +243,7 @@ class WelcomeScreen extends Component {
                                         onPress={() => this._onPressButton()}
                                         containerViewStyle={{ width: '40%' }}
                                     >
-                                        <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >LOG IN</Text>
+                                        <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >Entrar</Text>
 
                                     </TouchableOpacity>
                                     <FlatList
@@ -250,15 +252,18 @@ class WelcomeScreen extends Component {
                                         keyExtractor={item => 'non_field_errors'}
                                     />
                                 </View>
-
-                                <TouchableOpacity
-                                    style={styles.buttonFacebook}
-                                    onPress={() => this.logIn()}
-                                    containerViewStyle={{ width: '40%' }}
-                                >
-                                    <Text style={{ color: 'white', fontWeight: '700' }} >Facebook</Text>
-                                </TouchableOpacity>
-
+                                <View style={styles.containerButtonFacebook}>
+                                    <Icon.Button
+                                        name="facebook"
+                                        backgroundColor="#3b5998"
+                                        borderRadius={15}
+                                        height={40}
+                                        justifyContent='center'
+                                        onPress={() => this.logIn()}
+                                    >
+                                        Entrar com Facebook
+                                </Icon.Button>
+                                </View>
                                 <TouchableOpacity
                                     style={styles.button1}
                                     onPress={() => this.props.navigation.navigate('SignUpScreen')}
@@ -279,24 +284,15 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#8bd4da",
+        backgroundColor: "#A3F8FF",
         borderRadius: 15,
         height: 40,
-        width: 320,
+        width: 325,
         justifyContent: 'center',
         alignItems: 'center'
     },
     container1: {
-        marginTop: 150,
-    },
-
-    buttonFacebook: {
-        backgroundColor: "#3B5998",
-        borderRadius: 15,
-        height: 40,
-        width: 100,
-        justifyContent: 'center',
-        alignItems: 'center'
+        marginTop: 130,
     },
     button1: {
         backgroundColor: "rgba(0, 0, 0, 0)",
@@ -312,7 +308,10 @@ const styles = StyleSheet.create({
     containerButton: {
         alignItems: 'center',
         marginTop: 10
-
+    },
+    containerButtonFacebook: {
+        marginTop: 20,
+        marginBottom: 10
     },
     containerImage: {
         margin: 30,
