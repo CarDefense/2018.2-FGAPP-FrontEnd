@@ -102,8 +102,8 @@ export default class UserProfileView extends Component {
                     <View style={styles.header}>
                         <View style={styles.headerContent}>
                             <Image style={styles.avatar}
-                                source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/hehehehhehehehheeh.png' }} />
-
+                                source={require('../../../../../../images/hehehehhehehehheeh.png')} />
+                                    
                             <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
                             {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
                             {/* <Text style={styles.userInfo}>Florida </Text> */}

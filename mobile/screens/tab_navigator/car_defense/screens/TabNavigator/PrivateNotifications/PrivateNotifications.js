@@ -15,6 +15,7 @@ import {
   Picker
 } from 'react-native';
 import { NOTIFICATIONS_API } from '../const/Const'
+import { Icon } from "native-base";
 
 
 export default class PrivateNotifications extends Component {
@@ -156,7 +157,7 @@ export default class PrivateNotifications extends Component {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/notificationicon.png' }}
+                  source={require('../../../../../../images/notification.png')}
                 />
                 <Text style={styles.name}>Envie aqui as notificões</Text>
               </View>
@@ -215,20 +216,26 @@ export default class PrivateNotifications extends Component {
             {/* <Text style={styles.text}>Adicionar imagem</Text> */}
             <View style={styles.alternativeLayoutButtonContainer}>
               <TouchableOpacity
-                style={styles.button}
                 color="#8bd4da"
                 onPress={this._takePhoto}
-                containerViewStyle={{ width: '40%' }}
+                containerViewStyle={{ width: '10%' }}
               >
-                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Camera</Text>
+                <Icon
+                  type='FontAwesome'
+                  name="camera"
+                  style={{ color: "white" }}
+                />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.button2}
-                color="#540b71"
+                color="#8bd4da"
                 onPress={this._pickImage}
-                containerViewStyle={{ width: '40%' }}
+                containerViewStyle={{ width: '10%' }}
               >
-                <Text style={{ color: '#8bd4da', fontWeight: "800" }} >Galeria</Text>
+                <Icon
+                  type='FontAwesome'
+                  name="image"
+                  style={{ color: "white" }}
+                />
               </TouchableOpacity>
             </View>
             {this._maybeRenderImage()}
@@ -411,7 +418,7 @@ const styles = StyleSheet.create({
   },
   alternativeLayoutButtonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     paddingTop: 4,
     paddingRight: 4,
     marginTop: 20

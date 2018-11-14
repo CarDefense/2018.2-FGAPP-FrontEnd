@@ -201,7 +201,7 @@ export default class RegisterCar extends Component {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/ssssssssssssssssssssssssssss.png' }}
+                source={require('../images/s.png')}
                 />
                 <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
               </View>
