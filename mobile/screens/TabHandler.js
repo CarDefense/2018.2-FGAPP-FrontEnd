@@ -26,7 +26,7 @@ const TabHandler = new TabNavigator({
                     style={{ color: '#8bd4da', fontSize: 16 }}
                 />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
 
@@ -42,7 +42,7 @@ const TabHandler = new TabNavigator({
 
                 />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
     PublicNotifications: {
@@ -57,7 +57,7 @@ const TabHandler = new TabNavigator({
 
                 />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
     RegisterCar: {
@@ -73,7 +73,7 @@ const TabHandler = new TabNavigator({
 
                 />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
     PrivateFeed: {
@@ -87,7 +87,7 @@ const TabHandler = new TabNavigator({
                     style={{ color: '#8bd4da', fontSize: 15 }}
                 />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
     Profile: {
@@ -99,13 +99,13 @@ const TabHandler = new TabNavigator({
                     type='FontAwesome'
                     name="user"
                     style={{ color: '#8bd4da', fontSize: 15 }}
-                    />
+                />
             ),
-            headerLeft: null,
+            header: null,
         }
     },
 },
-            {
+    {
         tabBarOptions: {
             showLabel: true,
             showIcon: true,

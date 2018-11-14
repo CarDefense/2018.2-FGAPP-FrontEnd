@@ -17,9 +17,6 @@ import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/co
 
 export default class SignUpScreen extends Component {
 
-  static navigationOption = {
-    header: 'none'
-  }
   constructor(props) {
     super(props);
 
