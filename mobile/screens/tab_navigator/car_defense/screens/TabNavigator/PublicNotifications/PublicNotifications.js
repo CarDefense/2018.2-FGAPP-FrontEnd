@@ -135,7 +135,7 @@ export default class PublicNotifications extends Component {
                 <Text style={styles.name}>Envie aqui os alertas</Text>
               </View>
             </View>
-            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle}>           
+            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle} style={{ color: "white" }} mode="dropdown">           
               <Picker.Item label="Alerta Geral" value="Alerta Geral" />
               <Picker.Item label="Roubo" value="Roubo" />
               <Picker.Item label="Incêndio" value="Incendio" />

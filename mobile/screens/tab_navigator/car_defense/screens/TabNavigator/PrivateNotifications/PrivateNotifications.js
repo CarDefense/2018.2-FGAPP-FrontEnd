@@ -161,6 +161,21 @@ export default class PrivateNotifications extends Component {
                 <Text style={styles.name}>Envie aqui as notificões</Text>
               </View>
             </View>    
+            <Picker
+             selectedValue= {this.state.title} 
+             onValueChange={this.updateTitle} 
+             style={{ color: "white" }} 
+             mode="dropdown"
+            >        
+              <Picker.Item label="Notificação" value="Notificacao"/>
+              <Picker.Item label="Vidro aberto" value="Vidro aberto" />
+              <Picker.Item label="Farol aceso" value="Farol aceso" />
+              <Picker.Item label ="Pneu furado" value="Pneu furado" />
+              <Picker.Item label ="Alarme disparado" value="Alarme disparado" />
+              <Picker.Item label ="Local estacionado" value="Local estacionado" />
+              
+
+            </Picker>
             <TextField
               ref={this.plateRef}
               value={data.plate}
@@ -180,15 +195,6 @@ export default class PrivateNotifications extends Component {
               textColor="white"
               placeholderTextColor="white"
             />
-            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle}>        
-              <Picker.Item label="Notificação" value="Notificacao" styles={{color: "white"}}/>
-              <Picker.Item label="Vidro aberto" value="Vidro aberto" />
-              <Picker.Item label="Farol aceso" value="Farol aceso" />
-              <Picker.Item label ="Pneu furado" value="Pneu furado" />
-              <Picker.Item label ="Alarme disparado" value="Alarme disparado" />
-              <Picker.Item label ="Local estacionado" value="Local estacionado" />
-              
-            </Picker>
             <TextField
               ref={this.messageRef}
               value={data.message}
