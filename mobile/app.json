@@ -21,7 +21,7 @@
       "package": "com.epsmds.cardefense"
     },
     "splash" : {
-      "image": "./images/b6.jpg",
+      "image": "./images/b6p.png",
       "resizeMode": "cover"
     }
   }
