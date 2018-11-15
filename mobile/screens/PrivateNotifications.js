@@ -36,8 +36,8 @@ export default class PrivateNotifications extends Component {
     }
   }
   updateTitle = (title) => {
-    this.setState({ title: title})
-    }
+    this.setState({ title: title })
+  }
   onFocus() {
     let { errors = {} } = this.state;
 
@@ -152,112 +152,112 @@ export default class PrivateNotifications extends Component {
 
     return (
       <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-      <KeyboardAvoidingView behavior="position">
-        <ScrollView>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <Image style={styles.avatar}
-                  source={require('../images/notification.png')}
-                />
+        <KeyboardAvoidingView behavior="position">
+          <ScrollView>
+            <View style={styles.container}>
+              <View style={styles.header}>
+                <View style={styles.headerContent}>
+                  <Image style={styles.avatar}
+                    source={require('../images/notification.png')}
+                  />
+                </View>
               </View>
-            </View> 
-            <View style={styles.border}>  
-            <Picker
-             selectedValue= {this.state.title} 
-             onValueChange={this.updateTitle}  
-             mode="dropdown"
-             style={{ color: "#26C6DA", backgroundColor: 'white' }}
-            >        
-              <Picker.Item label="Notificação" value="Notificacao"/>
-              <Picker.Item label="Vidro aberto" value="Vidro aberto" />
-              <Picker.Item label="Farol aceso" value="Farol aceso" />
-              <Picker.Item label ="Pneu furado" value="Pneu furado" />
-              <Picker.Item label ="Alarme disparado" value="Alarme disparado" />
-              <Picker.Item label ="Local estacionado" value="Local estacionado" />
-              
+              <View style={styles.border}>
+                <Picker
+                  selectedValue={this.state.title}
+                  onValueChange={this.updateTitle}
+                  mode="dropdown"
+                  style={{ color: "#26C6DA", backgroundColor: 'white' }}
+                >
+                  <Picker.Item label="Notificação" value="Notificacao" />
+                  <Picker.Item label="Vidro aberto" value="Vidro aberto" />
+                  <Picker.Item label="Farol aceso" value="Farol aceso" />
+                  <Picker.Item label="Pneu furado" value="Pneu furado" />
+                  <Picker.Item label="Alarme disparado" value="Alarme disparado" />
+                  <Picker.Item label="Local estacionado" value="Local estacionado" />
 
-            </Picker>
-            <TextField
-              ref={this.plateRef}
-              value={data.plate}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(plate) => this.setState({ plate })}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitPLate}
-              returnKeyType='next'
-              label='Placa'
-              tintColor="white"
-              underlineColorAndroid="transparent"
-              maxLength={8}
-              autoCapitalize="characters"
-              error={errors.plate}
-              textColor="white"
-              placeholderTextColor="white"
-              inputContainerStyle = {{ marginHorizontal: 20 }}
-              labelPadding={50}
-            />
-            <TextField
-              ref={this.messageRef}
-              value={data.message}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(message) => this.setState({ message })}
-              maxLength={50}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitMessage}
-              returnKeyType='next'
-              label='Detalhes'
-              tintColor="white"
-              error={errors.message}
-              textColor="white"
-              placeholderTextColor="white"
-              inputContainerStyle = {{ marginHorizontal: 20 }}
-            />
-            {/* <Text style={styles.text}>Adicionar imagem</Text> */}
-            <View style={styles.alternativeLayoutButtonContainer}>
-              <TouchableOpacity
-                color="#B2EBF2"
-                onPress={this._takePhoto}
-                containerViewStyle={{ width: '10%' }}
-              >
-                <Icon
-                  type='FontAwesome'
-                  name="camera"
-                  style={{ color: "#26C6DA" }}
+
+                </Picker>
+                <TextField
+                  ref={this.plateRef}
+                  value={data.plate}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(plate) => this.setState({ plate })}
+                  // onChangeText={this.onChangeText}
+                  // onSubmitEditing={this.onSubmitPLate}
+                  returnKeyType='next'
+                  label='Placa'
+                  tintColor="white"
+                  underlineColorAndroid="transparent"
+                  maxLength={8}
+                  autoCapitalize="characters"
+                  error={errors.plate}
+                  textColor="white"
+                  placeholderTextColor="white"
+                  inputContainerStyle={{ marginHorizontal: 20 }}
+                  labelPadding={50}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                color="#B2EBF2"
-                onPress={this._pickImage}
-                containerViewStyle={{ width: '10%' }}
-              >
-                <Icon
-                  type='FontAwesome'
-                  name="image"
-                  style={{ color: "#26C6DA" }}
+                <TextField
+                  ref={this.messageRef}
+                  value={data.message}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(message) => this.setState({ message })}
+                  maxLength={50}
+                  // onChangeText={this.onChangeText}
+                  // onSubmitEditing={this.onSubmitMessage}
+                  returnKeyType='next'
+                  label='Detalhes'
+                  tintColor="white"
+                  error={errors.message}
+                  textColor="white"
+                  placeholderTextColor="white"
+                  inputContainerStyle={{ marginHorizontal: 20 }}
                 />
-              </TouchableOpacity>
+                {/* <Text style={styles.text}>Adicionar imagem</Text> */}
+                <View style={styles.alternativeLayoutButtonContainer}>
+                  <TouchableOpacity
+                    color="#B2EBF2"
+                    onPress={this._takePhoto}
+                    containerViewStyle={{ width: '10%' }}
+                  >
+                    <Icon
+                      type='FontAwesome'
+                      name="camera"
+                      style={{ color: "#26C6DA" }}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    color="#B2EBF2"
+                    onPress={this._pickImage}
+                    containerViewStyle={{ width: '10%' }}
+                  >
+                    <Icon
+                      type='FontAwesome'
+                      name="image"
+                      style={{ color: "#26C6DA" }}
+                    />
+                  </TouchableOpacity>
+                </View>
+                {this._maybeRenderImage()}
+                {this._maybeRenderUploadingOverlay()}
+                <View style={styles.container1}>
+                  <TouchableOpacity
+                    style={styles.button3}
+                    color="#B2EBF2"
+                    onPress={this.onPressButton}
+                    containerViewStyle={{ width: '40%' }}
+                  >
+                    <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-            {this._maybeRenderImage()}
-            {this._maybeRenderUploadingOverlay()}
-            <View style={styles.container1}>
-              <TouchableOpacity
-                style={styles.button3}
-                color="#B2EBF2"
-                onPress={this.onPressButton}
-                containerViewStyle={{ width: '40%' }}
-              >
-                <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
-              </TouchableOpacity>
-              </View> 
-            </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -414,7 +414,8 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    flex: 1
+    flex: 1,
+    marginBottom: 20
   },
   text: {
     paddingTop: 16,
@@ -521,6 +522,6 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 15,
     borderColor: "white",
-    backgroundColor: '#B2EBF2'
+    backgroundColor: '#B2EBF2',
   }
 });
