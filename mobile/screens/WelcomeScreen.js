@@ -150,10 +150,12 @@ class WelcomeScreen extends Component {
                     if (value.length < 8) {
                         this.state.isLoading = 0;
                         errors[text] = 'Senha muito curta.';
+                        errorPassword = true;
                     }
                     else if (value.length > 15) {
                         this.state.isLoading = 0;
                         errors[text] = 'Senha muito longa.';
+                        errorPassword = true;
                     }
                 }
             });
