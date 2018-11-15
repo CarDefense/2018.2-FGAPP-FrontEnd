@@ -11,6 +11,7 @@ import {
     ScrollView,
     KeyboardAvoidingView
 } from 'react-native';
+import { MaterialIndicator } from 'react-native-indicators';
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import jwt_decode from 'jwt-decode';
@@ -51,7 +52,8 @@ class WelcomeScreen extends Component {
             userName: '',
             password: '',
             secureTextEntry: true,
-            non_field_alert: ['']
+            non_field_alert: [''],
+            isLoading: 0
         };
 
     }
@@ -107,6 +109,7 @@ class WelcomeScreen extends Component {
     }
 
     _onPressButton = async () => {
+        this.state.isLoading = 50;
         let errors = {};
         let errorUserName = false;
         let errorPassword = false;
@@ -117,6 +120,7 @@ class WelcomeScreen extends Component {
 
                 if (!value) {
                     errors[text] = 'Digite o nome de usuário!';
+                    this.state.isLoading = false;
                     errorUserName = true;
                 }
             });
@@ -126,14 +130,17 @@ class WelcomeScreen extends Component {
                 let value = this[text].value();
 
                 if (!value) {
+                    this.state.isLoading = 0;
                     errors[text] = 'Digite a senha!';
                     errorPassword = true;
                 }
                 else {
                     if (value.length < 8) {
+                        this.state.isLoading = 0;
                         errors[text] = 'Senha muito curta.';
                     }
                     else if (value.length > 15) {
+                        this.state.isLoading = 0;
                         errors[text] = 'Senha muito longa.';
                     }
                 }
@@ -155,6 +162,7 @@ class WelcomeScreen extends Component {
                 .then((responseJson) => {
                     console.log(JSON.stringify(responseJson));
                     if (responseJson.non_field_errors != undefined) {
+                        this.state.isLoading = 0;
                         this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).'] })
                     }
                     else {
@@ -164,6 +172,7 @@ class WelcomeScreen extends Component {
                     user = token ? jwt_decode(token) : undefined;
                     if (user != undefined || responseJson.key != undefined) {
                         this.props.navigation.navigate('TabHandler', { user: user });
+                        this.state.isLoading = 0;
                     }
                 })
                 .catch(err => {
@@ -173,6 +182,7 @@ class WelcomeScreen extends Component {
                         });
                     } else {
                         Alert.alert("Erro na conexão.");
+                        this.state.isLoading = 0;
                     }
                 });
         }
@@ -198,7 +208,10 @@ class WelcomeScreen extends Component {
                                 />
                             </View>
                             <View style={styles.container1}>
-
+                                <MaterialIndicator
+                                size= {this.state.isLoading}
+                                color= "white"
+                                />
                                 <TextField
                                     ref={this.usernameRef}
                                     value={data.username}
@@ -268,7 +281,7 @@ class WelcomeScreen extends Component {
                                     onPress={() => this.props.navigation.navigate('SignUpScreen')}
                                     containerViewStyle={{ width: '40%' }}
                                 >
-                                    <Text style={{ color: "#B2EBF2" }} >Criar conta</Text>
+                                    <Text style={{ color: "white" }} >Criar conta</Text>
 
                                 </TouchableOpacity>
                             </View>

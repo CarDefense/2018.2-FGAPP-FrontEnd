@@ -87,7 +87,7 @@ export default class UserProfileView extends Component {
     render() {
         const { state } = this.props.navigation;
         var user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
-        var source = state.params.user.picture.data.url ? {uri: state.params.user.picture.data.url } : undefined;
+        var source = state.params.user.picture ? { uri: state.params.user.picture.data.url } : require('../../../../../../images/hehehehhehehehheeh.png');
 
 
         return (
