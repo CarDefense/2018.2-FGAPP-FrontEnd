@@ -86,7 +86,8 @@ export default class UserProfileView extends Component {
 
     render() {
         const { state } = this.props.navigation;
-        var user = state.params ? (state.params.user.name ? state.params.user.name : state.params.user.username) : undefined;
+        var user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
+        var source = state.params.user.picture.data.url ? {uri: state.params.user.picture.data.url } : undefined;
 
 
         return (
@@ -102,7 +103,7 @@ export default class UserProfileView extends Component {
                 >
                     <View style={styles.headerContent}>
                         <Image style={styles.avatar}
-                            source={require('../../../../../../images/hehehehhehehehheeh.png')} />
+                            source={source}/>
 
                         <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
                         {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}

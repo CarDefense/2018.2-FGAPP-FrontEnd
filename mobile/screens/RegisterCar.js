@@ -199,7 +199,7 @@ export default class RegisterCar extends Component {
     let { model = 'text' } = data;
     let { color = 'text' } = data;
     const { state } = this.props.navigation;
-    var user = state.params ? (state.params.user.name ? state.params.user.name : state.params.user.username) : undefined;
+    var user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
 
 
     return (

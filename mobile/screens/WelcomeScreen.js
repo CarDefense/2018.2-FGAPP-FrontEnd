@@ -19,15 +19,14 @@ import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/co
 
 class WelcomeScreen extends Component {
 
-    async logIn() {
+    async facebookLogin() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2177002552568068', {
             permissions: ['public_profile'],
         });
         if (type === 'success') {
-            // Get the user's name using Facebook's Graph API
-            const response = await fetch(
-                `https://graph.facebook.com/v3.2/me?access_token=${token}&debug=all&fields=id%2Cname%2Cemail&format=json&method=get&pretty=0&suppress_http_code=1`
-                );
+            const baseUrl = `https://graph.facebook.com/me?access_token=${token}`
+            const fields = '&debug=all&fields=id%2Cfirst_name%2Cpicture%7Burl%7D&format=json&method=get&pretty=0&suppress_http_code=1'
+            const response = await fetch(`${baseUrl}${fields}`)
             const user = (await response.json());
             console.log(user);
             this.props.navigation.navigate('TabHandler', { user: user });
@@ -186,7 +185,7 @@ class WelcomeScreen extends Component {
 
         return (
             <ImageBackground
-            source={require('../images/b6.jpg')}
+                source={require('../images/b6.jpg')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <KeyboardAvoidingView behavior="position">
@@ -259,7 +258,7 @@ class WelcomeScreen extends Component {
                                         borderRadius={15}
                                         height={40}
                                         justifyContent='center'
-                                        onPress={() => this.logIn()}
+                                        onPress={() => this.facebookLogin()}
                                     >
                                         Entrar com Facebook
                                 </Icon.Button>
