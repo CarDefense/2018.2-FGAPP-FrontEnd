@@ -16,7 +16,15 @@ import { CAR_API } from '../screens/tab_navigator/car_defense/screens/TabNavigat
 import { Icon } from "native-base";
 
 
+async function _Alert(){
+  Alert.alert('Mande uma foto do documento do seu carro.')
+}
+
 export default class RegisterCar extends Component {
+  
+  componentWillMount() {
+    _Alert();
+  }
 
   constructor(props) {
     super(props);
@@ -481,10 +489,10 @@ const styles = StyleSheet.create({
     fontWeight: '200',
   },
   avatar: {
-    width: 170,
-    height: 170,
-    borderRadius: 63,
-    borderWidth: 7,
+    width: 100,
+    height: 100,
+    borderRadius: 40,
+    borderWidth: 5,
     borderColor: "white",
     marginBottom: 10,
   },
