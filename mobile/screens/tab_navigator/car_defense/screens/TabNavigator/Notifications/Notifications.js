@@ -28,7 +28,7 @@ export default class Notifications extends Component {
     render() {
         return (
         <View
-        style={{ backgroundColor: '#26C6DA', flex: 1 }}
+        style={{ backgroundColor: '#00ACC1', flex: 1 }}
         >
             <ScrollView>
                 <View style={styles.container}>

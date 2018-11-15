@@ -108,8 +108,9 @@ export default class Feed extends React.Component {
   render() {
 
     return (
-      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
-        <ScrollView style={styles.item}
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+        <ScrollView 
+          style={styles.item}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -119,7 +120,6 @@ export default class Feed extends React.Component {
         >
 
           <FlatList
-            style={{ backgroundColor: '#26C6DA' }}
             data={this.state.dataSource}
             renderItem={({ item }) => {
               return (
@@ -167,10 +167,6 @@ const styles = StyleSheet.create({
     color: "#B2EBF2",
     fontWeight: '600'
   },
-  header: {
-    backgroundColor: "#B2EBF2",
-  },
-
   headerContent: {
     padding: 30,
     alignItems: 'center',

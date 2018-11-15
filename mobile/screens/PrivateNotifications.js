@@ -151,7 +151,7 @@ export default class PrivateNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
-      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -227,7 +227,7 @@ export default class PrivateNotifications extends Component {
                 <Icon
                   type='FontAwesome'
                   name="camera"
-                  style={{ color: "white" }}
+                  style={{ color: "#26C6DA" }}
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -238,7 +238,7 @@ export default class PrivateNotifications extends Component {
                 <Icon
                   type='FontAwesome'
                   name="image"
-                  style={{ color: "white" }}
+                  style={{ color: "#26C6DA" }}
                 />
               </TouchableOpacity>
             </View>
@@ -251,7 +251,7 @@ export default class PrivateNotifications extends Component {
                 onPress={this.onPressButton}
                 containerViewStyle={{ width: '40%' }}
               >
-                <Text style={{ color: '#62969A', fontWeight: '800' }} >Enviar</Text>
+                <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
               </TouchableOpacity>
               </View> 
             </View>
@@ -414,7 +414,6 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: '#26C6DA',
     flex: 1
   },
   text: {
@@ -512,7 +511,6 @@ const styles = StyleSheet.create({
   headerContent: {
     padding: 30,
     alignItems: 'center',
-    backgroundColor: '#26C6DA'
   },
   input: {
     marginBottom: 5,

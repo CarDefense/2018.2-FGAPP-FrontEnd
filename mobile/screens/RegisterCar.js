@@ -16,12 +16,12 @@ import { CAR_API } from '../screens/tab_navigator/car_defense/screens/TabNavigat
 import { Icon } from "native-base";
 
 
-async function _Alert(){
+async function _Alert() {
   Alert.alert('Mande uma foto do documento do seu carro.')
 }
 
 export default class RegisterCar extends Component {
-  
+
   componentWillMount() {
     _Alert();
   }
@@ -203,17 +203,15 @@ export default class RegisterCar extends Component {
 
 
     return (
-      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
         <KeyboardAvoidingView behavior="position">
           <ScrollView>
             <View style={styles.container}>
-              <View style={styles.header}>
-                <View style={styles.headerContent}>
-                  <Image style={styles.avatar}
-                    source={require('../images/s.png')}
-                  />
-                  <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
-                </View>
+              <View style={styles.headerContent}>
+                <Image style={styles.avatar}
+                  source={require('../images/s.png')}
+                />
+                <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
               </View>
               <View style={styles.border}>
                 <TextField
@@ -277,7 +275,7 @@ export default class RegisterCar extends Component {
                     <Icon
                       type='FontAwesome'
                       name="camera"
-                      style={{ color: "white" }}
+                      style={{ color: "#26C6DA" }}
                     />
                   </TouchableOpacity>
 
@@ -287,11 +285,11 @@ export default class RegisterCar extends Component {
                 <View style={styles.container1}>
                   <TouchableOpacity
                     style={styles.button}
-                    color="white"
+                    color="#26C6DA"
                     onPress={this.onPressButton}
                     containerViewStyle={{ width: '40%' }}
                   >
-                    <Text style={{ color: '#B2EBF2', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                    <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
                   </TouchableOpacity>
                   {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
 
@@ -443,7 +441,6 @@ async function uploadImageAsync(uri) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#26C6DA',
     flex: 1
   },
   container1: {
@@ -507,9 +504,6 @@ const styles = StyleSheet.create({
   },
   box: {
     color: 'white'
-  },
-  header: {
-    backgroundColor: "#26C6DA",
   },
   maybeRenderUploading: {
     paddingTop: 8,

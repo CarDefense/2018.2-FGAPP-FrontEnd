@@ -62,8 +62,9 @@ export default class Feed extends React.Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
-        <ScrollView style={styles.item}
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+        <ScrollView 
+          style={styles.item}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -82,9 +83,11 @@ export default class Feed extends React.Component {
                     onPress={() => { this._height(this.state.height) }}
                   >
                     <Image source={{ uri: item.image }}
-                      style={{ width: 270, height: this.state.height }} />
+                      style={{ height: this.state.height }} />
                   </TouchableOpacity>
-                  <Text style={styles.text}>{item.message}</Text>
+                  <View style={{ marginTop: 10 }}>
+                    <Text style={styles.text2}>{item.message}</Text>
+                  </View>
                 </View>
               );
             }}
@@ -100,8 +103,6 @@ export default class Feed extends React.Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "",
-    margin: 4,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -109,20 +110,15 @@ const styles = StyleSheet.create({
       height: 1,
       width: 1
     },
-    elevation: 4
+    elevation: 4,
+    marginTop: 20,
+    marginBottom: 5
   },
 
   text: {
     color: "#B2EBF2",
     fontWeight: '600'
   },
-  text1: {
-    color: "#26C6DA",
-    fontWeight: '800',
-  }, header: {
-    backgroundColor: "#26C6DA",
-  },
-
   headerContent: {
     padding: 30,
     alignItems: 'center',
@@ -147,10 +143,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
-  item: {
-    flexDirection: 'row',
-  },
-
   icon: {
     width: 30,
     height: 30,
@@ -162,7 +154,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   item2: {
-    alignItems: "center",
     backgroundColor: "white",
     flexGrow: 1,
     padding: 20,
@@ -188,8 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   text2: {
-    color: "#B2EBF2",
+    color: "#26C6DA",
     fontWeight: '800',
-    fontSize: 12
   }
 });

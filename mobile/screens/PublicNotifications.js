@@ -126,7 +126,7 @@ export default class PublicNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
-      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -359,7 +359,6 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: '#26C6DA',
     flex: 1
   },
   text: {

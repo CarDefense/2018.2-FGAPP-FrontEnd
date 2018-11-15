@@ -90,8 +90,9 @@ export default class UserProfileView extends Component {
 
 
         return (
-            <View style={{ backgroundColor: "#26C6DA", flex: 1 }}>
+            <View style={{ backgroundColor: "#00ACC1", flex: 1 }}>
                 <ScrollView
+                    style={styles.item}
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -99,21 +100,18 @@ export default class UserProfileView extends Component {
                         />
                     }
                 >
-                    <View style={styles.header}>
-                        <View style={styles.headerContent}>
-                            <Image style={styles.avatar}
-                                source={require('../../../../../../images/hehehehhehehehheeh.png')} />
-                                    
-                            <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
-                            {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
-                            {/* <Text style={styles.userInfo}>Florida </Text> */}
-                            <Text style={styles.userInfo}>Aqui estão os seus carros</Text>
-                        </View>
+                    <View style={styles.headerContent}>
+                        <Image style={styles.avatar}
+                            source={require('../../../../../../images/hehehehhehehehheeh.png')} />
+
+                        <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
+                        {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
+                        {/* <Text style={styles.userInfo}>Florida </Text> */}
+                        <Text style={styles.userInfo}>Aqui estão os seus carros</Text>
                     </View>
 
-                    <View style={{ backgroundColor: '#26C6DA' }}>
+                    <View>
                         <FlatList
-                            style={{ backgroundColor: '#26C6DA' }}
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                                 return (
@@ -175,10 +173,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    header: {
-        backgroundColor: "#26C6DA",
-    },
-
     headerContent: {
         padding: 30,
         alignItems: 'center',
@@ -204,9 +198,9 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     item: {
-        flexDirection: 'row',
+        marginTop: 20,
+        marginBottom: 5
     },
-
     icon: {
         width: 30,
         height: 30,
