@@ -151,6 +151,7 @@ export default class PrivateNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
+      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -247,12 +248,13 @@ export default class PrivateNotifications extends Component {
                 onPress={this.onPressButton}
                 containerViewStyle={{ width: '40%' }}
               >
-                <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
+                <Text style={{ color: '#62969A', fontWeight: '800' }} >Enviar</Text>
               </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      </View>
     );
   }
 
@@ -499,7 +501,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    color: "white",
+    color: "#8bd4da",
     fontWeight: '800',
   },
   headerContent: {

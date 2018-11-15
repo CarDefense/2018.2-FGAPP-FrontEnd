@@ -186,7 +186,7 @@ class WelcomeScreen extends Component {
 
         return (
             <ImageBackground
-            source={require('../images/bg.jpg')}
+            source={require('../images/b6.jpg')}
                 style={{ width: '100%', height: '100%' }}
             >
                 <KeyboardAvoidingView behavior="position">
@@ -284,7 +284,7 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#A3F8FF",
+        backgroundColor: "#93DFE5",
         borderRadius: 15,
         height: 40,
         width: 325,

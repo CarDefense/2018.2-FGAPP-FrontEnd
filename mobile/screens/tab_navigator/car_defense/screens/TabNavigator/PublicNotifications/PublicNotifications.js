@@ -126,6 +126,7 @@ export default class PublicNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
+      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -199,6 +200,7 @@ export default class PublicNotifications extends Component {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      </View>
     );
   }
 

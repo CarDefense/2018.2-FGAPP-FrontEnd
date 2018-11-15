@@ -194,7 +194,7 @@ export default class RegisterCar extends Component {
 
 
     return (
-
+<View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -284,6 +284,7 @@ export default class RegisterCar extends Component {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      </View>
     );
   }
   _maybeRenderUploadingOverlay = () => { //done

@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
   text1: {
     color: "#8bd4da",
     fontWeight: '800',
-  }, header: {
+  }, 
+  header: {
     backgroundColor: "#8bd4da",
   },
 
