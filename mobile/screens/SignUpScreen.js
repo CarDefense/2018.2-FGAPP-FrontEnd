@@ -18,7 +18,16 @@ import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
 
+
+async function _Alert(){
+  Alert.alert('Para se cadastrar é necessário de um documento com foto.')
+}
+
 export default class SignUpScreen extends Component {
+
+  componentWillMount() {
+    _Alert();
+  }
 
   constructor(props) {
     super(props);
