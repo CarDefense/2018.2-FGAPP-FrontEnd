@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image ,TouchableOpacity} from 'react-native';
+import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity } from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
@@ -35,7 +35,7 @@ export default class Feed extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       refreshing: false,
       height: 135
     }
@@ -89,14 +89,14 @@ export default class Feed extends React.Component {
   }
 
   _height = (height) => {
-    if (height === 400){
+    if (height === 400) {
       this.state.height = 135
       this.setState({ refreshing: true });
       this.componentDidMount().then(() => {
         this.setState({ refreshing: false });
       });
     }
-    else{
+    else {
       this.state.height = 400
       this.setState({ refreshing: true });
       this.componentDidMount().then(() => {
@@ -130,9 +130,11 @@ export default class Feed extends React.Component {
                     onPress={() => { this._height(this.state.height) }}
                   >
                     <Image source={{ uri: item.image }}
-                      style={{ width: 270, height: this.state.height }} />
+                      style={{ height: this.state.height }} />
                   </TouchableOpacity>
-                  <Text style={styles.text}>{item.message}</Text>
+                  <View style={{ marginTop: 10 }}>
+                    <Text style={styles.text2}>{item.message}</Text>
+                  </View>
                 </View>
               );
             }}
@@ -149,8 +151,6 @@ export default class Feed extends React.Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "",
-    margin: 4,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -158,16 +158,14 @@ const styles = StyleSheet.create({
       height: 1,
       width: 1
     },
-    elevation: 4
+    elevation: 4,
+    marginTop: 20,
+    marginBottom: 5
   },
 
   text: {
     color: "#B2EBF2",
     fontWeight: '600'
-  },
-  text1: {
-    color: "#26C6DA",
-    fontWeight: '800',
   },
   header: {
     backgroundColor: "#B2EBF2",
@@ -197,9 +195,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
-  item: {
-    flexDirection: 'row',
-  },
 
   icon: {
     width: 30,
@@ -212,7 +207,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   item2: {
-    alignItems: "center",
     backgroundColor: "white",
     flexGrow: 1,
     padding: 20,
@@ -238,8 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   text2: {
-    color: "#B2EBF2",
+    color: "#26C6DA",
     fontWeight: '800',
-    fontSize: 12
   }
 });

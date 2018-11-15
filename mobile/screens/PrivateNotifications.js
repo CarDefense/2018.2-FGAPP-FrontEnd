@@ -206,6 +206,7 @@ export default class PrivateNotifications extends Component {
               enablesReturnKeyAutomatically={true}
               onFocus={this.onFocus}
               onChangeText={(message) => this.setState({ message })}
+              maxLength={50}
               // onChangeText={this.onChangeText}
               // onSubmitEditing={this.onSubmitMessage}
               returnKeyType='next'
