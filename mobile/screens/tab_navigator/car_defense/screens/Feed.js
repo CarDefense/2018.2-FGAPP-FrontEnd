@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
+import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image ,TouchableOpacity} from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
@@ -35,7 +35,10 @@ export default class Feed extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { refreshing: false, }
+    this.state = { 
+      refreshing: false,
+      height: 135
+    }
   }
 
   async componentDidMount() {
@@ -84,9 +87,28 @@ export default class Feed extends React.Component {
       this.setState({ refreshing: false });
     });
   }
+
+  _height = (height) => {
+    if (height === 400){
+      this.state.height = 135
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+    else{
+      this.state.height = 400
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+  }
+
   render() {
+
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
         <ScrollView style={styles.item}
           refreshControl={
             <RefreshControl
@@ -97,16 +119,19 @@ export default class Feed extends React.Component {
         >
 
           <FlatList
-            style={{ backgroundColor: '#8bd4da' }}
+            style={{ backgroundColor: '#26C6DA' }}
             data={this.state.dataSource}
             renderItem={({ item }) => {
               return (
-
                 <View style={styles.item2}>
                   <Text style={styles.text1}>{item.title}</Text>
                   <Text style={styles.text}>{item.date} às {item.time}</Text>
-                  <Image source={{ uri: item.image }}
-                    style={{ width: 270, height: 135 }} />
+                  <TouchableOpacity
+                    onPress={() => { this._height(this.state.height) }}
+                  >
+                    <Image source={{ uri: item.image }}
+                      style={{ width: 270, height: this.state.height }} />
+                  </TouchableOpacity>
                   <Text style={styles.text}>{item.message}</Text>
                 </View>
               );
@@ -137,15 +162,15 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '600'
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
-  }, 
+  },
   header: {
-    backgroundColor: "#8bd4da",
+    backgroundColor: "#B2EBF2",
   },
 
   headerContent: {
@@ -198,7 +223,7 @@ const styles = StyleSheet.create({
 
   },
   icon1: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 44,
     position: 'absolute',
@@ -208,12 +233,12 @@ const styles = StyleSheet.create({
 
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
     fontSize: 30
   },
   text2: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 12
   }

@@ -43,6 +43,23 @@ export default class Feed extends React.Component {
     });
   }
 
+  _height = (height) => {
+    if (height === 400){
+      this.state.height = 135
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+    else{
+      this.state.height = 400
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+  }
+
   render() {
     return (
       <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
@@ -61,8 +78,12 @@ export default class Feed extends React.Component {
                 <View style={styles.item2}>
                   <Text style={styles.text1}>{item.title}</Text>
                   <Text style={styles.text}>{item.date} às {item.time}</Text>
-                  <Image source={{ uri: item.image }}
-                    style={{ width: 270, height: 135 }} />
+                  <TouchableOpacity
+                    onPress={() => { this._height(this.state.height) }}
+                  >
+                    <Image source={{ uri: item.image }}
+                      style={{ width: 270, height: this.state.height }} />
+                  </TouchableOpacity>
                   <Text style={styles.text}>{item.message}</Text>
                 </View>
               );
@@ -92,14 +113,13 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "#00ACC18F",
+    color: "#B2EBF2",
     fontWeight: '600'
   },
   text1: {
     color: "#26C6DA",
     fontWeight: '800',
-  }, 
-  header: {
+  }, header: {
     backgroundColor: "#26C6DA",
   },
 
