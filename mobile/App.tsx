@@ -5,6 +5,8 @@ import {StackNavigator} from 'react-navigation'
 import WelcomeScreen from './screens/WelcomeScreen'
 import SignUpScreen from './screens/SignUpScreen'
 import RegisterCar from './screens/RegisterCar'
+import PrivateNotifications from './screens/PrivateNotifications'
+import PublicNotifications from './screens/PublicNotifications'
 import TabHandler from './screens/TabHandler'
 
 
@@ -33,6 +35,12 @@ const AppStackNavigator = new StackNavigator({
   },
   RegisterCar:{
     screen:RegisterCar,
+  },
+  PrivateNotifications:{
+    screen:PrivateNotifications,
+  },
+  PublicNotifications:{
+    screen:PublicNotifications,
   },
   TabHandler:{
     screen:TabHandler,

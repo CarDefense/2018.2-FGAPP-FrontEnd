@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {StackNavigator} from 'react-navigation'
 
-import PublicNotifications from './PublicNotifications'
+import Notifications from './PublicNotifications'
 
 
-export default class PublicNotificationsNavigator extends Component {
+export default class NotificationsNavigator extends Component {
 
     render() {
         return (
@@ -13,10 +13,10 @@ export default class PublicNotificationsNavigator extends Component {
     }
 }
 
-const PublicNotificationsStackNavigator = new StackNavigator({
+const NotificationsStackNavigator = new StackNavigator({
 
-    PublicNotificatios: {
-        screen: PublicNotifications,
+    Notificatios: {
+        screen: Notifications,
         navigationOptions: ({ navigation }) => ({
             header: null,
         }),

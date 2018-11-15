@@ -1,7 +1,6 @@
-
-import { TextField } from 'react-native-material-textfield';
 import { Constants, ImagePicker, Permissions } from 'expo';
-import React, { Component } from 'react';
+import { NOTIFICATIONS_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
+import React, { Component, Children } from 'react';
 import {
   ActivityIndicator,
   View,
@@ -12,24 +11,24 @@ import {
   Alert,
   Image,
   KeyboardAvoidingView,
-  Picker
+  Picker,
 } from 'react-native';
-import { NOTIFICATIONS_API } from '../const/Const'
 import { Icon } from "native-base";
+import { TextField } from 'react-native-material-textfield';
 
 
-export default class PrivateNotifications extends Component {
+const tk = 0;
+
+export default class PublicNotifications extends Component {
 
   constructor(props) {
     super(props);
 
-    this.plateRef = this.updateRef.bind(this, 'plate');
     this.messageRef = this.updateRef.bind(this, 'message');
     this.onFocus = this.onFocus.bind(this);
 
     this.state = {
       title: '',
-      plate: '',
       message: '',
       image: null,
       uploading: false,
@@ -38,6 +37,7 @@ export default class PrivateNotifications extends Component {
   updateTitle = (title) => {
     this.setState({ title: title})
     }
+    
   onFocus() {
     let { errors = {} } = this.state;
 
@@ -53,13 +53,6 @@ export default class PrivateNotifications extends Component {
   }
 
   onChangeText(words) {
-    ['plate']
-      .map((text) => ({ text, ref: this[text] }))
-      .forEach(({ text, ref }) => {
-        if (ref && ref.isFocused()) {
-          this.setState({ [text]: words });
-        }
-      });
     ['message']
       .map((text) => ({ text, ref: this[text] }))
       .forEach(({ text, ref }) => {
@@ -75,24 +68,8 @@ export default class PrivateNotifications extends Component {
 
   onPressButton = () => {
     let errors = {};
-    const url = NOTIFICATIONS_API + '/send_push_message/' //function send_push_message url
-    let errorPlate = false;
-    let errorMessage = false;
-
-    ['plate']
-      .forEach((text) => {
-        let value = this[text].value();
-
-        if (!value) {
-          errors[text] = 'Campo obrigatório.';
-          errorPlate = true;
-        } else {
-          if ('plate' === text && value.length < 8) {
-            errors[text] = 'Placa inválida. Ex.:AAA-0000';
-            errorPlate = true;
-          }
-        }
-      });
+    const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
+    let i = 0;
 
     ['message']
       .forEach((text) => {
@@ -100,20 +77,19 @@ export default class PrivateNotifications extends Component {
 
         if (!value) {
           errors[text] = 'Campo obrigatório.';
-          errorMessage = true;
+          i += 1;
         } else {
           if ('message' === text && value.length < 5) {
             errors[text] = 'Forneça mais detalhes do ocorrido.';
-            errorMessage = true;
+            i += 1;
           }
         }
       });
 
-    if (errorPlate == false && errorMessage == false) {
+    if (i == 0) {
       let notification = JSON.stringify({
-        //sender_id: tk,
+        sender_id: tk,
         title: this.state.title,
-        plate: this.state.plate,
         message: this.state.message,
         image: this.state.image
       })
@@ -130,13 +106,13 @@ export default class PrivateNotifications extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);
-        Alert.alert("Notificação enviada!")
       }
       ).catch(error => {
         console.log(error)
-        Alert.alert("Placa não existe!")
       })
+      Alert.alert("Alerta enviado!")
     }
+
     this.setState({ errors });
   }
 
@@ -147,7 +123,6 @@ export default class PrivateNotifications extends Component {
   render() {
     let { image } = this.state;
     let { errors = {}, ...data } = this.state;
-    let { plate = 'text' } = data;
     let { message = 'text' } = data;
 
     return (
@@ -158,45 +133,17 @@ export default class PrivateNotifications extends Component {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={require('../../../../../../images/notification.png')}
+                  source={require('../images/alert.png')}
                 />
-                <Text style={styles.name}>Envie aqui as notificões</Text>
+                <Text style={styles.name}>Envie aqui os alertas</Text>
               </View>
-            </View>    
-            <Picker
-             selectedValue= {this.state.title} 
-             onValueChange={this.updateTitle} 
-             style={{ color: "white" }} 
-             mode="dropdown"
-            >        
-              <Picker.Item label="Notificação" value="Notificacao"/>
-              <Picker.Item label="Vidro aberto" value="Vidro aberto" />
-              <Picker.Item label="Farol aceso" value="Farol aceso" />
-              <Picker.Item label ="Pneu furado" value="Pneu furado" />
-              <Picker.Item label ="Alarme disparado" value="Alarme disparado" />
-              <Picker.Item label ="Local estacionado" value="Local estacionado" />
-              
-
-            </Picker>
-            <TextField
-              ref={this.plateRef}
-              value={data.plate}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(plate) => this.setState({ plate })}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitPLate}
-              returnKeyType='next'
-              label='Placa'
-              tintColor="white"
-              underlineColorAndroid="transparent"
-              maxLength={8}
-              autoCapitalize="characters"
-              error={errors.plate}
-              textColor="white"
-              placeholderTextColor="white"
-            />
+            </View>
+            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle} style={{ color: "white" }} mode="dropdown">           
+              <Picker.Item label="Alerta Geral" value="Alerta Geral" />
+              <Picker.Item label="Roubo" value="Roubo" />
+              <Picker.Item label="Incêndio" value="Incendio" />
+              <Picker.Item label ="Tempestade" value="Tempestade" />
+            </Picker>           
             <TextField
               ref={this.messageRef}
               value={data.message}
@@ -214,7 +161,6 @@ export default class PrivateNotifications extends Component {
               labelPadding={10}
               placeholderTextColor="white"
             />
-            {/* <Text style={styles.text}>Adicionar imagem</Text> */}
             <View style={styles.alternativeLayoutButtonContainer}>
               <TouchableOpacity
                 color="#8bd4da"
@@ -248,7 +194,7 @@ export default class PrivateNotifications extends Component {
                 onPress={this.onPressButton}
                 containerViewStyle={{ width: '40%' }}
               >
-                <Text style={{ color: '#62969A', fontWeight: '800' }} >Enviar</Text>
+                <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -263,7 +209,7 @@ export default class PrivateNotifications extends Component {
       return (
         <View
           style={styles.maybeRenderUploading}>
-          <ActivityIndicator color="#313869" size="large" />
+          <ActivityIndicator color="#540b71" size="large" />
         </View>
       );
     }
@@ -305,7 +251,7 @@ export default class PrivateNotifications extends Component {
     alert('Copied image URL to clipboard');
   };
 
-  _takePhoto = async () => { //Done
+  _takePhoto = async () => {
     const {
       status: cameraPerm
     } = await Permissions.askAsync(Permissions.CAMERA);
@@ -422,7 +368,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingTop: 4,
-    paddingRight: 4,
+    paddingRight: 1,
     marginTop: 20
   },
   button: {
@@ -455,7 +401,8 @@ const styles = StyleSheet.create({
   container1: {
     paddingTop: 20,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 40
   },
   header: {
     marginTop: 25,
@@ -501,7 +448,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    color: "#8bd4da",
+    color: "white",
     fontWeight: '800',
   },
   headerContent: {

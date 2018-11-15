@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-import {
-    View,
-    Text,
-    StyleSheet
-} from "react-native";
 import { TabNavigator } from 'react-navigation'
 import Feed from './tab_navigator/car_defense/screens/Feed'
-import PublicNotifications from './tab_navigator/car_defense/screens/TabNavigator/PublicNotifications/PublicNotifications'
-import PrivateNotifications from './tab_navigator/car_defense/screens/TabNavigator/PrivateNotifications/PrivateNotifications'
+import Notifications from './tab_navigator/car_defense/screens/TabNavigator/Notifications/Notifications.js'
 import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
 import PrivateFeed from './tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
 import { Icon } from 'native-base';
@@ -28,27 +22,13 @@ const TabHandler = new TabNavigator({
         }
     },
 
-    PrivateNotifications: {
-        screen: PrivateNotifications,
+    Notifications: {
+        screen: Notifications,
         navigationOptions: {
             tabBarIcon: ({ focused }) => (
                 <Icon
                     type='FontAwesome'
                     name="send-o"
-                    style={{ color: '#8bd4da', fontSize: 15 }}
-
-                />
-            ),
-            header: null,
-        }
-    },
-    PublicNotifications: {
-        screen: PublicNotifications,
-        navigationOptions: {
-            tabBarIcon: ({ focused }) => (
-                <Icon
-                    type='FontAwesome'
-                    name="warning"
                     style={{ color: '#8bd4da', fontSize: 15 }}
 
                 />
