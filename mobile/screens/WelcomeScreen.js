@@ -41,6 +41,10 @@ class WelcomeScreen extends Component {
         super(props);
 
         this.onFocus = this.onFocus.bind(this);
+        //this.onSubmit = this.onSubmit.bind(this);
+        //this.onChangeText = this.onChangeText.bind(this);
+        this.onSubmitUsername = this.onSubmitUsername.bind(this);
+        this.onSubmitPassword = this.onSubmitPassword.bind(this);
         this.onAccessoryPress = this.onAccessoryPress.bind(this);
 
         this.usernameRef = this.updateRef.bind(this, 'username');
@@ -84,6 +88,14 @@ class WelcomeScreen extends Component {
 
     onAccessoryPress() {
         this.setState(({ secureTextEntry }) => ({ secureTextEntry: !secureTextEntry }));
+    }
+
+    onSubmitUsername() {
+      this.password.focus();
+    }
+
+    onSubmitPassword() {
+      this.password.blur();
     }
 
     updateRef(name, ref) {
@@ -219,6 +231,7 @@ class WelcomeScreen extends Component {
                                     enablesReturnKeyAutomatically={true}
                                     onFocus={this.onFocus}
                                     onChangeText={(username) => this.setState({ username })}
+                                    onSubmitEditing={this.onSubmitUsername}
                                     returnKeyType='next'
                                     label='Nome de usuário'
                                     tintColor="white"
@@ -237,17 +250,16 @@ class WelcomeScreen extends Component {
                                     clearTextOnFocus={true}
                                     onFocus={this.onFocus}
                                     onChangeText={(password) => this.setState({ password })}
+                                    onSubmitPassword={this.onSubmitPassword}
                                     returnKeyType='done'
                                     label='Senha'
                                     tintColor="white"
-
                                     underlineColorAndroid="transparent"
                                     error={errors.password}
                                     maxLength={20}
                                     characterRestriction={15}
                                     renderAccessory={this.renderPasswordAccessory}
                                     textColor='white'
-
                                 />
                                 <View style={styles.containerButton}>
                                     <TouchableOpacity
