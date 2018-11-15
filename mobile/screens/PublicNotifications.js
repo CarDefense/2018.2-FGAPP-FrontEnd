@@ -135,7 +135,6 @@ export default class PublicNotifications extends Component {
                 <Image style={styles.avatar}
                   source={require('../images/alert.png')}
                 />
-                <Text style={styles.name}>Envie aqui os alertas</Text>
               </View>
             </View>
             <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle} style={{ color: "white" }} mode="dropdown">           
@@ -439,8 +438,8 @@ const styles = StyleSheet.create({
     width: 250,
   },
   avatar: {
-    width: 170,
-    height: 170,
+    width: 100,
+    height: 100,
     borderRadius: 63,
     borderWidth: 7,
     borderColor: "white",
