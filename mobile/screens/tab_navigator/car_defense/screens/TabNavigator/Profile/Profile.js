@@ -90,7 +90,7 @@ export default class UserProfileView extends Component {
 
 
         return (
-            <View style={{ backgroundColor: "#8bd4da", flex: 1 }}>
+            <View style={{ backgroundColor: "#26C6DA", flex: 1 }}>
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -111,9 +111,9 @@ export default class UserProfileView extends Component {
                         </View>
                     </View>
 
-                    <View style={{ backgroundColor: '#8bd4da' }}>
+                    <View style={{ backgroundColor: '#26C6DA' }}>
                         <FlatList
-                            style={{ backgroundColor: '#8bd4da' }}
+                            style={{ backgroundColor: '#26C6DA' }}
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                                 return (
@@ -133,7 +133,7 @@ export default class UserProfileView extends Component {
                                             <Icon
                                                 type='FontAwesome'
                                                 name="trash"
-                                                style={{ color: "red" }}
+                                                style={{ color: "red", fontSize: 15 }}
                                             />
                                         </TouchableOpacity>
                                     </View>
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
     button: {
-        backgroundColor: "#A3F8FF",
+        backgroundColor: "#B2EBF2",
         borderRadius: 20,
         height: 40,
         width: 40,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        backgroundColor: "#8bd4da",
+        backgroundColor: "#26C6DA",
     },
 
     headerContent: {
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
 
     },
     icon1: {
-        color: "#8bd4da",
+        color: "#26C6DA",
         fontWeight: '800',
         fontSize: 44,
         position: 'absolute',
@@ -239,12 +239,12 @@ const styles = StyleSheet.create({
 
     },
     text1: {
-        color: "#8bd4da",
+        color: "#26C6DA",
         fontWeight: '800',
         fontSize: 30
     },
     text2: {
-        color: "#8bd4da",
+        color: "#B2EBF2",
         fontWeight: '800',
         fontSize: 12
     }

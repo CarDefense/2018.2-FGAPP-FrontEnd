@@ -15,7 +15,7 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="home"
-                    style={{ color: '#8bd4da', fontSize: 16 }}
+                    style={{ color: '#26C6DA', fontSize: 20 }}
                 />
             ),
             header: null,
@@ -29,7 +29,7 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="send-o"
-                    style={{ color: '#8bd4da', fontSize: 15 }}
+                    style={{ color: '#26C6DA', fontSize: 20 }}
 
                 />
             ),
@@ -43,7 +43,7 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="bell-o"
-                    style={{ color: '#8bd4da', fontSize: 15 }}
+                    style={{ color: '#26C6DA', fontSize: 20 }}
                 />
             ),
             header: null,
@@ -56,7 +56,7 @@ const TabHandler = new TabNavigator({
                 <Icon
                     type='FontAwesome'
                     name="user"
-                    style={{ color: '#8bd4da', fontSize: 15 }}
+                    style={{ color: '#26C6DA', fontSize: 20 }}
                 />
             ),
             header: null,
@@ -68,9 +68,8 @@ const TabHandler = new TabNavigator({
         tabBarOptions: {
             showLabel: false,
             showIcon: true,
-            swipeEnabled: true,
-            activeTintColor: '#318E95',
-            inactiveTintColor: '#8bd4da',
+            swipeEnabled: false,
+            activeTintColor: 'black',
 
             labelStyle: {
                 fontSize: 5,
@@ -79,7 +78,7 @@ const TabHandler = new TabNavigator({
                 height: 65,
             },
             style: {
-                backgroundColor: 'white',
+                backgroundColor: '#E0F7FA',
 
             },
             animationEnabled: true,

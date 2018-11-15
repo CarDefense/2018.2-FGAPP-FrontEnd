@@ -151,7 +151,7 @@ export default class PrivateNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -161,12 +161,13 @@ export default class PrivateNotifications extends Component {
                   source={require('../images/notification.png')}
                 />
               </View>
-            </View>    
+            </View> 
+            <View style={styles.border}>  
             <Picker
              selectedValue= {this.state.title} 
-             onValueChange={this.updateTitle} 
-             style={{ color: "white" }} 
+             onValueChange={this.updateTitle}  
              mode="dropdown"
+             style={{ color: "#26C6DA", backgroundColor: 'white' }}
             >        
               <Picker.Item label="Notificação" value="Notificacao"/>
               <Picker.Item label="Vidro aberto" value="Vidro aberto" />
@@ -195,6 +196,8 @@ export default class PrivateNotifications extends Component {
               error={errors.plate}
               textColor="white"
               placeholderTextColor="white"
+              inputContainerStyle = {{ marginHorizontal: 20 }}
+              labelPadding={50}
             />
             <TextField
               ref={this.messageRef}
@@ -210,13 +213,13 @@ export default class PrivateNotifications extends Component {
               tintColor="white"
               error={errors.message}
               textColor="white"
-              labelPadding={10}
               placeholderTextColor="white"
+              inputContainerStyle = {{ marginHorizontal: 20 }}
             />
             {/* <Text style={styles.text}>Adicionar imagem</Text> */}
             <View style={styles.alternativeLayoutButtonContainer}>
               <TouchableOpacity
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this._takePhoto}
                 containerViewStyle={{ width: '10%' }}
               >
@@ -227,7 +230,7 @@ export default class PrivateNotifications extends Component {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this._pickImage}
                 containerViewStyle={{ width: '10%' }}
               >
@@ -243,12 +246,13 @@ export default class PrivateNotifications extends Component {
             <View style={styles.container1}>
               <TouchableOpacity
                 style={styles.button3}
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this.onPressButton}
                 containerViewStyle={{ width: '40%' }}
               >
                 <Text style={{ color: '#62969A', fontWeight: '800' }} >Enviar</Text>
               </TouchableOpacity>
+              </View> 
             </View>
           </View>
         </ScrollView>
@@ -409,12 +413,12 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: '#8bd4da',
+    backgroundColor: '#26C6DA',
     flex: 1
   },
   text: {
     paddingTop: 16,
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: 'bold',
   },
   alternativeLayoutButtonContainer: {
@@ -454,7 +458,8 @@ const styles = StyleSheet.create({
   container1: {
     paddingTop: 20,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    bottom: 12
   },
   header: {
     marginTop: 25,
@@ -500,16 +505,23 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
   },
   headerContent: {
     padding: 30,
     alignItems: 'center',
+    backgroundColor: '#26C6DA'
   },
   input: {
     marginBottom: 5,
     paddingLeft: 10,
     paddingRight: 10
+  },
+  border: {
+    borderWidth: 5,
+    borderRadius: 15,
+    borderColor: "white",
+    backgroundColor: '#B2EBF2'
   }
 });

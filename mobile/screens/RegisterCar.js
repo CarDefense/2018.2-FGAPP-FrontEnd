@@ -194,7 +194,7 @@ export default class RegisterCar extends Component {
 
 
     return (
-<View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+<View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -206,6 +206,7 @@ export default class RegisterCar extends Component {
                 <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
               </View>
             </View>
+            <View style={styles.border}>
             <TextField
               ref={this.plateRef}
               value={data.plate}
@@ -223,6 +224,8 @@ export default class RegisterCar extends Component {
               autoCapitalize="characters"
               error={errors.plate}
               textColor="white"
+              labelPadding={5}
+              inputContainerStyle = {{ marginHorizontal: 20 }}
             />
             <TextField
               ref={this.modelRef}
@@ -237,6 +240,8 @@ export default class RegisterCar extends Component {
               label='Modelo'
               tintColor="white"
               textColor="white"
+              labelPadding={5}
+              inputContainerStyle = {{ marginHorizontal: 20 }}
             />
             <TextField
               ref={this.colorRef}
@@ -251,11 +256,12 @@ export default class RegisterCar extends Component {
               label='Cor'
               tintColor="white"
               textColor="white"
-
+              labelPadding={5}
+              inputContainerStyle = {{ marginHorizontal: 20 }}
             />
             <View style={styles.container1}>
               <TouchableOpacity
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this._takePhoto}
                 containerViewStyle={{ width: '10%' }}
               >
@@ -276,11 +282,12 @@ export default class RegisterCar extends Component {
                 onPress={this.onPressButton}
                 containerViewStyle={{ width: '40%' }}
               >
-                <Text style={{ color: '#8bd4da', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                <Text style={{ color: '#B2EBF2', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
               </TouchableOpacity>
               {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
 
             </View>
+          </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -438,13 +445,14 @@ async function uploadImageAsync(uri) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#8bd4da',
+    backgroundColor: '#26C6DA',
     flex: 1
   },
   container1: {
     marginTop: 13,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    bottom: 10
   },
   header2: {
     color: '#760f9f',
@@ -503,7 +511,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   header: {
-    backgroundColor: "#8bd4da",
+    backgroundColor: "#26C6DA",
   },
   userInfo: {
     fontSize: 15,
@@ -512,5 +520,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
+  border: {
+    borderWidth: 5,
+    borderRadius: 15,
+    borderColor: "white",
+    backgroundColor: '#B2EBF2'
+  }
 });
 

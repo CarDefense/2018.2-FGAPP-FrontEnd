@@ -6,6 +6,7 @@ import {
     ScrollView,
     TouchableOpacity,
     Image,
+    ImageBackground,
 } from 'react-native';
 
 
@@ -26,30 +27,32 @@ export default class Notifications extends Component {
 
     render() {
         return (
+        <View
+        style={{ backgroundColor: '#26C6DA', flex: 1 }}
+        >
             <ScrollView>
-                <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
-                    <View style={styles.container}>
-                        <TouchableOpacity
-                            onPress={() => this.PrivateNotifications()}
-                        >
-                            <Image style={styles.avatar}
-                                source={require('../../../../../../images/notification.png')}
-                            />
-                            <Text style={styles.name}>Envie aqui as notificões</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.container1}>
-                        <TouchableOpacity
-                            onPress={() => this.PublicNotifications()}
-                        >
-                            <Image style={styles.avatar}
-                                source={require('../../../../../../images/alert.png')}
-                            />
-                            <Text style={styles.name}>Envie aqui os alertas</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.container}>
+                    <TouchableOpacity
+                        onPress={() => this.PrivateNotifications()}
+                    >
+                        <Image style={styles.avatar}
+                            source={require('../../../../../../images/notification.png')}
+                        />
+                        <Text style={styles.name}>Envie aqui as notificões</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.container1}>
+                    <TouchableOpacity
+                        onPress={() => this.PublicNotifications()}
+                    >
+                        <Image style={styles.avatar}
+                            source={require('../../../../../../images/alert.png')}
+                        />
+                        <Text style={styles.name}>Envie aqui os alertas</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
+            </View>
         );
     }
 }

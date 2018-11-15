@@ -243,7 +243,7 @@ class WelcomeScreen extends Component {
                                         onPress={() => this._onPressButton()}
                                         containerViewStyle={{ width: '40%' }}
                                     >
-                                        <Text style={{ color: 'white', fontSize: 15, fontWeight: '300' }} >Entrar</Text>
+                                        <Text style={{ color: 'white', fontSize: 18, fontWeight: '800' }} >Entrar</Text>
 
                                     </TouchableOpacity>
                                     <FlatList
@@ -269,7 +269,7 @@ class WelcomeScreen extends Component {
                                     onPress={() => this.props.navigation.navigate('SignUpScreen')}
                                     containerViewStyle={{ width: '40%' }}
                                 >
-                                    <Text style={{ color: "#8bd4da" }} >Criar conta</Text>
+                                    <Text style={{ color: "#B2EBF2" }} >Criar conta</Text>
 
                                 </TouchableOpacity>
                             </View>
@@ -284,7 +284,7 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#93DFE5",
+        backgroundColor: "#26C6DA",
         borderRadius: 15,
         height: 40,
         width: 325,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     container1: {
-        marginTop: 130,
+        marginTop: 90,
     },
     button1: {
         backgroundColor: "rgba(0, 0, 0, 0)",
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     image: {
-        height: 100,
-        width: 100,
+        height: 170,
+        width: 170,
     }
 });

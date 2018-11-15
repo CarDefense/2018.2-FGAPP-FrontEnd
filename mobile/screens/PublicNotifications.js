@@ -126,7 +126,7 @@ export default class PublicNotifications extends Component {
     let { message = 'text' } = data;
 
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
       <KeyboardAvoidingView behavior="position">
         <ScrollView>
           <View style={styles.container}>
@@ -137,7 +137,8 @@ export default class PublicNotifications extends Component {
                 />
               </View>
             </View>
-            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle} style={{ color: "white" }} mode="dropdown">           
+            <View style={styles.border}>
+            <Picker selectedValue= {this.state.title} onValueChange={this.updateTitle} style={{ color: "#26C6DA", backgroundColor: 'white' }} mode="dropdown">           
               <Picker.Item label="Alerta Geral" value="Alerta Geral" />
               <Picker.Item label="Roubo" value="Roubo" />
               <Picker.Item label="Incêndio" value="Incendio" />
@@ -157,30 +158,31 @@ export default class PublicNotifications extends Component {
               tintColor="white"
               error={errors.message}
               textColor="white"
-              labelPadding={10}
+              labelPadding={5}
               placeholderTextColor="white"
+              inputContainerStyle = {{ marginHorizontal: 20 }}
             />
             <View style={styles.alternativeLayoutButtonContainer}>
               <TouchableOpacity
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this._takePhoto}
                 containerViewStyle={{ width: '10%' }}
               >
                 <Icon
                   type='FontAwesome'
                   name="camera"
-                  style={{ color: "white" }}
+                  style={{ color: "#26C6DA" }}
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                color="#8bd4da"
+                color="#B2EBF2"
                 onPress={this._pickImage}
                 containerViewStyle={{ width: '10%' }}
               >
                 <Icon
                   type='FontAwesome'
                   name="image"
-                  style={{ color: "white" }}
+                  style={{ color: "#26C6DA" }}
                 />
               </TouchableOpacity>
             </View>
@@ -189,12 +191,13 @@ export default class PublicNotifications extends Component {
             <View style={styles.container1}>
               <TouchableOpacity
                 style={styles.button3}
-                color="#8bd4da"
+                backgroundColor="#26C6DA"
                 onPress={this.onPressButton}
-                containerViewStyle={{ width: '40%' }}
+                containerViewStyle={{ width: '30%' }}
               >
-                <Text style={{ color: '#8bd4da', fontWeight: '800' }} >Enviar</Text>
+                <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
               </TouchableOpacity>
+            </View>
             </View>
           </View>
         </ScrollView>
@@ -355,12 +358,12 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: '#8bd4da',
+    backgroundColor: '#26C6DA',
     flex: 1
   },
   text: {
     paddingTop: 16,
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: 'bold',
   },
   alternativeLayoutButtonContainer: {
@@ -458,5 +461,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 10,
     paddingRight: 10
+  },
+  border: {
+    borderWidth: 5,
+    borderRadius: 15,
+    borderColor: "white",
+    backgroundColor: '#B2EBF2'
   }
 });

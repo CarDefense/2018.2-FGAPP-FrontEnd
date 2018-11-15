@@ -45,7 +45,7 @@ export default class Feed extends React.Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
+      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
         <ScrollView style={styles.item}
           refreshControl={
             <RefreshControl
@@ -92,14 +92,15 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "#8bd4da",
+    color: "#00ACC18F",
     fontWeight: '600'
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
-  }, header: {
-    backgroundColor: "#8bd4da",
+  }, 
+  header: {
+    backgroundColor: "#26C6DA",
   },
 
   headerContent: {
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
 
   },
   icon1: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 44,
     position: 'absolute',
@@ -162,12 +163,12 @@ const styles = StyleSheet.create({
 
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
     fontSize: 30
   },
   text2: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 12
   }
