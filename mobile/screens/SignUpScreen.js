@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Constants, ImagePicker, Permissions } from 'expo';
 import {
+  ActivityIndicator,
   TouchableOpacity,
   View,
   Text,
@@ -11,6 +13,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
+import { Icon } from "native-base";
 import { TextField } from 'react-native-material-textfield';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
@@ -33,7 +36,8 @@ export default class SignUpScreen extends Component {
       userName: '',
       password: '',
       secureTextEntry: true,
-      username_field_alerts: ['']
+      username_field_alerts: [''],
+      uploading: false,
     };
 
   }
@@ -194,7 +198,7 @@ export default class SignUpScreen extends Component {
 
                 />
               </View>
-              <View>
+              <View style={styles.container2}>
                 <TextField
                   ref={this.emailRef}
                   value={data.email}
@@ -206,7 +210,7 @@ export default class SignUpScreen extends Component {
                   onChangeText={(email) => this.setState({ email })}
                   returnKeyType='next'
                   label='Endereço de email'
-                  tintColor="#760f9f"
+                  tintColor="white"
                   underlineColorAndroid="transparent"
                   error={errors.email}
                 />
@@ -219,7 +223,7 @@ export default class SignUpScreen extends Component {
                   onChangeText={(username) => this.setState({ username })}
                   returnKeyType='next'
                   label='Nome de usuário'
-                  tintColor="#760f9f"
+                  tintColor="white"
                   underlineColorAndroid="transparent"
                   error={errors.username}
                 />
@@ -235,13 +239,28 @@ export default class SignUpScreen extends Component {
                   onChangeText={(password) => this.setState({ password })}
                   returnKeyType='done'
                   label='Senha'
-                  tintColor="#760f9f"
+                  tintColor="white"
                   underlineColorAndroid="transparent"
                   error={errors.password}
                   maxLength={20}
                   characterRestriction={15}
                   renderAccessory={this.renderPasswordAccessory}
                 />
+                <View style={styles.container1}>
+                  <TouchableOpacity
+                    color="#B2EBF2"
+                    onPress={this._takePhoto}
+                    containerViewStyle={{ width: '10%' }}
+                  >
+                    <Icon
+                      type='FontAwesome'
+                      name="camera"
+                      style={{ color: "white" }}
+                    />
+                  </TouchableOpacity>
+                </View>
+                {this._maybeRenderImage()}
+                {this._maybeRenderUploadingOverlay()}
                 <View style={styles.containerButton}>
                   <TouchableOpacity
                     style={styles.button}
@@ -263,19 +282,167 @@ export default class SignUpScreen extends Component {
       </ImageBackground>
     );
   }
+
+  _maybeRenderUploadingOverlay = () => { //done
+    if (this.state.uploading) {
+      return (
+        <View
+          style={styles.maybeRenderUploading}>
+          <ActivityIndicator color="#313869" size="large" />
+        </View>
+      );
+    }
+  };
+
+  _maybeRenderImage = () => { //done
+    let {
+      image
+    } = this.state;
+
+    if (!image) {
+      return;
+    }
+
+    // onPress={this._copyToClipboard}
+    // onLongPress={this._share}
+
+    return (
+      <View
+        style={styles.maybeRenderContainer}>
+        <View
+          style={styles.maybeRenderImageContainer}>
+          <Image source={{ uri: image }} style={styles.maybeRenderImage} />
+        </View>
+      </View>
+    );
+  };
+
+  _share = () => {
+    Share.share({
+      message: this.state.image,
+      title: 'Check out this photo',
+      url: this.state.image,
+    });
+  };
+
+  _copyToClipboard = () => {
+    Clipboard.setString(this.state.image);
+    alert('Copied image URL to clipboard');
+  };
+
+  _takePhoto = async () => { //Done
+    const {
+      status: cameraPerm
+    } = await Permissions.askAsync(Permissions.CAMERA);
+
+    const {
+      status: cameraRollPerm
+    } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    // only if user allows permission to camera AND camera roll
+    if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
+      let pickerResult = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+      });
+
+      this._handleImagePicked(pickerResult);
+    }
+  };
+
+  _pickImage = async () => {
+    const {
+      status: cameraRollPerm
+    } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    // only if user allows permission to camera roll
+    if (cameraRollPerm === 'granted') {
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+
+      });
+
+      this._handleImagePicked(pickerResult);
+    }
+  };
+
+  _handleImagePicked = async pickerResult => {
+    let uploadResponse, uploadResult;
+
+    try {
+      this.setState({
+        uploading: true
+      });
+
+      if (!pickerResult.cancelled) {
+        uploadResponse = await uploadImageAsync(pickerResult.uri);
+        uploadResult = await uploadResponse.json();
+
+        console.log(uploadResult.image)
+
+        this.setState({
+          image: uploadResult.image
+        });
+      }
+    } catch (e) {
+      console.log({ uploadResponse });
+      console.log({ uploadResult });
+      console.log({ e });
+      alert('Upload failed, sorry :(');
+    } finally {
+      this.setState({
+        uploading: false
+      });
+    }
+  };
+}
+
+async function uploadImageAsync(uri) {
+  let apiUrl = PROFILE_API + '/documents/';
+
+  let uriParts = uri.split('.');
+  let fileType = uriParts[uriParts.length - 1];
+
+  let formData = new FormData();
+  formData.append('image', {
+    uri,
+    name: `photo.${fileType}`,
+    type: `image/${fileType}`,
+  });
+
+  console.log(uri)
+
+  let options = {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  return fetch(apiUrl, options);
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#540b71",
+    backgroundColor: "#26C6DA",
     borderRadius: 15,
     height: 40,
-    width: 320,
+    width: 325,
     justifyContent: 'center',
     alignItems: 'center'
   },
   container: {
     margin: 16,
+  },
+  container1: {
+    marginTop: 13,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    bottom: 10
+  },
+  container2:{
+    marginTop: 70,
+    marginBottom: 10
   },
   containerButton: {
     alignItems: 'center'
@@ -293,5 +460,27 @@ const styles = StyleSheet.create({
   image: {
     height: 100,
     width: 100,
-  }
+  },
+  maybeRenderUploading: {
+    paddingTop: 8,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.0)',
+    justifyContent: 'center',
+  },
+  maybeRenderContainer: {
+    width: '100%',
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    elevation: 2,
+    marginTop: 32,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
+    shadowRadius: 5
+  },
 });

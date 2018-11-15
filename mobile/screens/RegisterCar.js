@@ -30,7 +30,8 @@ export default class RegisterCar extends Component {
       plate: '',
       model: '',
       color: '',
-      refreshing: false
+      refreshing: false,
+      uploading: false,
     };
   }
 
@@ -194,106 +195,107 @@ export default class RegisterCar extends Component {
 
 
     return (
-<View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
-      <KeyboardAvoidingView behavior="position">
-        <ScrollView>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <Image style={styles.avatar}
-                source={require('../images/s.png')}
+      <View style={{ backgroundColor: '#26C6DA', flex: 1 }}>
+        <KeyboardAvoidingView behavior="position">
+          <ScrollView>
+            <View style={styles.container}>
+              <View style={styles.header}>
+                <View style={styles.headerContent}>
+                  <Image style={styles.avatar}
+                    source={require('../images/s.png')}
+                  />
+                  <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
+                </View>
+              </View>
+              <View style={styles.border}>
+                <TextField
+                  ref={this.plateRef}
+                  value={data.plate}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(plate) => this.setState({ plate })}
+                  // onChangeText={this.onChangeText}
+                  // onSubmitEditing={this.onSubmitPLate}
+                  returnKeyType='next'
+                  label='Placa'
+                  tintColor="white"
+                  underlineColorAndroid="transparent"
+                  maxLength={8}
+                  autoCapitalize="characters"
+                  error={errors.plate}
+                  textColor="white"
+                  labelPadding={5}
+                  inputContainerStyle={{ marginHorizontal: 20 }}
                 />
-                <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
+                <TextField
+                  ref={this.modelRef}
+                  value={data.model}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(model) => this.setState({ model })}
+                  // onChangeText={this.onChangeText}
+                  // onSubmitEditing={this.onSubmitModel}
+                  returnKeyType='next'
+                  label='Modelo'
+                  tintColor="white"
+                  textColor="white"
+                  labelPadding={5}
+                  inputContainerStyle={{ marginHorizontal: 20 }}
+                />
+                <TextField
+                  ref={this.colorRef}
+                  value={data.color}
+                  autoCorrect={false}
+                  enablesReturnKeyAutomatically={true}
+                  onFocus={this.onFocus}
+                  onChangeText={(color) => this.setState({ color })}
+                  // onChangeText={this.onChangeText}
+                  // onSubmitEditing={this.onSubmitMessage}
+                  returnKeyType='next'
+                  label='Cor'
+                  tintColor="white"
+                  textColor="white"
+                  labelPadding={5}
+                  inputContainerStyle={{ marginHorizontal: 20 }}
+                />
+                <View style={styles.container1}>
+                  <TouchableOpacity
+                    color="#B2EBF2"
+                    onPress={this._takePhoto}
+                    containerViewStyle={{ width: '10%' }}
+                  >
+                    <Icon
+                      type='FontAwesome'
+                      name="camera"
+                      style={{ color: "white" }}
+                    />
+                  </TouchableOpacity>
+
+                </View>
+                {this._maybeRenderImage()}
+                {this._maybeRenderUploadingOverlay()}
+                <View style={styles.container1}>
+                  <TouchableOpacity
+                    style={styles.button}
+                    color="white"
+                    onPress={this.onPressButton}
+                    containerViewStyle={{ width: '40%' }}
+                  >
+                    <Text style={{ color: '#B2EBF2', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                  </TouchableOpacity>
+                  {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
+
+                </View>
               </View>
             </View>
-            <View style={styles.border}>
-            <TextField
-              ref={this.plateRef}
-              value={data.plate}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(plate) => this.setState({ plate })}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitPLate}
-              returnKeyType='next'
-              label='Placa'
-              tintColor="white"
-              underlineColorAndroid="transparent"
-              maxLength={8}
-              autoCapitalize="characters"
-              error={errors.plate}
-              textColor="white"
-              labelPadding={5}
-              inputContainerStyle = {{ marginHorizontal: 20 }}
-            />
-            <TextField
-              ref={this.modelRef}
-              value={data.model}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(model) => this.setState({ model })}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitModel}
-              returnKeyType='next'
-              label='Modelo'
-              tintColor="white"
-              textColor="white"
-              labelPadding={5}
-              inputContainerStyle = {{ marginHorizontal: 20 }}
-            />
-            <TextField
-              ref={this.colorRef}
-              value={data.color}
-              autoCorrect={false}
-              enablesReturnKeyAutomatically={true}
-              onFocus={this.onFocus}
-              onChangeText={(color) => this.setState({ color })}
-              // onChangeText={this.onChangeText}
-              // onSubmitEditing={this.onSubmitMessage}
-              returnKeyType='next'
-              label='Cor'
-              tintColor="white"
-              textColor="white"
-              labelPadding={5}
-              inputContainerStyle = {{ marginHorizontal: 20 }}
-            />
-            <View style={styles.container1}>
-              <TouchableOpacity
-                color="#B2EBF2"
-                onPress={this._takePhoto}
-                containerViewStyle={{ width: '10%' }}
-              >
-                <Icon
-                  type='FontAwesome'
-                  name="camera"
-                  style={{ color: "white" }}
-                />
-              </TouchableOpacity>
-
-            </View>
-            {this._maybeRenderImage()}
-            {this._maybeRenderUploadingOverlay()}
-            <View style={styles.container1}>
-              <TouchableOpacity
-                style={styles.button}
-                color="white"
-                onPress={this.onPressButton}
-                containerViewStyle={{ width: '40%' }}
-              >
-                <Text style={{ color: '#B2EBF2', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
-              </TouchableOpacity>
-              {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
-
-            </View>
-          </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
+
   _maybeRenderUploadingOverlay = () => { //done
     if (this.state.uploading) {
       return (
@@ -313,9 +315,6 @@ export default class RegisterCar extends Component {
     if (!image) {
       return;
     }
-
-    // onPress={this._copyToClipboard}
-    // onLongPress={this._share}
 
     return (
       <View
@@ -410,15 +409,6 @@ export default class RegisterCar extends Component {
 async function uploadImageAsync(uri) {
   let apiUrl = CAR_API + '/documents/';
 
-  // Note:
-  // Uncomment this if you want to experiment with local server
-  //
-  // if (Constants.isDevice) {
-  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-  // } else {
-  //   apiUrl = `http://localhost:3000/upload`
-  // }
-
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];
 
@@ -512,6 +502,28 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#26C6DA",
+  },
+  maybeRenderUploading: {
+    paddingTop: 8,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.0)',
+    justifyContent: 'center',
+  },
+  maybeRenderContainer: {
+    width: '100%',
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    elevation: 2,
+    marginTop: 32,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
+    shadowRadius: 5
   },
   userInfo: {
     fontSize: 15,

@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     container1: {
-        marginTop: 90,
+        marginTop: 70,
     },
     button1: {
         backgroundColor: "rgba(0, 0, 0, 0)",
