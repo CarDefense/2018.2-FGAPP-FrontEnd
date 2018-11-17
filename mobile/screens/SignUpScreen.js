@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
+import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { TextField } from 'react-native-material-textfield';
 import { Constants, ImagePicker, Permissions } from 'expo';
+import React, { Component } from 'react';
+import { Icon } from "native-base";
 import {
   ActivityIndicator,
   TouchableOpacity,
@@ -13,18 +17,12 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-import { Icon } from "native-base";
-import { TextField } from 'react-native-material-textfield';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
-
 
 async function _Alert(){
   Alert.alert('Para se cadastrar é necessário de um documento com foto.')
 }
 
 export default class SignUpScreen extends Component {
-
   componentWillMount() {
     _Alert();
   }
@@ -33,11 +31,17 @@ export default class SignUpScreen extends Component {
     super(props);
 
     this.onFocus = this.onFocus.bind(this);
+    //this.onSubmit = this.onSubmit.bind(this);
+    //this.onChangeText = this.onChangeText.bind(this);
+    this.onSubmitEmail = this.onSubmitEmail.bind(this);
+    this.onSubmitUsername = this.onSubmitUsername.bind(this);
+    this.onSubmitPassword = this.onSubmitPassword.bind(this);
     this.onAccessoryPress = this.onAccessoryPress.bind(this);
 
     this.emailRef = this.updateRef.bind(this, 'email');
     this.usernameRef = this.updateRef.bind(this, 'username');
     this.passwordRef = this.updateRef.bind(this, 'password');
+
     this.renderPasswordAccessory = this.renderPasswordAccessory.bind(this);
 
     this.state = {
@@ -77,6 +81,18 @@ export default class SignUpScreen extends Component {
 
   onAccessoryPress() {
     this.setState(({ secureTextEntry }) => ({ secureTextEntry: !secureTextEntry }));
+  }
+
+  onSubmitEmail() {
+    this.username.focus();
+  }
+
+  onSubmitUsername() {
+    this.password.focus();
+  }
+
+  onSubmitPassword() {
+    this.password.blur();
   }
 
   updateRef(name, ref) {
@@ -217,6 +233,7 @@ export default class SignUpScreen extends Component {
                   enablesReturnKeyAutomatically={true}
                   onFocus={this.onFocus}
                   onChangeText={(email) => this.setState({ email })}
+                  onSubmitEditing={this.onSubmitEmail}
                   returnKeyType='next'
                   label='Endereço de email'
                   tintColor="white"
@@ -230,6 +247,7 @@ export default class SignUpScreen extends Component {
                   enablesReturnKeyAutomatically={true}
                   onFocus={this.onFocus}
                   onChangeText={(username) => this.setState({ username })}
+                  onSubmitEditing={this.onSubmitUsername}
                   returnKeyType='next'
                   label='Nome de usuário'
                   tintColor="white"
@@ -246,6 +264,7 @@ export default class SignUpScreen extends Component {
                   clearTextOnFocus={true}
                   onFocus={this.onFocus}
                   onChangeText={(password) => this.setState({ password })}
+                  onSubmitEditing={this.onSubmitUsername}
                   returnKeyType='done'
                   label='Senha'
                   tintColor="white"
