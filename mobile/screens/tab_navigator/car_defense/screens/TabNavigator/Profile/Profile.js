@@ -19,14 +19,19 @@ export default class UserProfileView extends Component {
         super(props);
 
         this.state = {
-            refreshing: false
+            refreshing: false,
+            id: '',
+            user: '',
+            source: null
         };
     }
 
     async componentDidMount() {
         const { state } = this.props.navigation;
-        var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-        let link = CAR_API + '/car/?token=' + id
+        this.state.id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+        this.state.user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
+        this.state.source = state.params.user.picture ? { uri: state.params.user.picture.data.url } : require('../../../../../../images/hehehehhehehehheeh.png');
+        let link = CAR_API + '/car/?token=' + this.state.id
 
         return fetch(link)
             .then((response) => response.json())
@@ -46,13 +51,10 @@ export default class UserProfileView extends Component {
     }
 
     _onPressButton = (plate) => {
-        const { state } = this.props.navigation;
-        var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
         url = CAR_API + '/delete_car/'
 
-
         let car = JSON.stringify({
-            id_token: id,
+            id_token: this.state.id,
             plate: plate
         })
 
@@ -85,10 +87,6 @@ export default class UserProfileView extends Component {
     }
 
     render() {
-        const { state } = this.props.navigation;
-        var user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
-        var source = state.params.user.picture ? { uri: state.params.user.picture.data.url } : require('../../../../../../images/hehehehhehehehheeh.png');
-
 
         return (
             <View style={{ backgroundColor: "#00ACC1", flex: 1 }}>
@@ -103,11 +101,9 @@ export default class UserProfileView extends Component {
                 >
                     <View style={styles.headerContent}>
                         <Image style={styles.avatar}
-                            source={source}/>
-
-                        <Text style={styles.name}>Olá, {user}! Tudo bem?</Text>
-                        {/* <Text style={styles.userInfo}>jhonnydoe@mail.com </Text> */}
-                        {/* <Text style={styles.userInfo}>Florida </Text> */}
+                            source={this.state.source}
+                        />
+                        <Text style={styles.name}>Olá, {this.state.user}! Tudo bem?</Text>
                         <Text style={styles.userInfo}>Aqui estão os seus carros</Text>
                     </View>
 
