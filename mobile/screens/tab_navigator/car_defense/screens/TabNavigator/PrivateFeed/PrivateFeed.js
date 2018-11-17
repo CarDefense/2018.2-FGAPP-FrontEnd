@@ -1,7 +1,14 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
+import { FlatList,
+  Text, 
+  View, 
+  StyleSheet, 
+  ScrollView, 
+  RefreshControl, 
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import { NOTIFICATIONS_API } from '../const/Const'
-
 
 
 export default class Feed extends React.Component {
@@ -10,6 +17,7 @@ export default class Feed extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
+      height: 135
     };
   }
 

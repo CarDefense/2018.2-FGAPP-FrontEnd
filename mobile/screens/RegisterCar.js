@@ -38,6 +38,7 @@ export default class RegisterCar extends Component {
       plate: '',
       model: '',
       color: '',
+      document: '',
       refreshing: false,
       uploading: false,
     };
@@ -162,7 +163,8 @@ export default class RegisterCar extends Component {
         id_token: id,
         plate: this.state.plate,
         model: this.state.model,
-        color: this.state.color
+        color: this.state.color,
+        document: this.state.document
       })
 
       console.log(car)

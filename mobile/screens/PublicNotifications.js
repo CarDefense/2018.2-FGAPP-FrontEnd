@@ -17,8 +17,6 @@ import { Icon } from "native-base";
 import { TextField } from 'react-native-material-textfield';
 
 
-const tk = 0;
-
 export default class PublicNotifications extends Component {
 
   constructor(props) {
@@ -28,7 +26,7 @@ export default class PublicNotifications extends Component {
     this.onFocus = this.onFocus.bind(this);
 
     this.state = {
-      title: '',
+      title: 'Alerta Geral',
       message: '',
       image: null,
       uploading: false,
@@ -69,7 +67,9 @@ export default class PublicNotifications extends Component {
   onPressButton = () => {
     let errors = {};
     const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
-    let i = 0;
+    let i = true;
+    const { state } = this.props.navigation;
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
 
     ['message']
       .forEach((text) => {
@@ -86,9 +86,9 @@ export default class PublicNotifications extends Component {
         }
       });
 
-    if (i == 0) {
+    if (i) {
       let notification = JSON.stringify({
-        sender_id: tk,
+        sender_id: id,
         title: this.state.title,
         message: this.state.message,
         image: this.state.image

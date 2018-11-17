@@ -28,7 +28,7 @@ export default class PrivateNotifications extends Component {
     this.onFocus = this.onFocus.bind(this);
 
     this.state = {
-      title: '',
+      title: 'Notificação',
       plate: '',
       message: '',
       image: null,
@@ -78,6 +78,8 @@ export default class PrivateNotifications extends Component {
     const url = NOTIFICATIONS_API + '/send_push_message/' //function send_push_message url
     let errorPlate = false;
     let errorMessage = false;
+    const { state } = this.props.navigation;
+    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
 
     ['plate']
       .forEach((text) => {
@@ -111,7 +113,7 @@ export default class PrivateNotifications extends Component {
 
     if (errorPlate == false && errorMessage == false) {
       let notification = JSON.stringify({
-        //sender_id: tk,
+        sender_id: id,
         title: this.state.title,
         plate: this.state.plate,
         message: this.state.message,
