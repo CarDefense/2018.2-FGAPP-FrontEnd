@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList,
-  Text, 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  RefreshControl, 
+import {
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
   Image,
   TouchableOpacity
 } from 'react-native';
@@ -17,15 +18,18 @@ export default class Feed extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
-      height: 135
+      height: 135,
+      id: '',
+      user: '',
     };
   }
 
 
   async componentDidMount() {
     const { state } = this.props.navigation;
-    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-    let url = NOTIFICATIONS_API + `/notifications/?ordering=-id&token=` + id
+    this.state.id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    this.state.user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
+    let url = NOTIFICATIONS_API + `/notifications/?ordering=-id&token=` + this.state.id
 
     return fetch(url)
       .then((response) => response.json())
@@ -52,14 +56,14 @@ export default class Feed extends React.Component {
   }
 
   _height = (height) => {
-    if (height === 400){
+    if (height === 400) {
       this.state.height = 135
       this.setState({ refreshing: true });
       this.componentDidMount().then(() => {
         this.setState({ refreshing: false });
       });
     }
-    else{
+    else {
       this.state.height = 400
       this.setState({ refreshing: true });
       this.componentDidMount().then(() => {
@@ -71,7 +75,7 @@ export default class Feed extends React.Component {
   render() {
     return (
       <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-        <ScrollView 
+        <ScrollView
           style={styles.item}
           refreshControl={
             <RefreshControl
@@ -102,7 +106,12 @@ export default class Feed extends React.Component {
             keyExtractor={({ id }, index) => id.toString()}
 
           />
-
+          <View style={styles.item2}>
+            <Text style={styles.text1}>Olá {this.state.user}, seja bem Vindo!</Text>
+            <View style={{ marginTop: 10 }}>
+              <Text style={styles.text2}>Cadastre a placa do seu veículo para poder receber novas notificações.</Text>
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
