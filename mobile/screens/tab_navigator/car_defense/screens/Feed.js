@@ -65,7 +65,7 @@ export default class Feed extends React.Component {
       //console.log(error)
     })
 
-    return fetch(NOTIFICATIONS_API + '/emergencynotifications/')
+    return fetch(NOTIFICATIONS_API + '/emergencynotifications/?ordering=-id')
       .then((response) => response.json())
       .then((responseJson) => {
 

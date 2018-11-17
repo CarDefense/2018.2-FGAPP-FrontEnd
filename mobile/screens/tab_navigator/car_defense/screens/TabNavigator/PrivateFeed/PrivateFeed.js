@@ -25,7 +25,7 @@ export default class Feed extends React.Component {
   async componentDidMount() {
     const { state } = this.props.navigation;
     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-    let url = NOTIFICATIONS_API + `/notifications/?token=` + id
+    let url = NOTIFICATIONS_API + `/notifications/?ordering=-id&token=` + id
 
     return fetch(url)
       .then((response) => response.json())
