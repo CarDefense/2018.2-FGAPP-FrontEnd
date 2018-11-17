@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
+  StatusBar,
   Text,
   Alert,
   StyleSheet,
@@ -19,7 +20,7 @@ import {
 } from 'react-native';
 
 async function _Alert(){
-  Alert.alert('Para se cadastrar é necessário de um documento com foto.')
+  Alert.alert('Atenção', 'Recomenda-se o envio de foto de um documento de identificação com foto durante o cadastro.')
 }
 
 export default class SignUpScreen extends Component {
@@ -217,19 +218,17 @@ export default class SignUpScreen extends Component {
 
     return (
       <ImageBackground
-        source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/b9_VpUTIV2.png' }}
-
-        style={{ width: '100%', height: '100%' }}
+      source={require('../images/b6.jpg')}
+      style={{ width: '100%', height: '100%' }}
       >
-        <KeyboardAvoidingView behavior="position">
-          <ScrollView>
-            <View style={styles.container}>
+  <KeyboardAvoidingView behavior="position">
+      <ScrollView>
+          <View style={styles.container}>
               <View style={styles.containerImage}>
-                <Image
-                  style={styles.image}
-                  source={{ uri: 'http://cardefense2.eastus.cloudapp.azure.com:8002/media/icontest_T8bTMAG.png' }}
-
-                />
+                  <Image
+                      style={styles.image}
+                      source={require('../images/icontest.png')}
+                      />
               </View>
               <View style={styles.container2}>
                 <TextField
@@ -319,7 +318,7 @@ export default class SignUpScreen extends Component {
     );
   }
 
-  _maybeRenderUploadingOverlay = () => { //done
+  _maybeRenderUploadingOverlay = () => {
     if (this.state.uploading) {
       return (
         <View
@@ -330,7 +329,7 @@ export default class SignUpScreen extends Component {
     }
   };
 
-  _maybeRenderImage = () => { //done
+  _maybeRenderImage = () => {
     let {
       image
     } = this.state;
@@ -423,7 +422,7 @@ export default class SignUpScreen extends Component {
       console.log({ uploadResponse });
       console.log({ uploadResult });
       console.log({ e });
-      alert('Upload failed, sorry :(');
+      alert('Falha de Upload, tente novamente.');
     } finally {
       this.setState({
         uploading: false
@@ -468,20 +467,22 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   container: {
-    margin: 16,
+    padding: 16,
+    flex: 1
   },
   container1: {
-    marginTop: 13,
+    marginTop: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     bottom: 10
   },
   container2:{
     marginTop: 70,
-    marginBottom: 10
+    marginBottom: 12
   },
   containerButton: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 6
   },
   containerImage: {
     margin: 30,
