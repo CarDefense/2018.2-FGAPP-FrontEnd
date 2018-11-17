@@ -137,7 +137,7 @@ class WelcomeScreen extends Component {
                 let value = this[text].value();
 
                 if (!value) {
-                    errors[text] = 'Digite o nome de usuário!';
+                    errors[text] = 'Digite o nome de usuário';
                     // this.state.isLoading = false;
                     errorUserName = true;
                 }
@@ -149,21 +149,21 @@ class WelcomeScreen extends Component {
 
                 if (!value) {
                     // this.state.isLoading = 0;
-                    errors[text] = 'Digite a senha!';
+                    errors[text] = 'Digite uma senha';
                     errorPassword = true;
                 }
-                else {
-                    if (value.length < 8) {
-                        // this.state.isLoading = 0;
-                        errors[text] = 'Senha muito curta.';
-                        errorPassword = true;
-                    }
-                    else if (value.length > 15) {
-                        // this.state.isLoading = 0;
-                        errors[text] = 'Senha muito longa.';
-                        errorPassword = true;
-                    }
-                }
+                // else {
+                //     if (value.length < 8) {
+                //         // this.state.isLoading = 0;
+                //         errors[text] = 'Senha muito curta.';
+                //         errorPassword = true;
+                //     }
+                //     else if (value.length > 15) {
+                //         // this.state.isLoading = 0;
+                //         errors[text] = 'Senha muito longa.';
+                //         errorPassword = true;
+                //     }
+                // }
             });
 
         if (!errorUserName && !errorPassword) {

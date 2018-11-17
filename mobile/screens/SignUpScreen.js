@@ -128,8 +128,14 @@ export default class SignUpScreen extends Component {
         let value = this[text].value();
 
         if (!value) {
-          errors[text] = 'Digite um email válido!';
+          errors[text] = 'Digite o email';
           errorEmail = true;
+        }
+        else {
+          if(!value.includes("@") || !value.includes(".com")){
+            errors[text] = 'Digite um email válido';
+            errorEmail = true;
+          }
         }
       });
 
@@ -138,7 +144,7 @@ export default class SignUpScreen extends Component {
         let value = this[text].value();
 
         if (!value) {
-          errors[text] = 'Digite o nome de usuário!';
+          errors[text] = 'Digite o nome de usuário';
           errorUserName = true;
         }
       });
@@ -148,15 +154,17 @@ export default class SignUpScreen extends Component {
         let value = this[text].value();
 
         if (!value) {
-          errors[text] = 'Digite uma senha!';
+          errors[text] = 'Digite uma senha';
           errorPassword = true;
         }
         else {
           if (value.length < 8) {
-            errors[text] = 'Senha muito curta.';
+            errors[text] = 'Use 8 caracteres ou mais para a sua senha';
+            errorPassword = true;
           }
           else if (value.length > 15) {
-            errors[text] = 'Senha muito longa.';
+            errors[text] = 'Use 15 caracteres ou menos para a sua senha';
+            errorPassword = true;
           }
         }
       });
