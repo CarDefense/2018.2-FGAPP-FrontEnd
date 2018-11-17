@@ -313,7 +313,7 @@ class WelcomeScreen extends Component {
                                     onPress={() => this.props.navigation.navigate('SignUpScreen')}
                                     containerViewStyle={{ width: '40%' }}
                                     >
-                                    <Text style={{ color: "white" }} >Criar conta</Text>
+                                    <Text style={{ color: "white", fontWeight: "bold" }} >Registrar-se</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -366,11 +366,11 @@ const styles = StyleSheet.create({
         width: 170,
     },
     container1: {
-        marginTop: 70,
+        marginTop: 64,
     },
     containerButton: {
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 12,
     },
     button: {
         backgroundColor: "#26C6DA",
@@ -381,16 +381,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     containerButtonFacebook: {
-        marginTop: 20,
-        marginBottom: 10
+        marginTop: 6,
+        marginBottom: 12
     },
     button1: {
         backgroundColor: "rgba(0, 0, 0, 0)",
         borderRadius: 15,
         height: 40,
-        width: 120,
-        alignItems: 'center'
-
+        width: 325,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     container2: {
         paddingTop: "50%",
@@ -401,7 +401,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     containerText: {
-        margin: 60,
         alignItems: 'center'
     },
 });
