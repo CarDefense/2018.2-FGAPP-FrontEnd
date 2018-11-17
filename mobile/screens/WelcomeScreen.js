@@ -1,5 +1,12 @@
+import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIndicator } from 'react-native-indicators';
+import { TextField } from 'react-native-material-textfield';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { Component } from "react";
+import jwt_decode from 'jwt-decode';
 import {
+    ActivityIndicator,
     View,
     StyleSheet,
     Image,
@@ -11,14 +18,12 @@ import {
     ScrollView,
     KeyboardAvoidingView
 } from 'react-native';
-import { MaterialIndicator } from 'react-native-indicators';
-import { TextField } from 'react-native-material-textfield';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import jwt_decode from 'jwt-decode';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js';
+
 
 class WelcomeScreen extends Component {
+    state = {
+        loading: true,
+    }
 
     async facebookLogin() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2177002552568068', {
@@ -37,6 +42,7 @@ class WelcomeScreen extends Component {
     static navigationOption = {
         header: 'none'
     }
+
     constructor(props) {
         super(props);
 
@@ -121,7 +127,7 @@ class WelcomeScreen extends Component {
     }
 
     _onPressButton = async () => {
-        this.state.isLoading = 50;
+        // this.state.isLoading = 50;
         let errors = {};
         let errorUserName = false;
         let errorPassword = false;
@@ -132,7 +138,7 @@ class WelcomeScreen extends Component {
 
                 if (!value) {
                     errors[text] = 'Digite o nome de usuário!';
-                    this.state.isLoading = false;
+                    // this.state.isLoading = false;
                     errorUserName = true;
                 }
             });
@@ -142,18 +148,18 @@ class WelcomeScreen extends Component {
                 let value = this[text].value();
 
                 if (!value) {
-                    this.state.isLoading = 0;
+                    // this.state.isLoading = 0;
                     errors[text] = 'Digite a senha!';
                     errorPassword = true;
                 }
                 else {
                     if (value.length < 8) {
-                        this.state.isLoading = 0;
+                        // this.state.isLoading = 0;
                         errors[text] = 'Senha muito curta.';
                         errorPassword = true;
                     }
                     else if (value.length > 15) {
-                        this.state.isLoading = 0;
+                        // this.state.isLoading = 0;
                         errors[text] = 'Senha muito longa.';
                         errorPassword = true;
                     }
@@ -161,6 +167,10 @@ class WelcomeScreen extends Component {
             });
 
         if (!errorUserName && !errorPassword) {
+            this.setState({
+                uploading: true
+            });
+
             var login_path = PROFILE_API + '/token-auth/';
             fetch(login_path, {
                 method: 'POST',
@@ -176,7 +186,10 @@ class WelcomeScreen extends Component {
                 .then((responseJson) => {
                     console.log(JSON.stringify(responseJson));
                     if (responseJson.non_field_errors != undefined) {
-                        this.state.isLoading = 0;
+                        this.setState({
+                            uploading: false
+                        });
+                        // this.state.isLoading = 0;
                         this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).'] })
                     }
                     else {
@@ -186,7 +199,10 @@ class WelcomeScreen extends Component {
                     user = token ? jwt_decode(token) : undefined;
                     if (user != undefined || responseJson.key != undefined) {
                         this.props.navigation.navigate('TabHandler', { user: user });
-                        this.state.isLoading = 0;
+                        // this.state.isLoading = 0;
+                        this.setState({
+                            uploading: false
+                        });
                     }
                 })
                 .catch(err => {
@@ -196,7 +212,10 @@ class WelcomeScreen extends Component {
                         });
                     } else {
                         Alert.alert("Erro na conexão.");
-                        this.state.isLoading = 0;
+                        // this.state.isLoading = 0;
+                        this.setState({
+                            uploading: false
+                        });
                     }
                 });
         }
@@ -207,11 +226,12 @@ class WelcomeScreen extends Component {
     render() {
         let { errors = {}, secureTextEntry, ...data } = this.state;
 
-        return (
-            <ImageBackground
-                source={require('../images/b6.jpg')}
-                style={{ width: '100%', height: '100%' }}
-            >
+        if(!this.state.uploading){
+            return (
+                <ImageBackground
+                    source={require('../images/b6.jpg')}
+                    style={{ width: '100%', height: '100%' }}
+                    >
                 <KeyboardAvoidingView behavior="position">
                     <ScrollView>
                         <View style={styles.container}>
@@ -219,13 +239,13 @@ class WelcomeScreen extends Component {
                                 <Image
                                     style={styles.image}
                                     source={require('../images/icontest.png')}
-                                />
+                                    />
                             </View>
                             <View style={styles.container1}>
                                 <MaterialIndicator
-                                size= {this.state.isLoading}
-                                color= "white"
-                                />
+                                    size= {this.state.isLoading}
+                                    color= "white"
+                                    />
                                 <TextField
                                     ref={this.usernameRef}
                                     value={data.username}
@@ -240,8 +260,7 @@ class WelcomeScreen extends Component {
                                     underlineColorAndroid="transparent"
                                     error={errors.username}
                                     textColor='white'
-
-                                />
+                                    />
                                 <TextField
                                     ref={this.passwordRef}
                                     value={data.password}
@@ -262,21 +281,20 @@ class WelcomeScreen extends Component {
                                     characterRestriction={15}
                                     renderAccessory={this.renderPasswordAccessory}
                                     textColor='white'
-                                />
+                                    />
                                 <View style={styles.containerButton}>
                                     <TouchableOpacity
                                         style={styles.button}
                                         onPress={() => this._onPressButton()}
                                         containerViewStyle={{ width: '40%' }}
-                                    >
+                                        >
                                         <Text style={{ color: 'white', fontSize: 18, fontWeight: '800' }} >Entrar</Text>
-
                                     </TouchableOpacity>
                                     <FlatList
                                         data={this.state.non_field_alert}
                                         renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
                                         keyExtractor={item => 'non_field_errors'}
-                                    />
+                                        />
                                 </View>
                                 <View style={styles.containerButtonFacebook}>
                                     <Icon.Button
@@ -286,29 +304,74 @@ class WelcomeScreen extends Component {
                                         height={40}
                                         justifyContent='center'
                                         onPress={() => this.facebookLogin()}
-                                    >
-                                        Entrar com Facebook
-                                </Icon.Button>
+                                        >
+                                            Entrar com Facebook
+                                    </Icon.Button>
                                 </View>
                                 <TouchableOpacity
                                     style={styles.button1}
                                     onPress={() => this.props.navigation.navigate('SignUpScreen')}
                                     containerViewStyle={{ width: '40%' }}
-                                >
+                                    >
                                     <Text style={{ color: "white" }} >Criar conta</Text>
-
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </ScrollView>
                 </KeyboardAvoidingView>
-            </ImageBackground>
-        );
+                </ImageBackground>
+            );
+        } else {
+            return (
+                <ImageBackground
+                    source={require('../images/b6.jpg')}
+                    style={{ width: '100%', height: '100%' }}
+                    >
+                    <ScrollView>
+                        <View style={styles.container}>
+                            <View style={styles.containerImage}>
+                                <Image
+                                    style={styles.image}
+                                    source={require('../images/icontest.png')}
+                                    />
+                            </View>
+                            <View style={styles.container2}>
+                                <View
+                                    style={[StyleSheet.absoluteFill, styles.maybeRenderUploading]}>
+                                    <ActivityIndicator color="#ffffff" size="large" />
+                                </View>
+                            </View>
+                        </View>
+                    </ScrollView>
+                </ImageBackground>
+            ); 
+        }
     }
 }
 export default WelcomeScreen;
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 16,
+        flex: 1
+    },
+    containerImage: {
+        margin: 30,
+        paddingTop: 4,
+        paddingRight: 4,
+        alignItems: 'center'
+    },
+    image: {
+        height: 170,
+        width: 170,
+    },
+    container1: {
+        marginTop: 70,
+    },
+    containerButton: {
+        alignItems: 'center',
+        marginTop: 10
+    },
     button: {
         backgroundColor: "#26C6DA",
         borderRadius: 15,
@@ -317,8 +380,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    container1: {
-        marginTop: 70,
+    containerButtonFacebook: {
+        marginTop: 20,
+        marginBottom: 10
     },
     button1: {
         backgroundColor: "rgba(0, 0, 0, 0)",
@@ -328,29 +392,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
 
     },
-    container: {
-        margin: 16,
+    container2: {
+        paddingTop: "50%",
     },
-    containerButton: {
+    maybeRenderUploading: {
         alignItems: 'center',
-        marginTop: 10
-    },
-    containerButtonFacebook: {
-        marginTop: 20,
-        marginBottom: 10
-    },
-    containerImage: {
-        margin: 30,
-        paddingTop: 4,
-        paddingRight: 4,
-        alignItems: 'center'
+        backgroundColor: 'rgba(0,0,0,0)',
+        justifyContent: 'center',
     },
     containerText: {
         margin: 60,
         alignItems: 'center'
     },
-    image: {
-        height: 170,
-        width: 170,
-    }
 });
