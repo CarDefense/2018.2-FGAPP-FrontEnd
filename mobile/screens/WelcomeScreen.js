@@ -168,7 +168,7 @@ class WelcomeScreen extends Component {
 
         if (!errorUserName && !errorPassword) {
             this.setState({
-                uploading: true
+                loading: true
             });
 
             var login_path = PROFILE_API + '/token-auth/';
@@ -186,11 +186,11 @@ class WelcomeScreen extends Component {
                 .then((responseJson) => {
                     console.log(JSON.stringify(responseJson));
                     if (responseJson.non_field_errors != undefined) {
-                        this.setState({
-                            uploading: false
-                        });
                         // this.state.isLoading = 0;
                         this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).'] })
+                        this.setState({
+                            loading: false
+                        });
                     }
                     else {
                         this.setState({ non_field_alert: [''] })
@@ -201,12 +201,15 @@ class WelcomeScreen extends Component {
                         this.props.navigation.navigate('TabHandler', { user: user });
                         // this.state.isLoading = 0;
                         this.setState({
-                            uploading: false
+                            loading: false
                         });
                     }
                 })
                 .catch(err => {
                     if (typeof err.text === 'function') {
+                        this.setState({
+                            loading: false
+                        });
                         err.text().then(errorMessage => {
                             this.props.dispatch(displayTheError(errorMessage))
                         });
@@ -214,7 +217,7 @@ class WelcomeScreen extends Component {
                         Alert.alert("Erro na conexão.");
                         // this.state.isLoading = 0;
                         this.setState({
-                            uploading: false
+                            loading: false
                         });
                     }
                 });
@@ -226,7 +229,7 @@ class WelcomeScreen extends Component {
     render() {
         let { errors = {}, secureTextEntry, ...data } = this.state;
 
-        if(!this.state.uploading){
+        if(!this.state.loading){
             return (
                 <ImageBackground
                     source={require('../images/b6.jpg')}
@@ -337,7 +340,7 @@ class WelcomeScreen extends Component {
                             </View>
                             <View style={styles.container2}>
                                 <View
-                                    style={[StyleSheet.absoluteFill, styles.maybeRenderUploading]}>
+                                    style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
                                     <ActivityIndicator color="#ffffff" size="large" />
                                 </View>
                             </View>
@@ -395,7 +398,7 @@ const styles = StyleSheet.create({
     container2: {
         paddingTop: "50%",
     },
-    maybeRenderUploading: {
+    maybeLoading: {
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0)',
         justifyContent: 'center',
