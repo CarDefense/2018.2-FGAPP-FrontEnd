@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { TabNavigator } from 'react-navigation'
-import Feed from './tab_navigator/car_defense/screens/Feed'
 import Notifications from './tab_navigator/car_defense/screens/TabNavigator/Notifications/Notifications.js'
-import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
 import PrivateFeed from './tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
+import Profile from './tab_navigator/car_defense/screens/TabNavigator/Profile/Profile'
+import Feed from './tab_navigator/car_defense/screens/Feed'
+import { TabNavigator } from 'react-navigation'
+import React, { Component } from "react";
 import { Icon } from 'native-base';
 
 
@@ -21,7 +21,6 @@ const TabHandler = new TabNavigator({
             header: null,
         }
     },
-
     Notifications: {
         screen: Notifications,
         navigationOptions: {

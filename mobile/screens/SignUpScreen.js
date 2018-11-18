@@ -19,13 +19,15 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+
 async function _Alert(){
   Alert.alert('Atenção', 'Recomenda-se o envio de foto de um documento de identificação com foto durante o cadastro.')
 }
 
+
 export default class SignUpScreen extends Component {
   state = {
-    loading: true, 
+    loading: false, 
   }
 
   componentWillMount() {

@@ -22,7 +22,7 @@ import {
 
 class WelcomeScreen extends Component {
     state = {
-        loading: true,
+        loading: false,
     }
 
     async facebookLogin() {
