@@ -24,6 +24,10 @@ async function _Alert(){
 }
 
 export default class SignUpScreen extends Component {
+  state = {
+    loading: true, 
+  }
+
   componentWillMount() {
     _Alert();
   }
@@ -171,6 +175,10 @@ export default class SignUpScreen extends Component {
       });
 
     if (!errorUserName && !errorPassword && !errorEmail) {
+      this.setState({
+        loading: true
+      });
+
       var registration_path = PROFILE_API + '/users/';
       fetch(registration_path, {
         method: 'POST',
@@ -188,12 +196,18 @@ export default class SignUpScreen extends Component {
           console.log(JSON.stringify(responseJson));
           if (responseJson.username != undefined) {
             this.setState({ username_field_alerts: ['Um usuário já foi cadastrado com esse nome.'] })
+            this.setState({
+              loading: false
+          });
           }
           else {
             this.setState({ username_field_alerts: [''] })
           }
           if (responseJson.token != undefined ||
             responseJson.key != undefined) {
+              this.setState({
+                loading: false
+            });
             Alert.alert("Conta criada com sucesso!");
             this.props.navigation.navigate('WelcomeScreen')
           }
@@ -201,12 +215,18 @@ export default class SignUpScreen extends Component {
 
         .catch(err => {
           if (typeof err.text === 'function') {
+            this.setState({
+              loading: false
+          });
             err.text().then(errorMessage => {
               this.props.dispatch(displayTheError(errorMessage))
             });
           } else {
             Alert.alert("Erro na conexão.");
             console.log(err)
+            this.setState({
+              loading: false
+          });
           }
         });
     }
@@ -215,107 +235,136 @@ export default class SignUpScreen extends Component {
 
   render() {
     let { errors = {}, secureTextEntry, ...data } = this.state;
-
-    return (
-      <ImageBackground
-      source={require('../images/b6.jpg')}
-      style={{ width: '100%', height: '100%' }}
-      >
-  <KeyboardAvoidingView behavior="position">
-      <ScrollView>
-          <View style={styles.container}>
-              <View style={styles.containerImage}>
+    
+    if(!this.state.loading){
+      return (
+        <ImageBackground
+          source={require('../images/b6.jpg')}
+          style={{ width: '100%', height: '100%' }}
+          >
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+              <View style={styles.container}>
+                <View style={styles.containerImage}>
                   <Image
-                      style={styles.image}
-                      source={require('../images/icontest.png')}
-                      />
-              </View>
-              <View style={styles.container2}>
-                <TextField
-                  ref={this.emailRef}
-                  value={data.email}
-                  keyboardType='email-address'
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(email) => this.setState({ email })}
-                  onSubmitEditing={this.onSubmitEmail}
-                  returnKeyType='next'
-                  label='Endereço de email'
-                  tintColor="white"
-                  underlineColorAndroid="transparent"
-                  error={errors.email}
-                />
-                <TextField
-                  ref={this.usernameRef}
-                  value={data.username}
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(username) => this.setState({ username })}
-                  onSubmitEditing={this.onSubmitUsername}
-                  returnKeyType='next'
-                  label='Nome de usuário'
-                  tintColor="white"
-                  underlineColorAndroid="transparent"
-                  error={errors.username}
-                />
-                <TextField
-                  ref={this.passwordRef}
-                  value={data.password}
-                  secureTextEntry={secureTextEntry}
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  clearTextOnFocus={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(password) => this.setState({ password })}
-                  onSubmitEditing={this.onSubmitUsername}
-                  returnKeyType='done'
-                  label='Senha'
-                  tintColor="white"
-                  underlineColorAndroid="transparent"
-                  error={errors.password}
-                  maxLength={20}
-                  characterRestriction={15}
-                  renderAccessory={this.renderPasswordAccessory}
-                />
-                <View style={styles.container1}>
-                  <TouchableOpacity
-                    color="#B2EBF2"
-                    onPress={this._takePhoto}
-                    containerViewStyle={{ width: '10%' }}
-                  >
-                    <Icon
-                      type='FontAwesome'
-                      name="camera"
-                      style={{ color: "white" }}
+                    style={styles.image}
+                    source={require('../images/icontest.png')}
                     />
-                  </TouchableOpacity>
                 </View>
-                {this._maybeRenderImage()}
-                {this._maybeRenderUploadingOverlay()}
-                <View style={styles.containerButton}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this._onPressButton()}
-                    containerViewStyle={{ width: '40%' }}
-                  >
-                    <Text style={{ color: 'white' }} >Cadastrar</Text>
-                  </TouchableOpacity>
-                  <FlatList
-                    data={this.state.username_field_alerts}
-                    renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
-                    keyExtractor={item => 'non_field_errors'}
+                <View style={styles.container1}>
+                  <TextField
+                    ref={this.emailRef}
+                    value={data.email}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(email) => this.setState({ email })}
+                    onSubmitEditing={this.onSubmitEmail}
+                    returnKeyType='next'
+                    label='Endereço de email'
+                    tintColor="white"
+                    underlineColorAndroid="transparent"
+                    error={errors.email}
+                    textColor='white'
+                    />
+                  <TextField
+                    ref={this.usernameRef}
+                    value={data.username}
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(username) => this.setState({ username })}
+                    onSubmitEditing={this.onSubmitUsername}
+                    returnKeyType='next'
+                    label='Nome de usuário'
+                    tintColor="white"
+                    underlineColorAndroid="transparent"
+                    error={errors.username}
+                    textColor='white'
+                    />
+                  <TextField
+                    ref={this.passwordRef}
+                    value={data.password}
+                    secureTextEntry={secureTextEntry}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    clearTextOnFocus={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(password) => this.setState({ password })}
+                    onSubmitEditing={this.onSubmitUsername}
+                    returnKeyType='done'
+                    label='Senha'
+                    tintColor="white"
+                    underlineColorAndroid="transparent"
+                    error={errors.password}
+                    maxLength={20}
+                    characterRestriction={15}
+                    renderAccessory={this.renderPasswordAccessory}
+                    textColor='white'
+                    />
+                  <View style={styles.container2}>
+                    <TouchableOpacity
+                      color="#B2EBF2"
+                      onPress={this._takePhoto}
+                      containerViewStyle={{ width: '10%' }}
+                      >
+                      <Icon
+                        type='FontAwesome'
+                        name="camera"
+                        style={{ color: "white" }}
+                        />
+                    </TouchableOpacity>
+                  </View>
+                  {this._maybeRenderImage()}
+                  {this._maybeRenderUploadingOverlay()}
+                  <View style={styles.containerButton}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={() => this._onPressButton()}
+                      containerViewStyle={{ width: '40%' }}
+                      >
+                      <Text style={{ color: 'white' }} >Cadastrar</Text>
+                    </TouchableOpacity>
+                    <FlatList
+                      data={this.state.username_field_alerts}
+                      renderItem={({ item }) => <Text style={{ color: 'red' }}>{item}</Text>}
+                      keyExtractor={item => 'non_field_errors'}
+                      />
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      );
+    } else {
+      return (
+        <ImageBackground
+          source={require('../images/b6.jpg')}
+          style={{ width: '100%', height: '100%' }}
+          >
+          <ScrollView>
+            <View style={styles.container}>
+              <View style={styles.containerImage}>
+                <Image
+                  style={styles.image}
+                  source={require('../images/icontest.png')}
                   />
+              </View>
+              <View style={styles.container3}>
+                <View
+                  style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
+                  <ActivityIndicator color="#ffffff" size="large" />
                 </View>
               </View>
             </View>
           </ScrollView>
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    );
+        </ImageBackground>
+      ); 
+    }
   }
 
   _maybeRenderUploadingOverlay = () => {
@@ -365,7 +414,7 @@ export default class SignUpScreen extends Component {
     alert('Copied image URL to clipboard');
   };
 
-  _takePhoto = async () => { //Done
+  _takePhoto = async () => {
     const {
       status: cameraPerm
     } = await Permissions.askAsync(Permissions.CAMERA);
@@ -458,6 +507,34 @@ async function uploadImageAsync(uri) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    flex: 1
+  },
+  containerImage: {
+    margin: 30,
+    paddingTop: 4,
+    paddingRight: 4,
+    alignItems: 'center'
+  },
+  image: {
+    height: 100,
+    width: 100,
+  },
+  container1:{
+    marginTop: 70,
+    marginBottom: 12
+  },
+  container2: {
+    marginTop: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    bottom: 10
+  },
+  containerButton: {
+    alignItems: 'center',
+    marginTop: 6
+  },
   button: {
     backgroundColor: "#26C6DA",
     borderRadius: 15,
@@ -466,37 +543,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  container: {
-    padding: 16,
-    flex: 1
+  container3: {
+    paddingTop: "50%",
   },
-  container1: {
-    marginTop: 8,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    bottom: 10
-  },
-  container2:{
-    marginTop: 70,
-    marginBottom: 12
-  },
-  containerButton: {
+  maybeLoading: {
     alignItems: 'center',
-    marginTop: 6
-  },
-  containerImage: {
-    margin: 30,
-    paddingTop: 4,
-    paddingRight: 4,
-    alignItems: 'center'
-  },
-  containerText: {
-    margin: 60,
-    alignItems: 'center'
-  },
-  image: {
-    height: 100,
-    width: 100,
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'center',
   },
   maybeRenderUploading: {
     paddingTop: 8,
@@ -519,5 +572,19 @@ const styles = StyleSheet.create({
       width: 4,
     },
     shadowRadius: 5
+  },
+  maybeRenderImageContainer: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    overflow: 'hidden',
+  },
+  maybeRenderImage: {
+    height: 250,
+    width: 250,
+  },
+
+  containerText: {
+    margin: 60,
+    alignItems: 'center'
   },
 });
