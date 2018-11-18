@@ -481,7 +481,7 @@ export default class SignUpScreen extends Component {
 }
 
 async function uploadImageAsync(uri) {
-  let apiUrl = PROFILE_API + '/documents/';
+  let apiUrl = PROFILE_API + '/document/';
 
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];
