@@ -475,12 +475,12 @@ const styles = StyleSheet.create({
   },
   maybeRenderContainer: {
     width: '100%',
-    height: '40%',
+    height: '35%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
     elevation: 2,
-    marginTop: 32,
+    marginTop: 10,
     shadowColor: 'rgba(0,0,0,1)',
     shadowOpacity: 0.2,
     shadowOffset: {
@@ -495,8 +495,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   maybeRenderImage: {
-    height: 250,
-    width: 250,
+    height: 200,
+    width: 320,
   },
   avatar: {
     width: 100,
