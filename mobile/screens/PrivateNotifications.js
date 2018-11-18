@@ -132,7 +132,7 @@ export default class PrivateNotifications extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);
-        Alert.alert("Notificação enviada!")
+        Alert.alert(jsonResponse)
       }
       ).catch(error => {
         console.log(error)
