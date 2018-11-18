@@ -307,7 +307,7 @@ export default class PublicNotifications extends Component {
       console.log({ uploadResponse });
       console.log({ uploadResult });
       console.log({ e });
-      alert('Upload failed, sorry :(');
+      alert('Falha de Upload, tente novamente.');
     } finally {
       this.setState({
         uploading: false

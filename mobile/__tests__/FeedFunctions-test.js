@@ -21,26 +21,6 @@ it('Function onRefresh', () => {
     
 })
 
-it('Function componentWillUnmount', () => {
-    let feedData = renderer.create(<Feed/>).getInstance()
-
-    feedData.componentWillUnmount()
-
-    expect(feedData.componentWillUnmount()).toEqual(undefined)
-    
-})
-
-it('Function listen', () => {
-    let feedData = renderer.create(<Feed/>).getInstance()
-    let origin = ''
-    let data = ''
-
-    feedData.listen(origin, data)
-
-    expect(feedData.listen(origin, data)).toEqual(undefined)
-    
-})
-
 it('Function componentDidMount', async () => {
     let feedData = renderer.create(<Feed/>).getInstance()
 

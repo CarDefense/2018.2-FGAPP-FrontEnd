@@ -136,7 +136,7 @@ export default class PrivateNotifications extends Component {
       }
       ).catch(error => {
         console.log(error)
-        Alert.alert("Placa não existe!")
+        Alert.alert("Veículo não cadastradro!")
       })
     }
     this.setState({ errors });
@@ -220,7 +220,6 @@ export default class PrivateNotifications extends Component {
                     placeholderTextColor="white"
                     inputContainerStyle={{ marginHorizontal: 20 }}
                   />
-                  {/* <Text style={styles.text}>Adicionar imagem</Text> */}
                   <View style={styles.alternativeLayoutButtonContainer}>
                     <TouchableOpacity
                       color="#B2EBF2"
@@ -370,7 +369,7 @@ export default class PrivateNotifications extends Component {
       console.log({ uploadResponse });
       console.log({ uploadResult });
       console.log({ e });
-      alert('Upload failed, sorry :(');
+      alert('Falha de Upload, tente novamente.');
     } finally {
       this.setState({
         uploading: false
