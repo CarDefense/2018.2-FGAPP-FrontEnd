@@ -31,7 +31,7 @@ class WelcomeScreen extends Component {
         });
         if (type === 'success') {
             const baseUrl = `https://graph.facebook.com/me?access_token=${token}`
-            const fields = '&debug=all&fields=id%2Cfirst_name%2Cpicture%7Burl%7D&format=json&method=get&pretty=0&suppress_http_code=1'
+            const fields = '&fields=id,first_name,picture{url}'
             const response = await fetch(`${baseUrl}${fields}`)
             const user = (await response.json());
             console.log(user);
