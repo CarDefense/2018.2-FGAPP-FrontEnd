@@ -36,8 +36,6 @@ export default class SignUpScreen extends Component {
     super(props);
 
     this.onFocus = this.onFocus.bind(this);
-    //this.onSubmit = this.onSubmit.bind(this);
-    //this.onChangeText = this.onChangeText.bind(this);
     this.onSubmitEmail = this.onSubmitEmail.bind(this);
     this.onSubmitUsername = this.onSubmitUsername.bind(this);
     this.onSubmitPassword = this.onSubmitPassword.bind(this);
@@ -320,8 +318,6 @@ export default class SignUpScreen extends Component {
                         />
                     </TouchableOpacity>
                   </View>
-                  {this._maybeRenderImage()}
-                  {this._maybeRenderUploadingOverlay()}
                   <View style={styles.containerButton}>
                     <TouchableOpacity
                       style={styles.button}
@@ -489,7 +485,7 @@ async function uploadImageAsync(uri) {
   let fileType = uriParts[uriParts.length - 1];
 
   let formData = new FormData();
-  formData.append('image', {
+  formData.append('document', {
     uri,
     name: `photo.${fileType}`,
     type: `image/${fileType}`,
