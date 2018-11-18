@@ -17,11 +17,15 @@ import {
 
 
 async function _Alert() {
-  Alert.alert('Atenção', 'Mande uma foto do documento do seu carro para efetuar o cadastro.')
+  Alert.alert('Atenção', 'Envie uma foto do documento do seu carro para efetuar o cadastro.')
 }
 
 
 export default class RegisterCar extends Component {
+  state = {
+    loading: false,
+  }
+
   componentWillMount() {
     _Alert();
   }
@@ -157,6 +161,10 @@ export default class RegisterCar extends Component {
     }
 
     if (errorPlate == false && this.state.image) {
+      this.setState({
+        loading: true
+      });
+
       const url = CAR_API + '/validate_car/'
       this.state.document = this.state.image
 
@@ -180,10 +188,16 @@ export default class RegisterCar extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);
+        this.setState({
+          loading: false
+        });
         Alert.alert(jsonResponse)
       }
       ).catch(error => {
         console.log(error)
+        this.setState({
+          loading: false
+        });
         Alert.alert('Erro ao cadastrar!')
       })
     }
@@ -200,107 +214,131 @@ export default class RegisterCar extends Component {
     let { plate = 'text' } = data;
     let { model = 'text' } = data;
     let { color = 'text' } = data;
-
-
-    return (
-      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-        <KeyboardAvoidingView behavior="position">
-          <ScrollView>
-            <View style={styles.container}>
-              <View style={styles.headerContent}>
-                <Image style={styles.avatar}
-                  source={require('../images/s.png')}
-                  />
-                <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
-              </View>
-              <View style={styles.borderContainer}>
-                <View style={styles.border}>
-                  <View style={styles.textContainer}>
-                    <TextField
-                      ref={this.plateRef}
-                      value={data.plate}
-                      autoCorrect={false}
-                      enablesReturnKeyAutomatically={true}
-                      onFocus={this.onFocus}
-                      onChangeText={(plate) => this.setState({ plate })}
-                      // onChangeText={this.onChangeText}
-                      onSubmitEditing={this.onSubmitPlate}
-                      returnKeyType='next'
-                      label='Placa'
-                      tintColor="white"
-                      underlineColorAndroid="transparent"
-                      maxLength={8}
-                      autoCapitalize="characters"
-                      error={errors.plate}
-                      textColor="white"
-                      labelPadding={5}
-                      // inputContainerStyle={{ marginHorizontal: 20 }}
-                      />
-                    <TextField
-                      ref={this.modelRef}
-                      value={data.model}
-                      autoCorrect={false}
-                      enablesReturnKeyAutomatically={true}
-                      onFocus={this.onFocus}
-                      onChangeText={(model) => this.setState({ model })}
-                      // onChangeText={this.onChangeText}
-                      onSubmitEditing={this.onSubmitModel}
-                      returnKeyType='next'
-                      label='Modelo'
-                      tintColor="white"
-                      textColor="white"
-                      labelPadding={5}
-                      // inputContainerStyle={{ marginHorizontal: 20 }}
-                      />
-                    <TextField
-                      ref={this.colorRef}
-                      value={data.color}
-                      autoCorrect={false}
-                      enablesReturnKeyAutomatically={true}
-                      onFocus={this.onFocus}
-                      onChangeText={(color) => this.setState({ color })}
-                      // onChangeText={this.onChangeText}
-                      onSubmitEditing={this.onSubmitMessage}
-                      returnKeyType='next'
-                      label='Cor'
-                      tintColor="white"
-                      textColor="white"
-                      labelPadding={5}
-                      // inputContainerStyle={{ marginHorizontal: 20 }}
-                      />
-                  </View>
-                  <View style={styles.container1}>
-                    <TouchableOpacity
-                      color="#B2EBF2"
-                      onPress={this._takePhoto}
-                      containerViewStyle={{ width: '10%' }}
-                      >
-                        <Icon
-                          type='FontAwesome'
-                          name="camera"
-                          style={{ color: this.state.colorIcon }}
-                          />
-                    </TouchableOpacity>
-                  </View>
-                  {this._maybeRenderImage()}
-                  {this._maybeRenderUploadingOverlay()}
-                  <View style={styles.container1}>
-                    <TouchableOpacity
-                      style={styles.button}
-                      color="#26C6DA"
-                      onPress={this.onPressButton}
-                      containerViewStyle={{ width: '40%' }}
-                      >
-                        <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
-                    </TouchableOpacity>
+    
+    if(!this.state.loading){
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+              <View style={styles.container}>
+                <View style={styles.headerContent}>
+                  <Image style={styles.avatar}
+                    source={require('../images/s.png')}
+                    />
+                  <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
+                </View>
+                <View style={styles.borderContainer}>
+                  <View style={styles.border}>
+                    <View style={styles.textContainer}>
+                      <TextField
+                        ref={this.plateRef}
+                        value={data.plate}
+                        autoCorrect={false}
+                        enablesReturnKeyAutomatically={true}
+                        onFocus={this.onFocus}
+                        onChangeText={(plate) => this.setState({ plate })}
+                        // onChangeText={this.onChangeText}
+                        onSubmitEditing={this.onSubmitPlate}
+                        returnKeyType='next'
+                        label='Placa'
+                        tintColor="white"
+                        underlineColorAndroid="transparent"
+                        maxLength={8}
+                        autoCapitalize="characters"
+                        error={errors.plate}
+                        textColor="white"
+                        labelPadding={5}
+                        // inputContainerStyle={{ marginHorizontal: 20 }}
+                        />
+                      <TextField
+                        ref={this.modelRef}
+                        value={data.model}
+                        autoCorrect={false}
+                        enablesReturnKeyAutomatically={true}
+                        onFocus={this.onFocus}
+                        onChangeText={(model) => this.setState({ model })}
+                        // onChangeText={this.onChangeText}
+                        onSubmitEditing={this.onSubmitModel}
+                        returnKeyType='next'
+                        label='Modelo'
+                        tintColor="white"
+                        textColor="white"
+                        labelPadding={5}
+                        // inputContainerStyle={{ marginHorizontal: 20 }}
+                        />
+                      <TextField
+                        ref={this.colorRef}
+                        value={data.color}
+                        autoCorrect={false}
+                        enablesReturnKeyAutomatically={true}
+                        onFocus={this.onFocus}
+                        onChangeText={(color) => this.setState({ color })}
+                        // onChangeText={this.onChangeText}
+                        onSubmitEditing={this.onSubmitMessage}
+                        returnKeyType='next'
+                        label='Cor'
+                        tintColor="white"
+                        textColor="white"
+                        labelPadding={5}
+                        // inputContainerStyle={{ marginHorizontal: 20 }}
+                        />
+                    </View>
+                    <View style={styles.container1}>
+                      <TouchableOpacity
+                        color="#B2EBF2"
+                        onPress={this._takePhoto}
+                        containerViewStyle={{ width: '10%' }}
+                        >
+                          <Icon
+                            type='FontAwesome'
+                            name="camera"
+                            style={{ color: this.state.colorIcon }}
+                            />
+                      </TouchableOpacity>
+                    </View>
+                    {this._maybeRenderImage()}
+                    {this._maybeRenderUploadingOverlay()}
+                    <View style={styles.container1}>
+                      <TouchableOpacity
+                        style={styles.button}
+                        color="#26C6DA"
+                        onPress={this.onPressButton}
+                        containerViewStyle={{ width: '40%' }}
+                        >
+                          <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+              <View style={styles.container}>
+                <View style={styles.headerContent}>
+                  <Image style={styles.avatar}
+                    source={require('../images/s.png')}
+                    />
+                  <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
+                </View>
+                <View style={styles.container2}>
+                  <View
+                    style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
+                    <ActivityIndicator color="#ffffff" size="large" />
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      );
+    }
   }
 
   _maybeRenderUploadingOverlay = () => {
@@ -450,16 +488,78 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
   },
+  headerContent: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 40,
+    borderWidth: 5,
+    borderColor: "white",
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: '800',
+  },
+  borderContainer: {
+    paddingBottom: 20,
+    marginBottom: 20
+  },
+  border: {
+    borderWidth: 5,
+    borderRadius: 15,
+    borderColor: "white",
+    backgroundColor: '#B2EBF2',
+  },
+  textContainer: {
+    paddingRight: 8,
+    paddingLeft: 8,
+  },
   container1: {
     marginTop: 13,
     flexDirection: 'row',
     justifyContent: 'center',
     bottom: 10
   },
-  textContainer: {
-    paddingRight: 8,
-    paddingLeft: 8,
+  maybeRenderUploading: {
+    paddingTop: 8,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.0)',
+    justifyContent: 'center',
   },
+  maybeRenderContainer: {
+    width: '100%',
+    height: '38%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
+    elevation: 2,
+    marginTop: 10,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
+    shadowRadius: 5
+  },
+  maybeRenderImageContainer: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    overflow: 'hidden',
+  },
+  maybeRenderImage: {
+    height: 200,
+    width: 310,
+  },
+  container2: {
+    paddingTop: "75%",
+  },
+
   header2: {
     color: '#760f9f',
     textAlign: 'left',
@@ -496,56 +596,8 @@ const styles = StyleSheet.create({
     color: "#760f9f",
     fontWeight: '200',
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 40,
-    borderWidth: 5,
-    borderColor: "white",
-    marginBottom: 10,
-  },
-  name: {
-    fontSize: 18,
-    color: "white",
-    fontWeight: '800',
-  },
-  headerContent: {
-    padding: 30,
-    alignItems: 'center',
-  },
   box: {
     color: 'white'
-  },
-  maybeRenderUploading: {
-    paddingTop: 8,
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.0)',
-    justifyContent: 'center',
-  },
-  maybeRenderContainer: {
-    width: '100%',
-    height: '38%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 3,
-    elevation: 2,
-    marginTop: 10,
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      height: 4,
-      width: 4,
-    },
-    shadowRadius: 5
-  },
-  maybeRenderImageContainer: {
-    borderTopLeftRadius: 3,
-    borderTopRightRadius: 3,
-    overflow: 'hidden',
-  },
-  maybeRenderImage: {
-    height: 200,
-    width: 310,
   },
   userInfo: {
     fontSize: 15,
@@ -554,14 +606,4 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
-  border: {
-    borderWidth: 5,
-    borderRadius: 15,
-    borderColor: "white",
-    backgroundColor: '#B2EBF2',
-  },
-  borderContainer: {
-    paddingBottom: 20,
-    marginBottom: 20
-  }
 });
