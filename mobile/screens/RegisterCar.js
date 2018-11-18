@@ -17,7 +17,7 @@ import { Icon } from "native-base";
 
 
 async function _Alert() {
-  Alert.alert('Mande uma foto do documento do seu carro.')
+  Alert.alert('Atenção','Mande uma foto do documento do seu carro para efetuar o cadastro.')
 }
 
 export default class RegisterCar extends Component {
@@ -41,6 +41,8 @@ export default class RegisterCar extends Component {
       document: '',
       refreshing: false,
       uploading: false,
+      id: '',
+      user: ''
     };
   }
 
@@ -85,9 +87,10 @@ export default class RegisterCar extends Component {
   async componentDidMount() {
     this.setState({ hasError: false, errorMessage: '' })
     const { state } = this.props.navigation;
-    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    this.state.id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    this.state.user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
 
-    let link = CAR_API + '/car/?token=' + id
+    let link = CAR_API + '/car/?token=' + this.state.id
 
     return fetch(link)
       .then((response) => response.json())
@@ -153,14 +156,11 @@ export default class RegisterCar extends Component {
 
     if (errorPlate == false) {
 
-      const { state } = this.props.navigation;
-      var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-
       const url = CAR_API + '/validate_car/' //cars db models url
 
 
       let car = JSON.stringify({
-        id_token: id,
+        id_token: this.state.id,
         plate: this.state.plate,
         model: this.state.model,
         color: this.state.color,
@@ -200,8 +200,6 @@ export default class RegisterCar extends Component {
     let { plate = 'text' } = data;
     let { model = 'text' } = data;
     let { color = 'text' } = data;
-    const { state } = this.props.navigation;
-    var user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
 
 
     return (
@@ -213,7 +211,7 @@ export default class RegisterCar extends Component {
                 <Image style={styles.avatar}
                   source={require('../images/s.png')}
                 />
-                <Text style={styles.name}>Olá, {user}! Cadastre seus carros!</Text>
+                <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
               </View>
               <View style={styles.border}>
                 <TextField
