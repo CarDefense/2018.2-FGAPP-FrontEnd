@@ -56,6 +56,7 @@ export default class SignUpScreen extends Component {
       secureTextEntry: true,
       username_field_alerts: [''],
       uploading: false,
+      image: null,
     };
 
   }
@@ -461,7 +462,7 @@ export default class SignUpScreen extends Component {
         uploadResponse = await uploadImageAsync(pickerResult.uri);
         uploadResult = await uploadResponse.json();
 
-        console.log(uploadResult.image)
+        console.log(uploadResult.document)
 
         this.setState({
           image: uploadResult.document
