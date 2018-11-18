@@ -236,7 +236,8 @@ export default class SignUpScreen extends Component {
 
   render() {
     let { errors = {}, secureTextEntry, ...data } = this.state;
-    
+    let { image } = this.state;
+
     if(!this.state.loading){
       return (
         <ImageBackground
