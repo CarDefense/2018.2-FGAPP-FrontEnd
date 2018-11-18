@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import {StackNavigator} from 'react-navigation'
-
-import Notifications from './PublicNotifications'
+import Notifications from './Notifications'
 
 
 export default class NotificationsNavigator extends Component {
 
     render() {
         return (
-            <PublicNotificationsStackNavigator />
+            <NotificationsStackNavigator />
         );
     }
 }

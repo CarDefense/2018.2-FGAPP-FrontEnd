@@ -17,7 +17,7 @@ import { Icon } from "native-base";
 
 
 async function _Alert() {
-  Alert.alert('Atenção','Mande uma foto do documento do seu carro para efetuar o cadastro.')
+  Alert.alert('Atenção', 'Mande uma foto do documento do seu carro para efetuar o cadastro.')
 }
 
 export default class RegisterCar extends Component {
@@ -42,7 +42,9 @@ export default class RegisterCar extends Component {
       refreshing: false,
       uploading: false,
       id: '',
-      user: ''
+      user: '',
+      image: null,
+      colorIcon: 'white'
     };
   }
 
@@ -128,36 +130,14 @@ export default class RegisterCar extends Component {
         }
       });
 
-    ['plate']
-      .forEach((text) => {
-        let value = this[text].value();
+    if (!this.state.image) {
+      this.state.colorIcon = 'red'
+    }
 
-        if (!value) {
-          errors[text] = 'Campo obrigatório.';
-          errorPlate = true;
-        } else {
-          if ('plate' === text && value.length < 8) {
-            errors[text] = 'Placa inválida. Ex.:AAA-0000';
-            errorPlate = true;
-          }
-        }
-      });
+    if (errorPlate == false && this.state.image) {
 
-    ['model']
-      .forEach((text) => {
-        let value = this[text].value();
-      });
-
-    ['color']
-      .forEach((text) => {
-        let value = this[text].value();
-      });
-
-
-    if (errorPlate == false) {
-
-      const url = CAR_API + '/validate_car/' //cars db models url
-
+      const url = CAR_API + '/validate_car/'
+      this.state.document = this.state.image
 
       let car = JSON.stringify({
         id_token: this.state.id,
@@ -179,8 +159,7 @@ export default class RegisterCar extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);
-        // this.setState({ registered: true, registerMessage: 'Veículo cadastrado!' })
-        Alert.alert('Veículo cadastrado!')
+        Alert.alert(jsonResponse)
       }
       ).catch(error => {
         console.log(error)
@@ -213,86 +192,85 @@ export default class RegisterCar extends Component {
                 />
                 <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
               </View>
-              <View style={styles.border}>
-                <TextField
-                  ref={this.plateRef}
-                  value={data.plate}
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(plate) => this.setState({ plate })}
-                  // onChangeText={this.onChangeText}
-                  // onSubmitEditing={this.onSubmitPLate}
-                  returnKeyType='next'
-                  label='Placa'
-                  tintColor="white"
-                  underlineColorAndroid="transparent"
-                  maxLength={8}
-                  autoCapitalize="characters"
-                  error={errors.plate}
-                  textColor="white"
-                  labelPadding={5}
-                  inputContainerStyle={{ marginHorizontal: 20 }}
-                />
-                <TextField
-                  ref={this.modelRef}
-                  value={data.model}
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(model) => this.setState({ model })}
-                  // onChangeText={this.onChangeText}
-                  // onSubmitEditing={this.onSubmitModel}
-                  returnKeyType='next'
-                  label='Modelo'
-                  tintColor="white"
-                  textColor="white"
-                  labelPadding={5}
-                  inputContainerStyle={{ marginHorizontal: 20 }}
-                />
-                <TextField
-                  ref={this.colorRef}
-                  value={data.color}
-                  autoCorrect={false}
-                  enablesReturnKeyAutomatically={true}
-                  onFocus={this.onFocus}
-                  onChangeText={(color) => this.setState({ color })}
-                  // onChangeText={this.onChangeText}
-                  // onSubmitEditing={this.onSubmitMessage}
-                  returnKeyType='next'
-                  label='Cor'
-                  tintColor="white"
-                  textColor="white"
-                  labelPadding={5}
-                  inputContainerStyle={{ marginHorizontal: 20 }}
-                />
-                <View style={styles.container1}>
-                  <TouchableOpacity
-                    color="#B2EBF2"
-                    onPress={this._takePhoto}
-                    containerViewStyle={{ width: '10%' }}
-                  >
-                    <Icon
-                      type='FontAwesome'
-                      name="camera"
-                      style={{ color: "#26C6DA" }}
-                    />
-                  </TouchableOpacity>
-
-                </View>
-                {this._maybeRenderImage()}
-                {this._maybeRenderUploadingOverlay()}
-                <View style={styles.container1}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    color="#26C6DA"
-                    onPress={this.onPressButton}
-                    containerViewStyle={{ width: '40%' }}
-                  >
-                    <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
-                  </TouchableOpacity>
-                  {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
-
+              <View style={styles.borderContainer}>
+                <View style={styles.border}>
+                  <TextField
+                    ref={this.plateRef}
+                    value={data.plate}
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(plate) => this.setState({ plate })}
+                    // onChangeText={this.onChangeText}
+                    // onSubmitEditing={this.onSubmitPLate}
+                    returnKeyType='next'
+                    label='Placa'
+                    tintColor="white"
+                    underlineColorAndroid="transparent"
+                    maxLength={8}
+                    autoCapitalize="characters"
+                    error={errors.plate}
+                    textColor="white"
+                    labelPadding={5}
+                    inputContainerStyle={{ marginHorizontal: 20 }}
+                  />
+                  <TextField
+                    ref={this.modelRef}
+                    value={data.model}
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(model) => this.setState({ model })}
+                    // onChangeText={this.onChangeText}
+                    // onSubmitEditing={this.onSubmitModel}
+                    returnKeyType='next'
+                    label='Modelo'
+                    tintColor="white"
+                    textColor="white"
+                    labelPadding={5}
+                    inputContainerStyle={{ marginHorizontal: 20 }}
+                  />
+                  <TextField
+                    ref={this.colorRef}
+                    value={data.color}
+                    autoCorrect={false}
+                    enablesReturnKeyAutomatically={true}
+                    onFocus={this.onFocus}
+                    onChangeText={(color) => this.setState({ color })}
+                    // onChangeText={this.onChangeText}
+                    // onSubmitEditing={this.onSubmitMessage}
+                    returnKeyType='next'
+                    label='Cor'
+                    tintColor="white"
+                    textColor="white"
+                    labelPadding={5}
+                    inputContainerStyle={{ marginHorizontal: 20 }}
+                  />
+                  <View style={styles.container1}>
+                    <TouchableOpacity
+                      color="#B2EBF2"
+                      onPress={this._takePhoto}
+                      containerViewStyle={{ width: '10%' }}
+                    >
+                      <Icon
+                        type='FontAwesome'
+                        name="camera"
+                        style={{ color: this.state.colorIcon }}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  {this._maybeRenderImage()}
+                  {this._maybeRenderUploadingOverlay()}
+                  <View style={styles.container1}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      color="#26C6DA"
+                      onPress={this.onPressButton}
+                      containerViewStyle={{ width: '40%' }}
+                    >
+                      <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             </View>
@@ -302,7 +280,7 @@ export default class RegisterCar extends Component {
     );
   }
 
-  _maybeRenderUploadingOverlay = () => { //done
+  _maybeRenderUploadingOverlay = () => {
     if (this.state.uploading) {
       return (
         <View
@@ -313,7 +291,7 @@ export default class RegisterCar extends Component {
     }
   };
 
-  _maybeRenderImage = () => { //done
+  _maybeRenderImage = () => {
     let {
       image
     } = this.state;
@@ -321,6 +299,12 @@ export default class RegisterCar extends Component {
     if (!image) {
       return;
     }
+    else{
+      this.state.colorIcon = "#26C6DA"
+    }
+
+    // onPress={this._copyToClipboard}
+    // onLongPress={this._share}
 
     return (
       <View
@@ -346,7 +330,7 @@ export default class RegisterCar extends Component {
     alert('Copied image URL to clipboard');
   };
 
-  _takePhoto = async () => { //Done
+  _takePhoto = async () => {
     const {
       status: cameraPerm
     } = await Permissions.askAsync(Permissions.CAMERA);
@@ -393,17 +377,17 @@ export default class RegisterCar extends Component {
         uploadResponse = await uploadImageAsync(pickerResult.uri);
         uploadResult = await uploadResponse.json();
 
-        console.log(uploadResult.image)
+        console.log(uploadResult.document)
 
         this.setState({
-          image: uploadResult.image
+          image: uploadResult.document
         });
       }
     } catch (e) {
       console.log({ uploadResponse });
       console.log({ uploadResult });
       console.log({ e });
-      alert('Upload failed, sorry :(');
+      alert('Falha de Upload, tente novamente.');
     } finally {
       this.setState({
         uploading: false
@@ -413,13 +397,13 @@ export default class RegisterCar extends Component {
 }
 
 async function uploadImageAsync(uri) {
-  let apiUrl = CAR_API + '/documents/';
+  let apiUrl = CAR_API + '/document/';
 
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];
 
   let formData = new FormData();
-  formData.append('image', {
+  formData.append('document', {
     uri,
     name: `photo.${fileType}`,
     type: `image/${fileType}`,
@@ -441,7 +425,7 @@ async function uploadImageAsync(uri) {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    flex: 1
+    flex: 1,
   },
   container1: {
     marginTop: 13,
@@ -513,12 +497,12 @@ const styles = StyleSheet.create({
   },
   maybeRenderContainer: {
     width: '100%',
-    height: '40%',
+    height: '38%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
     elevation: 2,
-    marginTop: 32,
+    marginTop: 10,
     shadowColor: 'rgba(0,0,0,1)',
     shadowOpacity: 0.2,
     shadowOffset: {
@@ -526,6 +510,15 @@ const styles = StyleSheet.create({
       width: 4,
     },
     shadowRadius: 5
+  },
+  maybeRenderImageContainer: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    overflow: 'hidden',
+  },
+  maybeRenderImage: {
+    height: 200,
+    width: 310,
   },
   userInfo: {
     fontSize: 15,
@@ -538,7 +531,11 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 15,
     borderColor: "white",
-    backgroundColor: '#B2EBF2'
+    backgroundColor: '#B2EBF2',
+  },
+  borderContainer: {
+    paddingBottom: 20,
+    marginBottom: 20
   }
 });
 
