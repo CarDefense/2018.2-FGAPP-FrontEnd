@@ -241,7 +241,7 @@ class WelcomeScreen extends Component {
                             <View style={styles.containerImage}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../images/icontest.png')}
+                                    source={require('../images/imageedit_1_5249542411.png')}
                                     />
                             </View>
                             <View style={styles.container1}>
@@ -335,7 +335,7 @@ class WelcomeScreen extends Component {
                             <View style={styles.containerImage}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../images/icontest.png')}
+                                    source={require('../images/imageedit_1_5249542411.png')}
                                     />
                             </View>
                             <View style={styles.container2}>
