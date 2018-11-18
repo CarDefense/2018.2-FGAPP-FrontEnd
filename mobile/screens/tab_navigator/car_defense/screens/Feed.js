@@ -3,35 +3,7 @@ import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image, To
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
-var tk
-
-async function register() {
-  const { status } = await Expo.Permissions.askAsync(
-    Expo.Permissions.NOTIFICATIONS
-  );
-  if (status != 'granted') {
-    alert('You need to enable permissions in settings');
-    return;
-  }
-
-  const value = await Expo.Notifications.getExpoPushTokenAsync();
-  tk = value;
-  //console.log(status, value);
-
-}
-
 export default class Feed extends React.Component {
-  componentWillMount() {
-    register();
-    this.listener = Expo.Notifications.addListener(this.listen);
-  }
-  componentWillUnmount() {
-    this.listener && Expo.Notifications.addListener(this.listen);
-  }
-
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
 
   constructor(props) {
     super(props);
@@ -45,11 +17,22 @@ export default class Feed extends React.Component {
     const { state } = this.props.navigation;
     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
 
+
+    const { status } = await Expo.Permissions.askAsync(
+      Expo.Permissions.NOTIFICATIONS
+    );
+    if (status != 'granted') {
+      alert('You need to enable permissions in settings');
+      return;
+    }
+
+    const value = await Expo.Notifications.getExpoPushTokenAsync();
+
     let profile = JSON.stringify({
       id_token: id,
-      notification_token: tk,
+      notification_token: value,
     })
-    //console.log(profile);
+    console.log(profile);
     fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
@@ -59,10 +42,10 @@ export default class Feed extends React.Component {
       body: profile
     }).then(response => { return response.json() }
     ).then(jsonResponse => {
-      //console.log(jsonResponse);
+      console.log(jsonResponse);
     }
     ).catch(error => {
-      //console.log(error)
+      console.log(error)
     })
 
     return fetch(NOTIFICATIONS_API + '/emergencynotifications/?ordering=-id')
@@ -109,7 +92,7 @@ export default class Feed extends React.Component {
 
     return (
       <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-        <ScrollView 
+        <ScrollView
           style={styles.item}
           refreshControl={
             <RefreshControl
