@@ -464,7 +464,7 @@ export default class SignUpScreen extends Component {
         console.log(uploadResult.image)
 
         this.setState({
-          image: uploadResult.image
+          image: uploadResult.document
         });
       }
     } catch (e) {
