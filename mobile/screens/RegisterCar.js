@@ -43,7 +43,8 @@ export default class RegisterCar extends Component {
       uploading: false,
       id: '',
       user: '',
-      image: null
+      image: null,
+      colorIcon: 'white'
     };
   }
 
@@ -129,36 +130,14 @@ export default class RegisterCar extends Component {
         }
       });
 
-    ['plate']
-      .forEach((text) => {
-        let value = this[text].value();
+    if (!this.state.image) {
+      this.state.colorIcon = 'red'
+    }
 
-        if (!value) {
-          errors[text] = 'Campo obrigatório.';
-          errorPlate = true;
-        } else {
-          if ('plate' === text && value.length < 8) {
-            errors[text] = 'Placa inválida. Ex.:AAA-0000';
-            errorPlate = true;
-          }
-        }
-      });
+    if (errorPlate == false && this.state.image) {
 
-    ['model']
-      .forEach((text) => {
-        let value = this[text].value();
-      });
-
-    ['color']
-      .forEach((text) => {
-        let value = this[text].value();
-      });
-
-
-    if (errorPlate == false) {
-
-      const url = CAR_API + '/validate_car/' //cars db models url
-
+      const url = CAR_API + '/validate_car/'
+      this.state.document = this.state.image
 
       let car = JSON.stringify({
         id_token: this.state.id,
@@ -180,8 +159,7 @@ export default class RegisterCar extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         console.log(jsonResponse);
-        // this.setState({ registered: true, registerMessage: 'Veículo cadastrado!' })
-        Alert.alert('Veículo cadastrado!')
+        Alert.alert(jsonResponse)
       }
       ).catch(error => {
         console.log(error)
@@ -277,10 +255,9 @@ export default class RegisterCar extends Component {
                       <Icon
                         type='FontAwesome'
                         name="camera"
-                        style={{ color: "#26C6DA" }}
+                        style={{ color: this.state.colorIcon }}
                       />
                     </TouchableOpacity>
-
                   </View>
                   {this._maybeRenderImage()}
                   {this._maybeRenderUploadingOverlay()}
@@ -293,8 +270,6 @@ export default class RegisterCar extends Component {
                     >
                       <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
                     </TouchableOpacity>
-                    {/* {this.state.registered ? <Text style={{ flexDirection: 'row', justifyContent: 'center', color: '#5c68c3', marginTop: 20 }}>{this.state.registerMessage}</Text> : null } */}
-
                   </View>
                 </View>
               </View>
@@ -323,6 +298,9 @@ export default class RegisterCar extends Component {
 
     if (!image) {
       return;
+    }
+    else{
+      this.state.colorIcon = "#26C6DA"
     }
 
     // onPress={this._copyToClipboard}
