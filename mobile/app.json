@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "com.cardefense.cardefense",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }
