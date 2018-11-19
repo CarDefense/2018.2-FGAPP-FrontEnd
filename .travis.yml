@@ -1,7 +1,7 @@
 language: android
 jdk:
 - oraclejdk8
-node_js: "0.10"
+node_js: "9.3"
 install: "yarn install"
 script: "yarn test"
 
