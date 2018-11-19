@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
 
   text: {
     color: "#B2EBF2",
-    fontWeight: '600'
+    fontWeight: '600',
+    fontFamily: 'Roboto'
   },
   headerContent: {
     padding: 30,
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 4,
     margin: 25,
-    marginTop: 2,
+    marginTop: 20,
 
   },
   icon1: {

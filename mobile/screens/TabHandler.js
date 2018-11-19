@@ -69,15 +69,16 @@ const TabHandler = new TabNavigator({
             showIcon: true,
             swipeEnabled: false,
             activeTintColor: 'black',
+            pressColor: 'black',
 
             labelStyle: {
                 fontSize: 5,
             },
             tabStyle: {
-                height: 65,
+                height: 50,
             },
             style: {
-                backgroundColor: '#E0F7FA',
+                backgroundColor: 'white',
 
             },
             animationEnabled: true,

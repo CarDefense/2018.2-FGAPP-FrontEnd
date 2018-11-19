@@ -129,14 +129,14 @@ export default class PublicNotifications extends Component {
               <View style={styles.header}>
                 <View style={styles.headerContent}>
                   <Image style={styles.avatar}
-                    source={require('../images/alert.png')}
+                    source={require('../images/al.png')}
                   />
                 </View>
               </View>
               <View style={styles.borderContainer}>
                 <View style={styles.border}>
                   <Picker selectedValue={this.state.title} onValueChange={this.updateTitle} style={{ color: "#26C6DA", backgroundColor: 'white' }} mode="dropdown">
-                    <Picker.Item label="Alerta Geral" value="Alerta Geral" />
+                    <Picker.Item label="Clique para selecionar o tipo de alerta" value="Outro" />
                     <Picker.Item label="Roubo" value="Roubo" />
                     <Picker.Item label="Incêndio" value="Incendio" />
                     <Picker.Item label="Tempestade" value="Tempestade" />
@@ -437,11 +437,8 @@ const styles = StyleSheet.create({
     width: 310,
   },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 40,
-    borderWidth: 5,
-    borderColor: "white",
+    width: 130,
+    height: 130,
     marginBottom: 10,
   },
   name: {

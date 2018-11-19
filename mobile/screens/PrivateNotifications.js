@@ -35,7 +35,7 @@ export default class PrivateNotifications extends Component {
       uploading: false,
     }
   }
-  updateTitle = (title) => {
+  updateTitle = (title='') => {
     this.setState({ title: title })
   }
   onFocus() {
@@ -160,7 +160,7 @@ export default class PrivateNotifications extends Component {
               <View style={styles.header}>
                 <View style={styles.headerContent}>
                   <Image style={styles.avatar}
-                    source={require('../images/notification.png')}
+                    source={require('../images/oie_transparent.png')}
                   />
                 </View>
               </View>
@@ -172,14 +172,12 @@ export default class PrivateNotifications extends Component {
                     mode="dropdown"
                     style={{ color: "#26C6DA", backgroundColor: 'white' }}
                   >
-                    <Picker.Item label="Notificação" value="Notificacao" />
+                    <Picker.Item label="Clique para selecionar o tipo de notificação" value="Outro" />
                     <Picker.Item label="Vidro aberto" value="Vidro aberto" />
                     <Picker.Item label="Farol aceso" value="Farol aceso" />
                     <Picker.Item label="Pneu furado" value="Pneu furado" />
                     <Picker.Item label="Alarme disparado" value="Alarme disparado" />
                     <Picker.Item label="Local estacionado" value="Local estacionado" />
-
-
                   </Picker>
                   <TextField
                     ref={this.plateRef}
@@ -500,11 +498,8 @@ const styles = StyleSheet.create({
     width: 310,
   },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 40,
-    borderWidth: 5,
-    borderColor: "white",
+    width: 130,
+    height: 130,
     marginBottom: 10,
   },
   name: {

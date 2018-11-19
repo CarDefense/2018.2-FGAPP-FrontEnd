@@ -36,9 +36,8 @@ export default class Notifications extends Component {
                         onPress={() => this.PrivateNotifications()}
                     >
                         <Image style={styles.avatar}
-                            source={require('../../../../../../images/notification.png')}
+                            source={ require('../../../../../../images/oie_transparent.png') }
                         />
-                        <Text style={styles.name}>Envie aqui as notificões</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.container1}>
@@ -46,9 +45,8 @@ export default class Notifications extends Component {
                         onPress={() => this.PublicNotifications()}
                     >
                         <Image style={styles.avatar}
-                            source={require('../../../../../../images/alert.png')}
+                            source={require('../../../../../../images/al.png')}
                         />
-                        <Text style={styles.name}>Envie aqui os alertas</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -66,19 +64,19 @@ const styles = StyleSheet.create({
     container1: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50
+        padding: 50,
     },
     avatar: {
-        width: 170,
-        height: 170,
-        borderRadius: 63,
-        borderWidth: 7,
-        borderColor: "white",
+        width: 240,
+        height: 240, 
         marginBottom: 10,
+        
     },
     name: {
         fontSize: 18,
         color: "white",
         fontWeight: '800',
+        justifyContent: "center",
+        alignItems: "center"
     },
 });

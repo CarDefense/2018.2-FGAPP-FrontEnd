@@ -119,7 +119,7 @@ class WelcomeScreen extends Component {
             <MaterialIcon
                 size={24}
                 name={name}
-                color={TextField.defaultProps.baseColor}
+                color={'white'}
                 onPress={this.onAccessoryPress}
                 suppressHighlighting
             />
@@ -241,7 +241,7 @@ class WelcomeScreen extends Component {
                             <View style={styles.containerImage}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../images/icontest.png')}
+                                    source={require('../images/imageedit_1_5249542411.png')}
                                     />
                             </View>
                             <View style={styles.container1}>
@@ -263,6 +263,7 @@ class WelcomeScreen extends Component {
                                     underlineColorAndroid="transparent"
                                     error={errors.username}
                                     textColor='white'
+                                    baseColor='white'
                                     />
                                 <TextField
                                     ref={this.passwordRef}
@@ -284,6 +285,7 @@ class WelcomeScreen extends Component {
                                     characterRestriction={15}
                                     renderAccessory={this.renderPasswordAccessory}
                                     textColor='white'
+                                    baseColor='white'
                                     />
                                 <View style={styles.containerButton}>
                                     <TouchableOpacity
@@ -335,7 +337,7 @@ class WelcomeScreen extends Component {
                             <View style={styles.containerImage}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../images/icontest.png')}
+                                    source={require('../images/imageedit_1_5249542411.png')}
                                     />
                             </View>
                             <View style={styles.container2}>
@@ -365,8 +367,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     image: {
-        height: 170,
-        width: 170,
+        height: 200,
+        width: 200,
     },
     container1: {
         marginTop: 64,

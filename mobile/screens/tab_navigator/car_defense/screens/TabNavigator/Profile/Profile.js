@@ -125,11 +125,13 @@ export default class UserProfileView extends Component {
                                             onPress={() => { this._onPressButton(item.plate) }}
                                             containerViewStyle={{ width: '10%' }}
                                         >
+                                        <View style={{ flexDirection: 'row-reverse' }}>
                                             <Icon
                                                 type='FontAwesome'
                                                 name="trash"
                                                 style={{ color: "red", fontSize: 15 }}
                                             />
+                                        </View>
                                         </TouchableOpacity>
                                     </View>
 
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     text2: {
-        color: "#B2EBF2",
+        color: "#26C6DA",
         fontWeight: '800',
         fontSize: 12
     }

@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 4,
     margin: 25,
-    marginTop: 2,
+    marginTop: 20,
 
   },
   icon1: {
