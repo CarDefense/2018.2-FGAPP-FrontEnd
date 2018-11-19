@@ -2,7 +2,7 @@
 
 set -e # exit entire script when command exits with non-zero status
 
-yarn install
+yarn
 
 # Publish `production` release 
 exp publish --release-channel production --non-interactive
