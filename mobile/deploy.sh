@@ -5,10 +5,10 @@ set -e # exit entire script when command exits with non-zero status
 yarn
 
 # Publish `production` release 
-exp publish --release-channel production --non-interactive
+yarn expo publish --release-channel production --non-interactive
 
 # Start building standalone android build using `production` release channel
-exp build:android --release-channel production --non-interactive --no-publish
+yarn expo build:android --release-channel production --non-interactive --no-publish
 
 # Download the artifact to current directory as `app.apk`
 curl -o app.apk "$(exp url:apk --non-interactive)"
