@@ -63,7 +63,7 @@ export default class PublicNotifications extends Component {
   onPressButton = () => {
     let errors = {};
     const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
-    let i = true;
+    let errorMessage = false;
     const { state } = this.props.navigation;
     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
 
@@ -73,16 +73,16 @@ export default class PublicNotifications extends Component {
 
         if (!value) {
           errors[text] = 'Campo obrigatório.';
-          i += 1;
+          errorMessage = true;
         } else {
           if ('message' === text && value.length < 5) {
             errors[text] = 'Forneça mais detalhes do ocorrido.';
-            i += 1;
+            errorMessage = true;            
           }
         }
       });
 
-    if (i) {
+    if (errorMessage==false) {
       let notification = JSON.stringify({
         sender_id: id,
         title: this.state.title,
@@ -101,14 +101,12 @@ export default class PublicNotifications extends Component {
         body: notification
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
-        console.log(jsonResponse);
+        Alert.alert(jsonResponse)
       }
       ).catch(error => {
         console.log(error)
       })
-      Alert.alert("Alerta enviado!")
     }
-
     this.setState({ errors });
   }
 

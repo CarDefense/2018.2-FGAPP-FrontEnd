@@ -80,7 +80,7 @@ export default class PrivateNotifications extends Component {
     let errorMessage = false;
     const { state } = this.props.navigation;
     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-
+   
     ['plate']
       .forEach((text) => {
         let value = this[text].value();
@@ -131,7 +131,6 @@ export default class PrivateNotifications extends Component {
         body: notification
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
-        console.log(jsonResponse);
         Alert.alert(jsonResponse)
       }
       ).catch(error => {
@@ -139,6 +138,7 @@ export default class PrivateNotifications extends Component {
         Alert.alert("Veículo não cadastradro!")
       })
     }
+    
     this.setState({ errors });
   }
 
