@@ -20,6 +20,6 @@ before_install:
   - gem install fastlane --no-rdoc --no-ri --no-document --quiet
   - yarn 
   - yarn add expo-cli
-  - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+  - yarn expo login -u "$EXPO_USERNAME" -p "$EXPO_PASSWORD" --non-interactive
 script:
   - bash ./deploy.sh
