@@ -68,8 +68,8 @@ exports[`WelcomeScreen snapShot 1`] = `
                 source={1}
                 style={
                   Object {
-                    "height": 170,
-                    "width": 170,
+                    "height": 200,
+                    "width": 200,
                   }
                 }
               />
@@ -286,7 +286,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                   style={
                     Object {
                       "backgroundColor": "transparent",
-                      "borderBottomColor": "rgba(0, 0, 0, 0.38)",
+                      "borderBottomColor": "rgba(255, 255, 255, 1)",
                       "borderBottomWidth": 0.5,
                       "height": 64,
                       "paddingBottom": 8,
@@ -311,7 +311,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                       numberOfLines={1}
                       style={
                         Object {
-                          "color": "rgba(0, 0, 0, 0.38)",
+                          "color": "rgba(255, 255, 255, 1)",
                           "fontSize": 16,
                         }
                       }
@@ -431,7 +431,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                         style={
                           Object {
                             "backgroundColor": "transparent",
-                            "color": "rgba(0, 0, 0, .38)",
+                            "color": "white",
                             "fontSize": 12,
                             "opacity": 1,
                           }
@@ -452,7 +452,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                   style={
                     Object {
                       "backgroundColor": "transparent",
-                      "borderBottomColor": "rgba(0, 0, 0, 0.38)",
+                      "borderBottomColor": "rgba(255, 255, 255, 1)",
                       "borderBottomWidth": 0.5,
                       "height": 64,
                       "paddingBottom": 8,
@@ -477,7 +477,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                       numberOfLines={1}
                       style={
                         Object {
-                          "color": "rgba(0, 0, 0, 0.38)",
+                          "color": "rgba(255, 255, 255, 1)",
                           "fontSize": 16,
                         }
                       }
@@ -615,7 +615,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                         style={
                           Object {
                             "backgroundColor": "transparent",
-                            "color": "rgba(0, 0, 0, .38)",
+                            "color": "white",
                             "fontSize": 12,
                             "opacity": 1,
                           }
@@ -643,7 +643,7 @@ exports[`WelcomeScreen snapShot 1`] = `
                           },
                           undefined,
                           Object {
-                            "color": "rgba(0, 0, 0, .38)",
+                            "color": "white",
                             "fontSize": 12,
                           },
                         ]

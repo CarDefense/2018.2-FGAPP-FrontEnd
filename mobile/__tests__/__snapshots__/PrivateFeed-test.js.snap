@@ -68,7 +68,7 @@ exports[`PrivateFeed snapShot 1`] = `
             "elevation": 4,
             "flexGrow": 1,
             "margin": 25,
-            "marginTop": 2,
+            "marginTop": 20,
             "padding": 20,
           }
         }

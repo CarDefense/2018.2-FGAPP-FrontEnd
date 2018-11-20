@@ -55,12 +55,9 @@ exports[`PublicNotifications snapShot 1`] = `
                   source={1}
                   style={
                     Object {
-                      "borderColor": "white",
-                      "borderRadius": 40,
-                      "borderWidth": 5,
-                      "height": 100,
+                      "height": 130,
                       "marginBottom": 10,
-                      "width": 100,
+                      "width": 130,
                     }
                   }
                 />
@@ -96,9 +93,9 @@ exports[`PublicNotifications snapShot 1`] = `
                     items={
                       Array [
                         Object {
-                          "label": "Alerta Geral",
+                          "label": "Clique para selecionar o tipo de alerta",
                           "textColor": undefined,
-                          "value": "Alerta Geral",
+                          "value": "Outro",
                         },
                         Object {
                           "label": "Roubo",
