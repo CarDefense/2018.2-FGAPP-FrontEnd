@@ -18,9 +18,8 @@ before_install:
   - cd mobile/
   - gem update --system
   - gem install fastlane --no-rdoc --no-ri --no-document --quiet
-install:
-  - yarn
-script:
+  - yarn 
   - yarn add expo-cli
   - yarn expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+script:
   - bash ./deploy.sh
