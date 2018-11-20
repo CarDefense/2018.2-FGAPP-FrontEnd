@@ -1,4 +1,4 @@
-import PublicNotifications from '../screens/tab_navigator/car_defense/screens/TabNavigator/PublicNotifications/PublicNotifications'
+import PublicNotifications from '../screens/PublicNotifications'
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'

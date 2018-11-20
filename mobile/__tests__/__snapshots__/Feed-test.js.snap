@@ -4,7 +4,7 @@ exports[`Feed snapShot 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#8bd4da",
+      "backgroundColor": "#00ACC1",
       "flex": 1,
     }
   }
@@ -18,7 +18,16 @@ exports[`Feed snapShot 1`] = `
     }
     style={
       Object {
-        "flexDirection": "row",
+        "elevation": 4,
+        "marginBottom": 5,
+        "marginTop": 20,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 2,
       }
     }
   >
@@ -45,11 +54,6 @@ exports[`Feed snapShot 1`] = `
         renderItem={[Function]}
         scrollEventThrottle={50}
         stickyHeaderIndices={Array []}
-        style={
-          Object {
-            "backgroundColor": "#8bd4da",
-          }
-        }
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}

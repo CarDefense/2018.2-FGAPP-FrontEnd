@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
 import {StackNavigator} from 'react-navigation'
 
 import WelcomeScreen from './screens/WelcomeScreen'
 import SignUpScreen from './screens/SignUpScreen'
+import RegisterCar from './screens/RegisterCar'
+import PrivateNotifications from './screens/PrivateNotifications'
+import PublicNotifications from './screens/PublicNotifications'
 import TabHandler from './screens/TabHandler'
 
 
@@ -26,18 +28,21 @@ const AppStackNavigator = new StackNavigator({
     }),
   },
   SignUpScreen:{
-    screen:SignUpScreen
+    screen:SignUpScreen,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+    }),
+  },
+  RegisterCar:{
+    screen:RegisterCar,
+  },
+  PrivateNotifications:{
+    screen:PrivateNotifications,
+  },
+  PublicNotifications:{
+    screen:PublicNotifications,
   },
   TabHandler:{
-    screen:TabHandler
+    screen:TabHandler,
   }
 })
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
