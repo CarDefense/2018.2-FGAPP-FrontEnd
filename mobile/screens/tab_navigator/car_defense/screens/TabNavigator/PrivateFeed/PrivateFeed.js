@@ -1,7 +1,15 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
+import {
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import { NOTIFICATIONS_API } from '../const/Const'
-
 
 
 export default class Feed extends React.Component {
@@ -10,14 +18,18 @@ export default class Feed extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
+      height: 135,
+      id: '',
+      user: '',
     };
   }
 
 
   async componentDidMount() {
     const { state } = this.props.navigation;
-    var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
-    let url = NOTIFICATIONS_API + `/notifications/?token=` + id
+    this.state.id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
+    this.state.user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
+    let url = NOTIFICATIONS_API + `/notifications/?ordering=-id&token=` + this.state.id
 
     return fetch(url)
       .then((response) => response.json())
@@ -43,10 +55,28 @@ export default class Feed extends React.Component {
     });
   }
 
+  _height = (height) => {
+    if (height === 400) {
+      this.state.height = 135
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+    else {
+      this.state.height = 400
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+  }
+
   render() {
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
-        <ScrollView style={styles.item}
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+        <ScrollView
+          style={styles.item}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -60,16 +90,28 @@ export default class Feed extends React.Component {
               return (
                 <View style={styles.item2}>
                   <Text style={styles.text1}>{item.title}</Text>
-                  <Image source={{ uri: item.image }}
-                    style={{ width: 270, height: 135 }} />
-                  <Text style={styles.text}>{item.message}</Text>
+                  <Text style={styles.text}>{item.date} às {item.time}</Text>
+                  <TouchableOpacity
+                    onPress={() => { this._height(this.state.height) }}
+                  >
+                    <Image source={{ uri: item.image }}
+                      style={{ height: this.state.height }} />
+                  </TouchableOpacity>
+                  <View style={{ marginTop: 10 }}>
+                    <Text style={styles.text2}>{item.message}</Text>
+                  </View>
                 </View>
               );
             }}
             keyExtractor={({ id }, index) => id.toString()}
 
           />
-
+          <View style={styles.item2}>
+            <Text style={styles.text1}>Olá {this.state.user}, seja bem Vindo!</Text>
+            <View style={{ marginTop: 10 }}>
+              <Text style={styles.text2}>Cadastre a placa do seu veículo para poder receber novas notificações.</Text>
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
@@ -78,8 +120,6 @@ export default class Feed extends React.Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "",
-    margin: 4,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -87,20 +127,15 @@ const styles = StyleSheet.create({
       height: 1,
       width: 1
     },
-    elevation: 4
+    elevation: 4,
+    marginTop: 20,
+    marginBottom: 5
   },
 
   text: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '600'
   },
-  text1: {
-    color: "#8bd4da",
-    fontWeight: '800',
-  }, header: {
-    backgroundColor: "#8bd4da",
-  },
-
   headerContent: {
     padding: 30,
     alignItems: 'center',
@@ -125,10 +160,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
-  item: {
-    flexDirection: 'row',
-  },
-
   icon: {
     width: 30,
     height: 30,
@@ -140,18 +171,17 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   item2: {
-    alignItems: "center",
     backgroundColor: "white",
     flexGrow: 1,
     padding: 20,
     borderRadius: 15,
     elevation: 4,
     margin: 25,
-    marginTop: 2,
+    marginTop: 20,
 
   },
   icon1: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 44,
     position: 'absolute',
@@ -161,13 +191,12 @@ const styles = StyleSheet.create({
 
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
     fontSize: 30
   },
   text2: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
-    fontSize: 12
   }
 });

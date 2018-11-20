@@ -1,11 +1,11 @@
-import RegisterCar from '../screens/RegisterCar'
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
+import Notifications from '../screens/tab_navigator/car_defense/screens/TabNavigator/Notifications/Notifications';
 
-test('RegisterCar snapShot', () => {
+test('Notifications snapShot', () => {
     const snap = renderer.create(
-        <RegisterCar/>
+        <Notifications/>
     ).toJSON()
     expect(snap).toMatchSnapshot()
 })
