@@ -7,7 +7,6 @@ cache:
     - ~/.npm
     - .jest
 before_script:
-  - cd mobile
   - npm install -g npm@latest
 script:
   - npm ci
@@ -17,6 +16,7 @@ jobs:
     - stage: deploy
       node_js: lts/*
       script:
+        - cd mobile
         - npm ci
         - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
         - npx expo publish --non-interactive
