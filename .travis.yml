@@ -12,6 +12,7 @@ script:
 jobs:
   include:
     - stage: deploy
+      if: branch = master AND (NOT type = pull_request)
       node_js: lts/*
       script:
         - cd mobile
