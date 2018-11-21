@@ -7,7 +7,7 @@ before_script:
 script:
   - cd mobile
   - yarn add --dev jest
-  - yarn run test
+  - yarn test -u
 
 jobs:
   include:
