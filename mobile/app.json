@@ -11,8 +11,6 @@
     "name": "cardefense",
     "slug": "cardefense",
     "version": "0.1.0",
-    "icon": "./images/imageedit_1_5249542411.png",
-    "description": "",
     "githubUrl": "https://github.com/fga-eps-mds/2018.2-CarDefense",
     "ios": {
       "bundleIdentifier": "com.epsmds.cardefense"
