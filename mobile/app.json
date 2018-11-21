@@ -11,18 +11,13 @@
     "name": "cardefense",
     "slug": "cardefense",
     "version": "0.1.0",
-    "icon": "./images/imageedit_1_5249542411.png",
-    "description": "",
-    "githubUrl": "https://github.com/fga-eps-mds/2018.2-CarDefense",
+    "githubUrl": "https://github.com/CarDefense/CarDefense_FrontEnd",
     "ios": {
-      "bundleIdentifier": "com.epsmds.cardefense"
+      "bundleIdentifier": "com.cardefense.cardefense"
     },
     "android": {
-      "package": "com.epsmds.cardefense"
-    },
-    "splash" : {
-      "image": "./images/b6p.png",
-      "resizeMode": "cover"
+      "package": "com.cardefense.cardefense",
+      "versionCode": 2
     }
   }
 }
