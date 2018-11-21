@@ -5,7 +5,7 @@ node_js:
 before_script:
   - yarn
 script:
-  - yarn add expo-cli
+  - cd mobile
   - yarn test
 jobs:
   include:
