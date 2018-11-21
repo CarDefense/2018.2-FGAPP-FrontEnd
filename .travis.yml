@@ -10,6 +10,7 @@ script:
 cache:
   directories:
   - ./mobile/node_modules
+
 jobs:
   include:
     - stage: deploy
