@@ -7,7 +7,7 @@ cache:
     - ~/.npm
     - .jest
 before_script:
-  - bash ./mobile
+  - cd mobile
   - npm install -g npm@latest
 script:
   - npm ci
