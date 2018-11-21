@@ -1,10 +1,10 @@
 import { CAR_API } from '../screens/tab_navigator/car_defense/screens/TabNavigator/const/Const'
 import { TextField } from 'react-native-material-textfield';
+import { MaterialIndicator } from 'react-native-indicators';
 import { Constants, ImagePicker, Permissions } from 'expo';
 import React, { Component } from "react";
 import { Icon } from "native-base";
 import {
-  ActivityIndicator,
   View,
   Text,
   TouchableOpacity,
@@ -16,26 +16,16 @@ import {
 } from 'react-native';
 
 
-async function _Alert() {
-  Alert.alert('Atenção', 'Envie uma foto do documento do seu carro para efetuar o cadastro.')
-}
-
-
 export default class RegisterCar extends Component {
-  state = {
-    loading: false,
-  }
 
   componentWillMount() {
-    _Alert();
+    Alert.alert('Atenção', 'Envie uma foto do documento do seu carro para efetuar o cadastro.')
   }
 
   constructor(props) {
     super(props);
 
     this.onFocus = this.onFocus.bind(this);
-    //this.onSubmit = this.onSubmit.bind(this);
-    //this.onChangeText = this.onChangeText.bind(this);
     this.onSubmitPlate = this.onSubmitPlate.bind(this);
     this.onSubmitModel = this.onSubmitModel.bind(this);
     this.onSubmitColor = this.onSubmitColor.bind(this);
@@ -54,6 +44,7 @@ export default class RegisterCar extends Component {
       id: '',
       user: '',
       image: null,
+      loading: false,
       colorIcon: 'white'
     };
   }
@@ -96,10 +87,6 @@ export default class RegisterCar extends Component {
       });
   }
 
-  //onAccessoryPress() {
-  //  this.setState(({ secureTextEntry }) => ({ secureTextEntry: !secureTextEntry }));
-  //}
-
   onSubmitPlate() {
     this.model.focus();
   }
@@ -117,24 +104,6 @@ export default class RegisterCar extends Component {
     const { state } = this.props.navigation;
     this.state.id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
     this.state.user = state.params ? (state.params.user.first_name ? state.params.user.first_name : state.params.user.username) : undefined;
-
-    let link = CAR_API + '/car/?token=' + this.state.id
-
-    return fetch(link)
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson,
-        }, function () {
-
-        });
-
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   onPressButton = () => {
@@ -192,6 +161,7 @@ export default class RegisterCar extends Component {
           loading: false
         });
         Alert.alert(jsonResponse)
+        this.props.navigation.goBack()
       }
       ).catch(error => {
         console.log(error)
@@ -214,8 +184,8 @@ export default class RegisterCar extends Component {
     let { plate = 'text' } = data;
     let { model = 'text' } = data;
     let { color = 'text' } = data;
-    
-    if(!this.state.loading){
+
+    if (!this.state.loading) {
       return (
         <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
           <KeyboardAvoidingView behavior="position">
@@ -224,7 +194,7 @@ export default class RegisterCar extends Component {
                 <View style={styles.headerContent}>
                   <Image style={styles.avatar}
                     source={require('../images/s.png')}
-                    />
+                  />
                   <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
                 </View>
                 <View style={styles.borderContainer}>
@@ -248,8 +218,8 @@ export default class RegisterCar extends Component {
                         error={errors.plate}
                         textColor="white"
                         labelPadding={5}
-                        // inputContainerStyle={{ marginHorizontal: 20 }}
-                        />
+                      // inputContainerStyle={{ marginHorizontal: 20 }}
+                      />
                       <TextField
                         ref={this.modelRef}
                         value={data.model}
@@ -264,8 +234,8 @@ export default class RegisterCar extends Component {
                         tintColor="white"
                         textColor="white"
                         labelPadding={5}
-                        // inputContainerStyle={{ marginHorizontal: 20 }}
-                        />
+                      // inputContainerStyle={{ marginHorizontal: 20 }}
+                      />
                       <TextField
                         ref={this.colorRef}
                         value={data.color}
@@ -280,20 +250,20 @@ export default class RegisterCar extends Component {
                         tintColor="white"
                         textColor="white"
                         labelPadding={5}
-                        // inputContainerStyle={{ marginHorizontal: 20 }}
-                        />
+                      // inputContainerStyle={{ marginHorizontal: 20 }}
+                      />
                     </View>
                     <View style={styles.container1}>
                       <TouchableOpacity
                         color="#B2EBF2"
                         onPress={this._takePhoto}
                         containerViewStyle={{ width: '10%' }}
-                        >
-                          <Icon
-                            type='FontAwesome'
-                            name="camera"
-                            style={{ color: this.state.colorIcon }}
-                            />
+                      >
+                        <Icon
+                          type='FontAwesome'
+                          name="camera"
+                          style={{ color: this.state.colorIcon }}
+                        />
                       </TouchableOpacity>
                     </View>
                     {this._maybeRenderImage()}
@@ -304,8 +274,8 @@ export default class RegisterCar extends Component {
                         color="#26C6DA"
                         onPress={this.onPressButton}
                         containerViewStyle={{ width: '40%' }}
-                        >
-                          <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
+                      >
+                        <Text style={{ color: '#26C6DA', fontWeight: '800', fontSize: 15 }} >Cadastrar</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -315,7 +285,8 @@ export default class RegisterCar extends Component {
           </KeyboardAvoidingView>
         </View>
       );
-    } else {
+    }
+    else {
       return (
         <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
           <KeyboardAvoidingView behavior="position">
@@ -324,13 +295,16 @@ export default class RegisterCar extends Component {
                 <View style={styles.headerContent}>
                   <Image style={styles.avatar}
                     source={require('../images/s.png')}
-                    />
+                  />
                   <Text style={styles.name}>Olá, {this.state.user}! Cadastre seus Veículos!</Text>
                 </View>
                 <View style={styles.container2}>
                   <View
                     style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                    <ActivityIndicator color="#ffffff" size="large" />
+                    <MaterialIndicator
+                      size={50}
+                      color="white"
+                    />
                   </View>
                 </View>
               </View>
@@ -346,7 +320,10 @@ export default class RegisterCar extends Component {
       return (
         <View
           style={styles.maybeRenderUploading}>
-          <ActivityIndicator color="#313869" size="large" />
+          <MaterialIndicator
+            size={50}
+            color="white"
+          />
         </View>
       );
     }
@@ -360,7 +337,7 @@ export default class RegisterCar extends Component {
     if (!image) {
       return;
     }
-    else{
+    else {
       this.state.colorIcon = "#26C6DA"
     }
 
@@ -556,10 +533,14 @@ const styles = StyleSheet.create({
     height: 200,
     width: 310,
   },
+  maybeLoading: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'center',
+  },
   container2: {
     paddingTop: "75%",
   },
-
   header2: {
     color: '#760f9f',
     textAlign: 'left',
