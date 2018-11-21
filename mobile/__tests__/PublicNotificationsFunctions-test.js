@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-import PublicNotifications from '../screens/tab_navigator/car_defense/screens/TabNavigator/PublicNotifications/PublicNotifications'
+import PublicNotifications from '../screens/PublicNotifications'
 
 it('Function onFocus', () => {
     let publicNotificationsData = renderer.create(<PublicNotifications/>).getInstance()

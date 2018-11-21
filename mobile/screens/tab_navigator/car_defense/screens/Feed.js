@@ -1,52 +1,38 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image } from 'react-native';
+import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity } from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
-var tk
-
-async function register() {
-  const { status } = await Expo.Permissions.askAsync(
-    Expo.Permissions.NOTIFICATIONS
-  );
-  if (status != 'granted') {
-    alert('You need to enable permissions in settings');
-    return;
-  }
-
-  const value = await Expo.Notifications.getExpoPushTokenAsync();
-  tk = value;
-  //console.log(status, value);
-
-}
-
 export default class Feed extends React.Component {
-  componentWillMount() {
-    register();
-    this.listener = Expo.Notifications.addListener(this.listen);
-  }
-  componentWillUnmount() {
-    this.listener && Expo.Notifications.addListener(this.listen);
-  }
-
-  listen = ({ origin, data }) => {
-    console.log('cool data', origin, data);
-  }
 
   constructor(props) {
     super(props);
-    this.state = { refreshing: false, }
+    this.state = {
+      refreshing: false,
+      height: 135
+    }
   }
 
   async componentDidMount() {
     const { state } = this.props.navigation;
     var id = state.params ? (state.params.user.id ? state.params.user.id : state.params.user.user_id) : undefined;
 
+
+    const { status } = await Expo.Permissions.askAsync(
+      Expo.Permissions.NOTIFICATIONS
+    );
+    if (status != 'granted') {
+      alert('You need to enable permissions in settings');
+      return;
+    }
+
+    const value = await Expo.Notifications.getExpoPushTokenAsync();
+
     let profile = JSON.stringify({
       id_token: id,
-      notification_token: tk,
+      notification_token: value,
     })
-    //console.log(profile);
+    console.log(profile);
     fetch(PROFILE_API + '/set_token/', {
       method: 'POST',
       headers: {
@@ -56,13 +42,13 @@ export default class Feed extends React.Component {
       body: profile
     }).then(response => { return response.json() }
     ).then(jsonResponse => {
-      //console.log(jsonResponse);
+      console.log(jsonResponse);
     }
     ).catch(error => {
-      //console.log(error)
+      console.log(error)
     })
 
-    return fetch(NOTIFICATIONS_API + '/emergencynotifications/')
+    return fetch(NOTIFICATIONS_API + '/emergencynotifications/?ordering=-id')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -84,10 +70,30 @@ export default class Feed extends React.Component {
       this.setState({ refreshing: false });
     });
   }
+
+  _height = (height) => {
+    if (height === 400) {
+      this.state.height = 135
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+    else {
+      this.state.height = 400
+      this.setState({ refreshing: true });
+      this.componentDidMount().then(() => {
+        this.setState({ refreshing: false });
+      });
+    }
+  }
+
   render() {
+
     return (
-      <View style={{ backgroundColor: '#8bd4da', flex: 1 }}>
-        <ScrollView style={styles.item}
+      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+        <ScrollView
+          style={styles.item}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -97,16 +103,21 @@ export default class Feed extends React.Component {
         >
 
           <FlatList
-            style={{ backgroundColor: '#8bd4da' }}
             data={this.state.dataSource}
             renderItem={({ item }) => {
               return (
-
                 <View style={styles.item2}>
                   <Text style={styles.text1}>{item.title}</Text>
-                  <Image source={{ uri: item.image }}
-                    style={{ width: 270, height: 135 }} />
-                  <Text style={styles.text}>{item.message}</Text>
+                  <Text style={styles.text}>{item.date} às {item.time}</Text>
+                  <TouchableOpacity
+                    onPress={() => { this._height(this.state.height) }}
+                  >
+                    <Image source={{ uri: item.image }}
+                      style={{ height: this.state.height }} />
+                  </TouchableOpacity>
+                  <View style={{ marginTop: 10 }}>
+                    <Text style={styles.text2}>{item.message}</Text>
+                  </View>
                 </View>
               );
             }}
@@ -123,8 +134,6 @@ export default class Feed extends React.Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "",
-    margin: 4,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -132,20 +141,16 @@ const styles = StyleSheet.create({
       height: 1,
       width: 1
     },
-    elevation: 4
+    elevation: 4,
+    marginTop: 20,
+    marginBottom: 5
   },
 
   text: {
-    color: "#8bd4da",
-    fontWeight: '600'
+    color: "#B2EBF2",
+    fontWeight: '600',
+    fontFamily: 'Roboto'
   },
-  text1: {
-    color: "#8bd4da",
-    fontWeight: '800',
-  }, header: {
-    backgroundColor: "#8bd4da",
-  },
-
   headerContent: {
     padding: 30,
     alignItems: 'center',
@@ -170,9 +175,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 15
   },
-  item: {
-    flexDirection: 'row',
-  },
 
   icon: {
     width: 30,
@@ -185,18 +187,17 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   item2: {
-    alignItems: "center",
     backgroundColor: "white",
     flexGrow: 1,
     padding: 20,
     borderRadius: 15,
     elevation: 4,
     margin: 25,
-    marginTop: 2,
+    marginTop: 20,
 
   },
   icon1: {
-    color: "#8bd4da",
+    color: "#B2EBF2",
     fontWeight: '800',
     fontSize: 44,
     position: 'absolute',
@@ -206,13 +207,12 @@ const styles = StyleSheet.create({
 
   },
   text1: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
     fontSize: 30
   },
   text2: {
-    color: "#8bd4da",
+    color: "#26C6DA",
     fontWeight: '800',
-    fontSize: 12
   }
 });

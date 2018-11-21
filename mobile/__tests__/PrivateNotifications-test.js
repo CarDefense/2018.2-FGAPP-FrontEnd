@@ -1,4 +1,4 @@
-import PrivateNotifications from '../screens/tab_navigator/car_defense/screens/TabNavigator/PrivateNotifications/PrivateNotifications'
+import PrivateNotifications from '../screens/PrivateNotifications'
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'

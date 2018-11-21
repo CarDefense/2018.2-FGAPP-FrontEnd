@@ -1,4 +1,4 @@
-# Integra APP
+# CarDefense
 An application developed by university students, for university students.
 
 ## Requirements

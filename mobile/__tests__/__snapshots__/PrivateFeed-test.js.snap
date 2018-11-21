@@ -4,7 +4,7 @@ exports[`PrivateFeed snapShot 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#8bd4da",
+      "backgroundColor": "#00ACC1",
       "flex": 1,
     }
   }
@@ -18,7 +18,16 @@ exports[`PrivateFeed snapShot 1`] = `
     }
     style={
       Object {
-        "flexDirection": "row",
+        "elevation": 4,
+        "marginBottom": 5,
+        "marginTop": 20,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 2,
       }
     }
   >
@@ -51,6 +60,57 @@ exports[`PrivateFeed snapShot 1`] = `
       >
         <View />
       </RCTScrollView>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 15,
+            "elevation": 4,
+            "flexGrow": 1,
+            "margin": 25,
+            "marginTop": 20,
+            "padding": 20,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#26C6DA",
+              "fontSize": 30,
+              "fontWeight": "800",
+            }
+          }
+        >
+          Olá 
+          
+          , seja bem Vindo!
+        </Text>
+        <View
+          style={
+            Object {
+              "marginTop": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#26C6DA",
+                "fontWeight": "800",
+              }
+            }
+          >
+            Cadastre a placa do seu veículo para poder receber novas notificações.
+          </Text>
+        </View>
+      </View>
     </View>
   </RCTScrollView>
 </View>
