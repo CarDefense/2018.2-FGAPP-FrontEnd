@@ -7,6 +7,9 @@ before_script:
 script:
   - cd mobile
   - yarn test
+cache:
+  directories:
+  - ./mobile/node_modules
 jobs:
   include:
     - stage: deploy
