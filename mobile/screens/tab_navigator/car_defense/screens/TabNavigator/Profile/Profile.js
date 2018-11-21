@@ -68,6 +68,10 @@ export default class UserProfileView extends Component {
         }).then(response => { return response.json() }
         ).then(jsonResponse => {
             Alert.alert(jsonResponse)
+            this.setState({ refreshing: true });
+            this.componentDidMount().then(() => {
+                this.setState({ refreshing: false });
+            });
         }).catch(error => {
             Alert.alert("Falha na conexão")
         })
@@ -137,8 +141,8 @@ export default class UserProfileView extends Component {
                                             </TouchableOpacity>
                                         </View>
                                     </View>
-                                    );
-                                }}
+                                );
+                            }}
                             keyExtractor={({ id }, index) => id.toString()}
                         />
                     </View>
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    icon:{
+    icon: {
         color: "red",
         fontWeight: '800',
         fontSize: 30,
