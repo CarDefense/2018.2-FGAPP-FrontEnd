@@ -6,10 +6,7 @@ before_script:
   - yarn
 script:
   - cd mobile
-  - yarn test
-cache:
-  directories:
-  - ./mobile/node_modules
+  - yarn run test
 
 jobs:
   include:
