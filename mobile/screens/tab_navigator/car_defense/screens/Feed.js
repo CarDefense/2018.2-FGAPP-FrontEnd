@@ -1,5 +1,14 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity } from 'react-native';
+import { 
+  FlatList, 
+  Text, 
+  View, 
+  StyleSheet, 
+  ScrollView, 
+  RefreshControl, 
+  Image, 
+  TouchableOpacity 
+} from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 

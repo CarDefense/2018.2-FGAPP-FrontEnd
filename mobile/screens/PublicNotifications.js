@@ -137,7 +137,7 @@ export default class PublicNotifications extends Component {
               <View style={styles.borderContainer}>
                 <View style={styles.border}>
                   <Picker selectedValue={this.state.title} onValueChange={this.updateTitle} style={{ color: "#26C6DA", backgroundColor: 'white' }} mode="dropdown">
-                    <Picker.Item label="Clique para selecionar o tipo de alerta" value="Outro" />
+                    <Picker.Item label="Clique para selecionar o tipo de alerta" value="Alerta Geral" />
                     <Picker.Item label="Roubo" value="Roubo" />
                     <Picker.Item label="Incêndio" value="Incendio" />
                     <Picker.Item label="Tempestade" value="Tempestade" />
