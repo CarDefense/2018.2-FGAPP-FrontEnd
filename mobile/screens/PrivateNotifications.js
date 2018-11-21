@@ -12,7 +12,8 @@ import {
   Alert,
   Image,
   KeyboardAvoidingView,
-  Picker
+  Picker,
+  TouchableHighlight
 } from 'react-native';
 import { NOTIFICATIONS_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
 import { Icon } from "native-base";
@@ -132,13 +133,15 @@ export default class PrivateNotifications extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         Alert.alert(jsonResponse)
+        if (jsonResponse == "Notificação enviada!") {
+          this.props.navigation.goBack()
+        }
       }
       ).catch(error => {
         console.log(error)
         Alert.alert("Veículo não cadastradro!")
       })
     }
-    
     this.setState({ errors });
   }
 

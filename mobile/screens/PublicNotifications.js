@@ -102,6 +102,9 @@ export default class PublicNotifications extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         Alert.alert(jsonResponse)
+        if (jsonResponse == "Alerta enviado!") {
+          this.props.navigation.goBack()
+        }
       }
       ).catch(error => {
         console.log(error)
