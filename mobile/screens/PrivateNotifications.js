@@ -139,7 +139,7 @@ export default class PrivateNotifications extends Component {
       }
       ).catch(error => {
         console.log(error)
-        Alert.alert("Veículo não cadastradro!")
+        Alert.alert("Veículo não cadastrado!")
       })
     }
     this.setState({ errors });

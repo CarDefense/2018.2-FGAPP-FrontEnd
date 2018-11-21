@@ -192,6 +192,7 @@ export default class RegisterCar extends Component {
           loading: false
         });
         Alert.alert(jsonResponse)
+        this.props.navigation.goBack()
       }
       ).catch(error => {
         console.log(error)
