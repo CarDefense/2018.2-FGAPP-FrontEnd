@@ -541,7 +541,6 @@ const styles = StyleSheet.create({
   container2: {
     paddingTop: "75%",
   },
-
   header2: {
     color: '#760f9f',
     textAlign: 'left',

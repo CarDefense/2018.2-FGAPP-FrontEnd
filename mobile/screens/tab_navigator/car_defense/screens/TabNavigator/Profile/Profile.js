@@ -219,7 +219,6 @@ const styles = StyleSheet.create({
         elevation: 4,
         margin: 25,
         marginTop: 2,
-
     },
     icon1: {
         color: "#26C6DA",
@@ -240,5 +239,10 @@ const styles = StyleSheet.create({
         color: "#26C6DA",
         fontWeight: '800',
         fontSize: 12
-    }
+    },
+    maybeLoading: {
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0)',
+      justifyContent: 'center',
+    },
 });
