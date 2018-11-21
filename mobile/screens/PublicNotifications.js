@@ -1,5 +1,6 @@
 import { Constants, ImagePicker, Permissions } from 'expo';
 import { NOTIFICATIONS_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
+import { MaterialIndicator } from 'react-native-indicators';
 import React, { Component, Children } from 'react';
 import {
   ActivityIndicator,
@@ -30,6 +31,7 @@ export default class PublicNotifications extends Component {
       message: '',
       image: null,
       uploading: false,
+      loading: false
     }
   }
   updateTitle = (title) => {
@@ -61,6 +63,9 @@ export default class PublicNotifications extends Component {
   }
 
   onPressButton = () => {
+    this.setState({
+      loading: true
+    });
     let errors = {};
     const url = NOTIFICATIONS_API + '/send_emergency_push_message/' //function send_emergency_push_message url
     let errorMessage = false;
@@ -77,12 +82,12 @@ export default class PublicNotifications extends Component {
         } else {
           if ('message' === text && value.length < 5) {
             errors[text] = 'Forneça mais detalhes do ocorrido.';
-            errorMessage = true;            
+            errorMessage = true;
           }
         }
       });
 
-    if (errorMessage==false) {
+    if (errorMessage == false) {
       let notification = JSON.stringify({
         sender_id: id,
         title: this.state.title,
@@ -102,12 +107,17 @@ export default class PublicNotifications extends Component {
       }).then(response => { return response.json() }
       ).then(jsonResponse => {
         Alert.alert(jsonResponse)
+        this.setState({
+          loading: false
+        });
         if (jsonResponse == "Alerta enviado!") {
           this.props.navigation.goBack()
         }
       }
       ).catch(error => {
-        console.log(error)
+        this.setState({
+          loading: false
+        });
       })
     }
     this.setState({ errors });
@@ -122,86 +132,116 @@ export default class PublicNotifications extends Component {
     let { errors = {}, ...data } = this.state;
     let { message = 'text' } = data;
 
-    return (
-      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-        <KeyboardAvoidingView behavior="position">
-          <ScrollView>
-            <View style={styles.container}>
-              <View style={styles.header}>
-                <View style={styles.headerContent}>
-                  <Image style={styles.avatar}
-                    source={require('../images/al.png')}
-                  />
-                </View>
-              </View>
-              <View style={styles.borderContainer}>
-                <View style={styles.border}>
-                  <Picker selectedValue={this.state.title} onValueChange={this.updateTitle} style={{ color: "#26C6DA", backgroundColor: 'white' }} mode="dropdown">
-                    <Picker.Item label="Clique para selecionar o tipo de alerta" value="Alerta Geral" />
-                    <Picker.Item label="Roubo" value="Roubo" />
-                    <Picker.Item label="Incêndio" value="Incendio" />
-                    <Picker.Item label="Tempestade" value="Tempestade" />
-                  </Picker>
-                  <TextField
-                    ref={this.messageRef}
-                    value={data.message}
-                    autoCorrect={false}
-                    enablesReturnKeyAutomatically={true}
-                    onFocus={this.onFocus}
-                    onChangeText={(message) => this.setState({ message })}
-                    maxLength={50}
-                    returnKeyType='next'
-                    label='Detalhes'
-                    tintColor="white"
-                    error={errors.message}
-                    textColor="white"
-                    labelPadding={5}
-                    placeholderTextColor="white"
-                    inputContainerStyle={{ marginHorizontal: 20 }}
-                  />
-                  <View style={styles.alternativeLayoutButtonContainer}>
-                    <TouchableOpacity
-                      color="#B2EBF2"
-                      onPress={this._takePhoto}
-                      containerViewStyle={{ width: '10%' }}
-                    >
-                      <Icon
-                        type='FontAwesome'
-                        name="camera"
-                        style={{ color: "#26C6DA" }}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      color="#B2EBF2"
-                      onPress={this._pickImage}
-                      containerViewStyle={{ width: '10%' }}
-                    >
-                      <Icon
-                        type='FontAwesome'
-                        name="image"
-                        style={{ color: "#26C6DA" }}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  {this._maybeRenderImage()}
-                  {this._maybeRenderUploadingOverlay()}
-                  <View style={styles.container1}>
-                    <TouchableOpacity
-                      style={styles.button3}
-                      backgroundColor="#26C6DA"
-                      onPress={this.onPressButton}
-                      containerViewStyle={{ width: '30%' }}
-                    >
-                      <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
-                    </TouchableOpacity>
+    if (!this.state.loading) {
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+              <View style={styles.container}>
+                <View style={styles.header}>
+                  <View style={styles.headerContent}>
+                    <Image style={styles.avatar}
+                      source={require('../images/al.png')}
+                    />
                   </View>
                 </View>
+                <View style={styles.borderContainer}>
+                  <View style={styles.border}>
+                    <Picker selectedValue={this.state.title} onValueChange={this.updateTitle} style={{ color: "#26C6DA", backgroundColor: 'white' }} mode="dropdown">
+                      <Picker.Item label="Clique para selecionar o tipo de alerta" value="Alerta Geral" />
+                      <Picker.Item label="Roubo" value="Roubo" />
+                      <Picker.Item label="Incêndio" value="Incendio" />
+                      <Picker.Item label="Tempestade" value="Tempestade" />
+                    </Picker>
+                    <TextField
+                      ref={this.messageRef}
+                      value={data.message}
+                      autoCorrect={false}
+                      enablesReturnKeyAutomatically={true}
+                      onFocus={this.onFocus}
+                      onChangeText={(message) => this.setState({ message })}
+                      maxLength={50}
+                      returnKeyType='next'
+                      label='Detalhes'
+                      tintColor="white"
+                      error={errors.message}
+                      textColor="white"
+                      labelPadding={5}
+                      placeholderTextColor="white"
+                      inputContainerStyle={{ marginHorizontal: 20 }}
+                    />
+                    <View style={styles.alternativeLayoutButtonContainer}>
+                      <TouchableOpacity
+                        color="#B2EBF2"
+                        onPress={this._takePhoto}
+                        containerViewStyle={{ width: '10%' }}
+                      >
+                        <Icon
+                          type='FontAwesome'
+                          name="camera"
+                          style={{ color: "#26C6DA" }}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        color="#B2EBF2"
+                        onPress={this._pickImage}
+                        containerViewStyle={{ width: '10%' }}
+                      >
+                        <Icon
+                          type='FontAwesome'
+                          name="image"
+                          style={{ color: "#26C6DA" }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                    {this._maybeRenderImage()}
+                    {this._maybeRenderUploadingOverlay()}
+                    <View style={styles.container1}>
+                      <TouchableOpacity
+                        style={styles.button3}
+                        backgroundColor="#26C6DA"
+                        onPress={this.onPressButton}
+                        containerViewStyle={{ width: '30%' }}
+                      >
+                        <Text style={{ color: '#26C6DA', fontWeight: '800' }} >Enviar</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
               </View>
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      );
+    }
+    else {
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <KeyboardAvoidingView behavior="position">
+            <ScrollView>
+              <View style={styles.container}>
+                <View style={styles.header}>
+                  <View style={styles.headerContent}>
+                    <Image style={styles.avatar}
+                      source={require('../images/al.png')}
+                    />
+                  </View>
+                </View>
+                <View style={styles.container2}>
+                  <View
+                    style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
+                    <MaterialIndicator
+                      size={50}
+                      color="white"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      );
+    }
   }
 
   _maybeRenderUploadingOverlay = () => { //done
@@ -403,6 +443,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 40
   },
+  container2: {
+    paddingTop: "75%",
+  },
   header: {
     marginTop: 25,
   },
@@ -436,6 +479,11 @@ const styles = StyleSheet.create({
   maybeRenderImage: {
     height: 200,
     width: 310,
+  },
+  maybeLoading: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'center',
   },
   avatar: {
     width: 130,
