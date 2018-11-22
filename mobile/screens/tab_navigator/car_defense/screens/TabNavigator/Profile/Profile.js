@@ -68,6 +68,10 @@ export default class UserProfileView extends Component {
         }).then(response => { return response.json() }
         ).then(jsonResponse => {
             Alert.alert(jsonResponse)
+            this.setState({ refreshing: true });
+            this.componentDidMount().then(() => {
+                this.setState({ refreshing: false });
+            });
         }).catch(error => {
             Alert.alert("Falha na conexão")
         })
@@ -113,28 +117,30 @@ export default class UserProfileView extends Component {
                             renderItem={({ item }) => {
                                 return (
                                     <View style={styles.item2}>
-                                        <Text style={styles.text1}>{item.plate}</Text>
-                                        <Text style={styles.text2}>Modelo: {item.model}   Cor: {item.color}</Text>
                                         <Icon
                                             type='FontAwesome'
                                             name="car"
                                             style={styles.icon1}
                                         />
-                                        <TouchableOpacity
-                                            color="grey"
-                                            onPress={() => { this._onPressButton(item.plate) }}
-                                            containerViewStyle={{ width: '10%' }}
-                                        >
-                                        <View style={{ flexDirection: 'row-reverse' }}>
-                                            <Icon
-                                                type='FontAwesome'
-                                                name="trash"
-                                                style={{ color: "red", fontSize: 15 }}
-                                            />
+                                        <View style={styles.container}>
+                                            <Text style={styles.text1}>{item.plate}</Text>
+                                            <Text style={styles.text2}>Modelo: {item.model}</Text>
+                                            <Text style={styles.text2}>Cor: {item.color}</Text>
                                         </View>
-                                        </TouchableOpacity>
+                                        <View>
+                                            <TouchableOpacity
+                                                color="grey"
+                                                onPress={() => { this._onPressButton(item.plate) }}
+                                                containerViewStyle={{ width: '10%' }}
+                                            >
+                                                <Icon
+                                                    type='FontAwesome'
+                                                    name="trash"
+                                                    style={styles.icon}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
-
                                 );
                             }}
                             keyExtractor={({ id }, index) => id.toString()}
@@ -200,36 +206,29 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 5
     },
-    icon: {
-        width: 30,
-        height: 30,
-        marginTop: 20,
-    },
-    info: {
-        fontSize: 18,
-        marginTop: 20,
-        color: "#FFFFFF",
-    },
     item2: {
         alignItems: "center",
         backgroundColor: "white",
         flexGrow: 1,
-        padding: 20,
+        paddingVertical: 20,
         borderRadius: 15,
         elevation: 4,
         margin: 25,
         marginTop: 2,
-
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    icon: {
+        color: "red",
+        fontWeight: '800',
+        fontSize: 30,
+        marginRight: 20
     },
     icon1: {
         color: "#26C6DA",
         fontWeight: '800',
         fontSize: 44,
-        position: 'absolute',
-        left: 10,
-        marginTop: 5,
-        bottom: 25// Keep some space between your left border and Image
-
+        marginLeft: 20
     },
     text1: {
         color: "#26C6DA",
@@ -240,5 +239,5 @@ const styles = StyleSheet.create({
         color: "#26C6DA",
         fontWeight: '800',
         fontSize: 12
-    }
+    },
 });
