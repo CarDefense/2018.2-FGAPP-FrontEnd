@@ -31,6 +31,33 @@ it('Function onAccessoryPress', () => {
     
 })
 
+it('Function onSubmitEmail', () => {
+    let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
+
+    signUpSreenData.onSubmitEmail()
+
+    expect(signUpSreenData.onSubmitEmail()).toEqual(undefined)
+    
+})
+
+it('Function onSubmitUsername', () => {
+    let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
+
+    signUpSreenData.onSubmitUsername()
+
+    expect(signUpSreenData.onSubmitUsername()).toEqual(undefined)
+    
+})
+
+it('Function onSubmitPassword', () => {
+    let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
+
+    signUpSreenData.onSubmitPassword()
+
+    expect(signUpSreenData.onSubmitPassword()).toEqual(undefined)
+    
+})
+
 // it('Function onPressButton', async () => {
 //     let signUpSreenData = renderer.create(<SignUpScreen/>).getInstance()
 
