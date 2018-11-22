@@ -16,7 +16,7 @@
       "bundleIdentifier": "com.cardefense.cardefense"
     },
     "android": {
-      "package": "com.epsmds.cardefense",
+      "package": "com.cardefense.cardefense",
       "versionCode": 3
     },
     "splash" : {
