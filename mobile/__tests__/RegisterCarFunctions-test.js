@@ -4,43 +4,43 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 it('onFoncus', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData.onFocus()
+    Data.onFocus()
 
-    expect(feedData.onFocus()).toEqual(undefined)
+    expect(Data.onFocus()).toEqual(undefined)
 })
 
 it('onChangeText', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData.onChangeText()
+    Data.onChangeText()
 
-    expect(feedData.onChangeText()).toEqual(undefined)
+    expect(Data.onChangeText()).toEqual(undefined)
 })
 
 it('onSubmitPlate', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData.onSubmitPlate()
+    Data.onSubmitPlate()
 
-    expect(feedData.onSubmitPlate()).toEqual(undefined)
+    expect(Data.onSubmitPlate()).toEqual(undefined)
 })
 
 it('onSubmitModel', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData.onSubmitModel()
+    Data.onSubmitModel()
 
-    expect(feedData.onSubmitModel()).toEqual(undefined)
+    expect(Data.onSubmitModel()).toEqual(undefined)
 })
 
 it('onSubmitColor', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData.onSubmitColor()
+    Data.onSubmitColor()
 
-    expect(feedData.onSubmitColor()).toEqual(undefined)
+    expect(Data.onSubmitColor()).toEqual(undefined)
 })
 
 // it('_share', () => {
@@ -60,25 +60,25 @@ it('onSubmitColor', () => {
 // })
 
 it('_takePhoto', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData._takePhoto()
+    Data._takePhoto()
 
-    expect(feedData._takePhoto()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+    expect(Data._takePhoto()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
 })
 
 it('_pickImage', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData._pickImage()
+    Data._pickImage()
 
-    expect(feedData._pickImage()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+    expect(Data._pickImage()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
 })
 
 it('_handleImagePicked', () => {
-    let feedData = renderer.create(<RegisterCar/>).getInstance()
+    let Data = renderer.create(<RegisterCar/>).getInstance()
 
-    feedData._handleImagePicked()
+    Data._handleImagePicked()
 
-    expect(feedData._handleImagePicked()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+    expect(Data._handleImagePicked()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
 })
