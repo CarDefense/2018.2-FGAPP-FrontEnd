@@ -21,10 +21,10 @@ it('Function componentDidMount', async () => {
     
 })
 
-it('registerCar', () => {
-    let feedData = renderer.create(<Profile/>).getInstance()
+// it('registerCar', () => {
+//     let feedData = renderer.create(<Profile/>).getInstance()
 
-    feedData.registerCar()
+//     feedData.registerCar()
 
-    expect(feedData.registerCar()).toEqual(undefined)
-})
+//     expect(feedData.registerCar()).toEqual(undefined)
+// })

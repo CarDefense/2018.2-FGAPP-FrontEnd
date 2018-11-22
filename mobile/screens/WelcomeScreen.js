@@ -30,7 +30,6 @@ class WelcomeScreen extends Component {
             const fields = '&fields=id,first_name,picture{url}'
             const response = await fetch(`${baseUrl}${fields}`)
             const user = (await response.json());
-            console.log(user);
             this.props.navigation.navigate('TabHandler', { user: user });
         }
     }
