@@ -19,6 +19,7 @@
     },
     "android": {
       "package": "com.epsmds.cardefense"
+      "versionCode": 3
     },
     "splash" : {
       "image": "./images/b6p.png",
