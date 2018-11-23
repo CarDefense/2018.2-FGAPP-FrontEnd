@@ -358,7 +358,10 @@ export default class SignUpScreen extends Component {
               <View style={styles.container3}>
                 <View
                   style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                  <ActivityIndicator color="#ffffff" size="large" />
+                  <ActivityIndicator 
+                    size= {60} 
+                    color="white" 
+                  />
                 </View>
               </View>
             </View>
