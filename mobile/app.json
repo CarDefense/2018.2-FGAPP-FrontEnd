@@ -18,7 +18,7 @@
       "bundleIdentifier": "com.epsmds.cardefense"
     },
     "android": {
-      "package": "com.epsmds.cardefense"
+      "package": "com.cardefense.cardefense",
     },
     "splash" : {
       "image": "./images/b6p.png",
