@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Text,
   View,
@@ -9,7 +10,6 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import { MaterialIndicator } from 'react-native-indicators';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
@@ -150,8 +150,8 @@ export default class Feed extends React.Component {
             <View style={styles.container2}>
               <View
                 style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                <MaterialIndicator
-                  size={50}
+                <ActivityIndicator
+                  size={60}
                   color="white"
                 />
               </View>

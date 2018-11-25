@@ -1,6 +1,5 @@
 
 import { TextField } from 'react-native-material-textfield';
-import { MaterialIndicator } from 'react-native-indicators';
 import { Constants, ImagePicker, Permissions } from 'expo';
 import React, { Component } from 'react';
 import {
@@ -291,8 +290,8 @@ export default class PrivateNotifications extends Component {
                 <View style={styles.container2}>
                   <View
                     style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                    <MaterialIndicator
-                      size={50}
+                    <ActivityIndicator
+                      size={60}
                       color="white"
                     />
                   </View>
@@ -310,7 +309,10 @@ export default class PrivateNotifications extends Component {
       return (
         <View
           style={styles.maybeRenderUploading}>
-          <ActivityIndicator color="#313869" size="large" />
+          <ActivityIndicator
+            size={60}
+            color="white"
+          />
         </View>
       );
     }

@@ -1,9 +1,9 @@
+import Feed from '../screens/tab_navigator/car_defense/screens/TabNavigator/PrivateFeed/PrivateFeed'
 import 'react-native'
 import React from 'react'
-import Feed from '../screens/tab_navigator/car_defense/screens/Feed'
-import renderer from 'react-test-renderer' 
+import renderer from 'react-test-renderer'
 
-it('Function onRefresh', () => {
+it('Function _onRefresh', () => {
     let feedData = renderer.create(<Feed/>).getInstance()
 
     feedData._onRefresh()
