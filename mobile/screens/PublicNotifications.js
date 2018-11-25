@@ -1,6 +1,5 @@
 import { Constants, ImagePicker, Permissions } from 'expo';
 import { NOTIFICATIONS_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const'
-import { MaterialIndicator } from 'react-native-indicators';
 import React, { Component, Children } from 'react';
 import {
   ActivityIndicator,
@@ -230,8 +229,8 @@ export default class PublicNotifications extends Component {
                 <View style={styles.container2}>
                   <View
                     style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                    <MaterialIndicator
-                      size={50}
+                    <ActivityIndicator
+                      size={60}
                       color="white"
                     />
                   </View>
@@ -249,7 +248,10 @@ export default class PublicNotifications extends Component {
       return (
         <View
           style={styles.maybeRenderUploading}>
-          <ActivityIndicator color="#540b71" size="large" />
+          <ActivityIndicator
+            size={60}
+            color="white"
+          />
         </View>
       );
     }

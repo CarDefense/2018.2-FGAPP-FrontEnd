@@ -1,6 +1,5 @@
 import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { MaterialIndicator } from 'react-native-indicators';
 import { TextField } from 'react-native-material-textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { Component } from "react";
@@ -15,7 +14,8 @@ import {
     ImageBackground,
     Alert,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ActivityIndicator
 } from 'react-native';
 
 
@@ -30,7 +30,6 @@ class WelcomeScreen extends Component {
             const fields = '&fields=id,first_name,picture{url}'
             const response = await fetch(`${baseUrl}${fields}`)
             const user = (await response.json());
-            console.log(user);
             this.props.navigation.navigate('TabHandler', { user: user });
         }
     }
@@ -325,10 +324,10 @@ class WelcomeScreen extends Component {
                             <View style={styles.container2}>
                                 <View
                                     style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                                    <MaterialIndicator
-                                        size= {50}
-                                        color= "white"
-                                        />
+                                    <ActivityIndicator 
+                                        size= {60} 
+                                        color="white" 
+                                    />
                                 </View>
                             </View>
                         </View>
