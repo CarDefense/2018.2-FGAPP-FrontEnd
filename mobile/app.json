@@ -8,16 +8,20 @@
       ],
       "transformer": "node_modules/react-native-typescript-transformer/index.js"
     },
-    "name": "cardefense",
-    "slug": "cardefense",
+    "name": "CarDefense",
+    "slug": "CarDefense",
+    "icon": "./images/iconcardefense.png",
     "version": "0.1.0",
     "githubUrl": "https://github.com/fga-eps-mds/2018.2-CarDefense",
     "ios": {
       "bundleIdentifier": "com.cardefense.cardefense"
     },
+    "notification":{
+      "icon":"./images/iconcardefense.png"
+    },
     "android": {
       "package": "com.cardefense.cardefense",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
