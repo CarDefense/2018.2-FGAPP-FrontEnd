@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
-  StatusBar,
   Text,
   Alert,
   StyleSheet,
@@ -250,7 +249,7 @@ export default class SignUpScreen extends Component {
                 <View style={styles.containerImage}>
                   <Image
                     style={styles.image}
-                    source={require('../images/icontest.png')}
+                    source={require('../images/imageedit_1_5249542411.png')}
                     />
                 </View>
                 <View style={styles.container1}>
@@ -359,7 +358,10 @@ export default class SignUpScreen extends Component {
               <View style={styles.container3}>
                 <View
                   style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                  <ActivityIndicator color="#ffffff" size="large" />
+                  <ActivityIndicator 
+                    size= {60} 
+                    color="white" 
+                  />
                 </View>
               </View>
             </View>

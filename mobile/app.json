@@ -22,6 +22,10 @@
     "android": {
       "package": "com.cardefense.cardefense",
       "versionCode": 3
+    },
+    "splash" : {
+      "image": "./images/b6p.png",
+      "resizeMode": "cover"
     }
   }
 }

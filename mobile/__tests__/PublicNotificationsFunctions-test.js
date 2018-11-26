@@ -20,3 +20,36 @@ it('Function onChangeText', () => {
     expect(publicNotificationsData.onChangeText()).toEqual(undefined)
 
 })
+
+it('Function updateTitle', () => {
+    let publicNotificationsData = renderer.create(<PublicNotifications/>).getInstance()
+
+    publicNotificationsData.updateTitle()
+
+    expect(publicNotificationsData.updateTitle()).toEqual(undefined)
+
+})
+
+it('_takePhoto', () => {
+    let Data = renderer.create(<PublicNotifications/>).getInstance()
+
+    Data._takePhoto()
+
+    expect(Data._takePhoto()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+})
+
+it('_pickImage', () => {
+    let Data = renderer.create(<PublicNotifications/>).getInstance()
+
+    Data._pickImage()
+
+    expect(Data._pickImage()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+})
+
+it('_handleImagePicked', () => {
+    let Data = renderer.create(<PublicNotifications/>).getInstance()
+
+    Data._handleImagePicked()
+
+    expect(Data._handleImagePicked()).toEqual({"_40": 0, "_55": null, "_65": 0, "_72": null})
+})

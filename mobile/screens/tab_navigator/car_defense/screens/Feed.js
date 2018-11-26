@@ -1,5 +1,15 @@
 import React from 'react';
-import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl, Image, TouchableOpacity } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import { NOTIFICATIONS_API, PROFILE_API } from './TabNavigator/const/Const.js'
 import Expo from 'expo'
 
@@ -9,6 +19,7 @@ export default class Feed extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
+      loading: true,
       height: 135
     }
   }
@@ -53,6 +64,7 @@ export default class Feed extends React.Component {
       .then((responseJson) => {
 
         this.setState({
+          loading: false,
           dataSource: responseJson,
         }, function () {
 
@@ -90,45 +102,64 @@ export default class Feed extends React.Component {
 
   render() {
 
-    return (
-      <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
-        <ScrollView
-          style={styles.item}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
-        >
+    if (!this.state.loading) {
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <ScrollView
+            style={styles.item}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          >
 
-          <FlatList
-            data={this.state.dataSource}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.item2}>
-                  <Text style={styles.text1}>{item.title}</Text>
-                  <Text style={styles.text}>{item.date} às {item.time}</Text>
-                  <TouchableOpacity
-                    onPress={() => { this._height(this.state.height) }}
-                  >
-                    <Image source={{ uri: item.image }}
-                      style={{ height: this.state.height }} />
-                  </TouchableOpacity>
-                  <View style={{ marginTop: 10 }}>
-                    <Text style={styles.text2}>{item.message}</Text>
+            <FlatList
+              data={this.state.dataSource}
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.item2}>
+                    <Text style={styles.text1}>{item.title}</Text>
+                    <Text style={styles.text}>{item.date} às {item.time}</Text>
+                    <TouchableOpacity
+                      onPress={() => { this._height(this.state.height) }}
+                    >
+                      <Image source={{ uri: item.image }}
+                        style={{ height: this.state.height }} />
+                    </TouchableOpacity>
+                    <View style={{ marginTop: 10 }}>
+                      <Text style={styles.text2}>{item.message}</Text>
+                    </View>
                   </View>
-                </View>
-              );
-            }}
-            keyExtractor={({ id }, index) => id.toString()}
+                );
+              }}
+              keyExtractor={({ id }, index) => id.toString()}
 
-          />
+            />
 
-        </ScrollView>
-      </View >
+          </ScrollView>
+        </View >
 
-    );
+      );
+    }
+    else {
+      return (
+        <View style={{ backgroundColor: '#00ACC1', flex: 1 }}>
+          <ScrollView>
+            <View style={styles.container2}>
+              <View
+                style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
+                <ActivityIndicator
+                  size={60}
+                  color="white"
+                />
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      );
+    }
   }
 }
 
@@ -145,7 +176,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5
   },
-
+  container2: {
+    paddingTop: "180%",
+  },
   text: {
     color: "#B2EBF2",
     fontWeight: '600',
@@ -214,5 +247,10 @@ const styles = StyleSheet.create({
   text2: {
     color: "#26C6DA",
     fontWeight: '800',
-  }
+  },
+  maybeLoading: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'center',
+  },
 });

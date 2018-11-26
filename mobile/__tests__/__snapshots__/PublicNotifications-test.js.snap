@@ -95,7 +95,7 @@ exports[`PublicNotifications snapShot 1`] = `
                         Object {
                           "label": "Clique para selecionar o tipo de alerta",
                           "textColor": undefined,
-                          "value": "Outro",
+                          "value": "Alerta Geral",
                         },
                         Object {
                           "label": "Roubo",

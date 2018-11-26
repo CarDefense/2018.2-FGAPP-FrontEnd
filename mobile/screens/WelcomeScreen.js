@@ -1,12 +1,10 @@
 import { PROFILE_API } from './tab_navigator/car_defense/screens/TabNavigator/const/Const.js';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { MaterialIndicator } from 'react-native-indicators';
 import { TextField } from 'react-native-material-textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { Component } from "react";
 import jwt_decode from 'jwt-decode';
 import {
-    ActivityIndicator,
     View,
     StyleSheet,
     Image,
@@ -16,15 +14,13 @@ import {
     ImageBackground,
     Alert,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ActivityIndicator
 } from 'react-native';
 
 
 class WelcomeScreen extends Component {
-    state = {
-        loading: false,
-    }
-
+    
     async facebookLogin() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2177002552568068', {
             permissions: ['public_profile'],
@@ -34,7 +30,6 @@ class WelcomeScreen extends Component {
             const fields = '&fields=id,first_name,picture{url}'
             const response = await fetch(`${baseUrl}${fields}`)
             const user = (await response.json());
-            console.log(user);
             this.props.navigation.navigate('TabHandler', { user: user });
         }
     }
@@ -47,8 +42,6 @@ class WelcomeScreen extends Component {
         super(props);
 
         this.onFocus = this.onFocus.bind(this);
-        //this.onSubmit = this.onSubmit.bind(this);
-        //this.onChangeText = this.onChangeText.bind(this);
         this.onSubmitUsername = this.onSubmitUsername.bind(this);
         this.onSubmitPassword = this.onSubmitPassword.bind(this);
         this.onAccessoryPress = this.onAccessoryPress.bind(this);
@@ -63,7 +56,7 @@ class WelcomeScreen extends Component {
             password: '',
             secureTextEntry: true,
             non_field_alert: [''],
-            isLoading: 0
+            loading: false,
         };
 
     }
@@ -127,7 +120,6 @@ class WelcomeScreen extends Component {
     }
 
     _onPressButton = async () => {
-        // this.state.isLoading = 50;
         let errors = {};
         let errorUserName = false;
         let errorPassword = false;
@@ -138,7 +130,6 @@ class WelcomeScreen extends Component {
 
                 if (!value) {
                     errors[text] = 'Digite o nome de usuário';
-                    // this.state.isLoading = false;
                     errorUserName = true;
                 }
             });
@@ -148,18 +139,15 @@ class WelcomeScreen extends Component {
                 let value = this[text].value();
 
                 if (!value) {
-                    // this.state.isLoading = 0;
                     errors[text] = 'Digite uma senha';
                     errorPassword = true;
                 }
                 // else {
                 //     if (value.length < 8) {
-                //         // this.state.isLoading = 0;
                 //         errors[text] = 'Senha muito curta.';
                 //         errorPassword = true;
                 //     }
                 //     else if (value.length > 15) {
-                //         // this.state.isLoading = 0;
                 //         errors[text] = 'Senha muito longa.';
                 //         errorPassword = true;
                 //     }
@@ -186,7 +174,6 @@ class WelcomeScreen extends Component {
                 .then((responseJson) => {
                     console.log(JSON.stringify(responseJson));
                     if (responseJson.non_field_errors != undefined) {
-                        // this.state.isLoading = 0;
                         this.setState({ non_field_alert: ['Usuário ou senha incorreto(s).'] })
                         this.setState({
                             loading: false
@@ -199,7 +186,6 @@ class WelcomeScreen extends Component {
                     user = token ? jwt_decode(token) : undefined;
                     if (user != undefined || responseJson.key != undefined) {
                         this.props.navigation.navigate('TabHandler', { user: user });
-                        // this.state.isLoading = 0;
                         this.setState({
                             loading: false
                         });
@@ -215,7 +201,6 @@ class WelcomeScreen extends Component {
                         });
                     } else {
                         Alert.alert("Erro na conexão.");
-                        // this.state.isLoading = 0;
                         this.setState({
                             loading: false
                         });
@@ -245,10 +230,6 @@ class WelcomeScreen extends Component {
                                     />
                             </View>
                             <View style={styles.container1}>
-                                <MaterialIndicator
-                                    size= {this.state.isLoading}
-                                    color= "white"
-                                    />
                                 <TextField
                                     ref={this.usernameRef}
                                     value={data.username}
@@ -343,7 +324,10 @@ class WelcomeScreen extends Component {
                             <View style={styles.container2}>
                                 <View
                                     style={[StyleSheet.absoluteFill, styles.maybeLoading]}>
-                                    <ActivityIndicator color="#ffffff" size="large" />
+                                    <ActivityIndicator 
+                                        size= {60} 
+                                        color="white" 
+                                    />
                                 </View>
                             </View>
                         </View>
